@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/24 20:46:42 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/24 21:20:14 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,7 +31,6 @@ CFLAGS			+= -g3
 endif
 
 # DIR
-BIN_DIR			:= bin
 SRC_DIR			:= src
 LIB_DIR			:= lib
 OBJ_DIR			:= obj
@@ -45,14 +44,16 @@ INC_DIR			:= $(addprefix -I,$(INC_TMP))
 LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 
 # SRC
-SRC_C			:= src/blank.c
+SRC_C			:= src/loop.c \
+				   src/minishell.c
+
 # OBJ
 
 OBJ_C			:= $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRC_C:%.c=%.o))
 
 # LIB DIR
 CFLAGS			+= $(INC_DIR)
-LIBS			:= $(LIBFT)
+LIBS			:= $(LIBFT) -lreadline
 
 #  Bash Color / unicode char
 
