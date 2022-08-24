@@ -1,0 +1,6 @@
+# vscode folder settings
+.vscode
+
+# compiled thing
+minishell
+obj/
