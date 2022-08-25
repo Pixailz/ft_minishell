@@ -235,7 +235,7 @@ if __name__ == "__main__":
 	config = {
 		"makefile":		"Makefile",
 		"makefile_var":	"SRC_C",
-		"header":		"includes/minishell.h",
+		"header":		"inc/minishell.h",
 		"src_folder":	"src"
 	}
 	minishell = ft_helper(**config)
