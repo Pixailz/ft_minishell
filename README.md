@@ -3,7 +3,8 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 # TODO
 
-1. suppress ^C|^\ from signal (<termios.h>)
+1. parse_cmd
+2. exec_engine
 
 # TIPS
 
