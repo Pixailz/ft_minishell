@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/25 03:23:34 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/25 06:00:28 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,8 +44,14 @@ INC_DIR			:= $(addprefix -I,$(INC_TMP))
 LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 
 # SRC
-SRC_C			:= src/dataset/init.c \
-				   src/minishell.c
+SRC_C			:= src/dataset/free.c \
+				   src/dataset/init.c \
+				   src/debug/debug_print.c \
+				   src/minishell.c \
+				   src/shell/exec_engine.c \
+				   src/shell/loop.c \
+				   src/shell/parse_cmd.c \
+				   src/shell/signal_handler.c
 
 # OBJ
 
