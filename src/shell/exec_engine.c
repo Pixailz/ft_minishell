@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:56:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/25 05:58:55 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/26 00:02:06 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,5 @@
 
 int	exec_engine(t_main *config)
 {
-	return (0);
+	return (config->cmd->have_arg);
 }
