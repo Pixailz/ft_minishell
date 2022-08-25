@@ -1,31 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   loop.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/25 06:27:45 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/08/25 06:27:38 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**do_something_with_argv(char **argv)
+int	main_loop(t_main *config)
 {
-	return (argv);
-}
-
-int	main(int argc, char **argv)
-{
-	t_main	config;
-
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_entry(&config);
-	main_loop(&config);
-	free_entry(&config);
+	while (VRAI)
+	{
+		config->line_buffer = readline(config->prompt);
+		if (config->line_buffer == NULL)
+		{
+			free_entry(config);
+			exit(debug_catched_signal(-1));
+		}
+		else
+		{
+			debug_line_buffer(config->line_buffer);
+			parse_cmd(config);
+			exec_engine(config);
+			free(config->line_buffer);
+		}
+	}
 	return (0);
 }

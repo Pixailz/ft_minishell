@@ -1,31 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   init.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/25 06:27:45 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/08/25 03:17:16 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/08/25 06:30:12 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**do_something_with_argv(char **argv)
+int	init_signal(void)
 {
-	return (argv);
+	signal(SIGINT, signal_handler);
+	signal(SIGQUIT, SIG_IGN);
+	return (0);
 }
 
-int	main(int argc, char **argv)
+char	*init_get_prompt(void)
 {
-	t_main	config;
+	return (ft_strdup("minishell@hostname:~/Documents$ "));
+}
 
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_entry(&config);
-	main_loop(&config);
-	free_entry(&config);
+int	init_config(t_main *config)
+{
+	config->prompt = init_get_prompt();
+	debug_initial_prompt(config->prompt);
+	config->line_buffer = NULL;
+	return (0);
+}
+
+int	init_entry(t_main *config)
+{
+	init_config(config);
+	init_signal();
 	return (0);
 }

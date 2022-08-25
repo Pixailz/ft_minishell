@@ -1,31 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   free.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/25 06:27:45 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/08/25 04:02:41 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/08/25 06:27:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**do_something_with_argv(char **argv)
+void	free_config(t_main *config)
 {
-	return (argv);
+	free(config->prompt);
+	config->prompt = NULL;
+	if (config->line_buffer != NULL)
+	{
+		free(config->line_buffer);
+		config->line_buffer = NULL;
+	}
 }
 
-int	main(int argc, char **argv)
+void	free_entry(t_main *config)
 {
-	t_main	config;
-
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_entry(&config);
-	main_loop(&config);
-	free_entry(&config);
-	return (0);
+	free_config(config);
 }
