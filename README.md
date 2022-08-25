@@ -22,4 +22,3 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- https://ruslanspivak.com/lsbasi-part7/
 	- https://unix.stackexchange.com/questions/88850/precedence-of-the-shell-logical-operators
 2. https://github.com/AudeizReading/minishell/wiki/01-PARSING
-	-
