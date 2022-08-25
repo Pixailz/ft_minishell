@@ -6,13 +6,13 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/24 21:20:14 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/25 03:23:34 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 # **************************************************************************** #
 # config
-CFLAGS			:= -Wall -Wextra
+CFLAGS			:= -Wall -Wextra -lreadline
 TARGET			:= minishell
 RM				:= rm -rf
 CC				:= gcc
@@ -36,15 +36,15 @@ LIB_DIR			:= lib
 OBJ_DIR			:= obj
 OBJ_SUBDIR		:= $(sort $(shell find $(SRC_DIR) -type d | \
 											sed 's|$(SRC_DIR)|$(OBJ_DIR)|g'))
-INC_TMP			:= includes \
-				   $(LIB_DIR)/ft_libft/include
+INC_TMP			:= inc \
+				   $(LIB_DIR)/ft_libft/inc
 INC_DIR			:= $(addprefix -I,$(INC_TMP))
 
 # LIB
 LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 
 # SRC
-SRC_C			:= src/loop.c \
+SRC_C			:= src/dataset/init.c \
 				   src/minishell.c
 
 # OBJ
@@ -53,7 +53,7 @@ OBJ_C			:= $(patsubst $(SRC_DIR)/%,$(OBJ_DIR)/%,$(SRC_C:%.c=%.o))
 
 # LIB DIR
 CFLAGS			+= $(INC_DIR)
-LIBS			:= $(LIBFT) -lreadline
+LIBS			:= $(LIBFT)
 
 #  Bash Color / unicode char
 
@@ -140,14 +140,14 @@ all:			setup $(TARGET)
 
 $(OBJ_DIR)/%.o: 		$(SRC_DIR)/%.c
 	$(call print_padded,$^,$@)
-	@$(CC) $(CFLAGS) -o $@ -c $<
+	@$(CC) -o $@ -c $< $(CFLAGS)
 
 $(LIBFT):
 	@$(MAKE) lib/ft_libft all
 
 $(TARGET):				$(LIBFT) $(OBJ_C)
 	@printf "$(green_plus) $(font_color)Creation of $(bold)$@$(reset)\n"
-	@$(CC) $(CFLAGS) -o $@ $(OBJ_C) $(LIBS)
+	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
 
 setup:					call_logo $(OBJ_SUBDIR)
 

@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/21 02:44:05 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/25 03:19:02 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -66,7 +66,7 @@ SRC_DIR				:= src
 OBJ_DIR				:= obj
 OBJ_SUBDIR			:= $(sort $(shell find $(SRC_DIR) -type d | \
 										sed 's|$(SRC_DIR)|$(OBJ_DIR)|g'))
-INC_DIR				:= -Iinclude
+INC_DIR				:= -Iinc
 
 # SRC
 SRC_INT				:= integer/ft_get_base.c \
