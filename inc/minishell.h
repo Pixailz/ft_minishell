@@ -52,8 +52,9 @@ readline
 /* FILES */
 /* ##### */
 
-// loop.c
-int	main_loop(void);
+// dataset/init.c
+int	init_entry(t_main *config);
+int	init_signal(void);
 
 // minishell.c
 int	main(int argc, char **argv);
