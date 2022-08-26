@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/25 06:00:28 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/26 12:07:03 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ endif
 ifeq ($(DEBUG),)
 CFLAGS			+= -Werror
 else
-CFLAGS			+= -g3
+CFLAGS			+= -g3 -fdiagnostics-color=always
 endif
 
 # DIR
@@ -74,7 +74,7 @@ blinking		:= \033[5m
 reset			:= \033[0m
 
 font_color		:= $(blue)
-bold			:= $(green)
+bold			:= $(red)
 ascii_color		:= $(bold)
 
 green_plus		:= $(font_color)[$(green)+$(font_color)]
