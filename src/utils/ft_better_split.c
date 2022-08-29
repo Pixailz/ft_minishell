@@ -12,93 +12,97 @@
 
 #include "minishell.h"
 
-static int	ft_better_get_words(char *str, char c)
+void	ft_lstadd_backsplit(t_input **lst, t_input *new)
 {
-	int	count;
+	t_input	*tmp;
 
-	count = 0;
-	while (*str)
+	tmp = *lst;
+	if (tmp)
 	{
-		while (*str && *str == c)
-			str++;
-		if (*str == '\'')
-		{
-			if (*str && *str != '\'')
-				count++;
-			while (*str && *str != '\'')
-				str++;
-		}
-		else if (*str == '"')
-		{
-			if (*str && *str != '"')
-				count++;
-			while (*str && *str != '"')
-				str++;
-		}
-		else
-		{
-			if (*str && *str != c)
-				count++;
-			while (*str && *str != c)
-				str++;
-		}
-	}
-	return (count);
-}
-
-char	*ft_better_init_str(char *s, char c)
-{
-	int		i;
-	char	*ptr;
-
-	i = 0;
-	if (s[i] == '\'')
-	{
-		while (s[i] && s[i] != '\'')
-			i++;
-	}
-	else if (s[i] == '"')
-	{
-		while (s[i] && s[i] != '"')
-			i++;
+		while (tmp->next)
+			tmp = tmp->next;
+		tmp->next = new;
 	}
 	else
-	{
-		while (s[i] && s[i] != c)
-			i++;
-	}
-	ptr = (char *)malloc(sizeof(char) * (i + 1));
-	if (!ptr)
-		return (NULL);
-	ft_strlcpy(ptr, s, i + 1);
-	return (ptr);
+		*lst = new;
 }
 
-char	**ft_better_split(char *s, char c)
+t_input	*ft_lstnew_ps(char *s)
 {
-	int		i[2];
-	char	**ptr;
+	t_input	*lst;
 
-	if (!s)
+	lst = malloc(sizeof(t_input));
+	if (!lst)
 		return (NULL);
-	i[1] = ft_better_get_words(s, c);
-	ptr = (char **)malloc(sizeof(char *) * (i[1] + 1));
-	i[0] = -1;
-	while (ptr && ++i[0] < i[1])
+	lst->str = s;
+	lst->next = NULL;
+	return (lst);
+}
+
+t_input	*ft_better_split(char *s)
+{
+	t_input *input;
+	int 	i;
+
+	i = 0;
+	input = NULL;
+	while (*s == ' ')
+		s++;
+	while (*s)
 	{
-		while (s[0] == c)
-			s++;
-		ptr[i[0]] = ft_better_init_str(s, c);
-		if (!ptr[i[0]])
+		if (s[i] == '"')
 		{
-			while (i[0] > 0)
-				free(ptr[i[0]--]);
-			free(ptr);
-			return (NULL);
+			i++;
+			while (s[i] && s[i] != '"')
+				i++;
+			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i + 1)));
+			i++;
+			while (--i > 0)
+				s++;
+			if (*s)
+				s++;
 		}
-		s = s + ft_strlen(ptr[i[0]]);
+		if (s[i] == '\'')
+		{
+			i++;
+			while (s[i] && s[i] != '\'')
+				i++;
+			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i + 1)));
+			i++;
+			while (--i > 0)
+				s++;
+			if (*s)
+				s++;
+		}
+		if (s[i] == '<')
+		{
+			while (s[i] && s[i] == '<')
+				i++;
+			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
+			i++;
+			while (--i > 0)
+				s++;
+		}
+		if (s[i] == '>')
+		{
+			while (s[i] && s[i] == '>')
+				i++;
+			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
+			i++;
+			while (--i > 0)
+				s++;
+		}
+		while (*s && *s == ' ')
+			s++;
+		while (s[i] && !ft_strcchr(" '\"<>", s[i]))
+			i++;
+		if (*s)
+			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
+		i++;
+		while (--i > 0)
+			s++;
+		while (*s && *s == ' ')
+			s++;
 	}
-	if (ptr)
-		ptr[i[0]] = 0;
-	return (ptr);
+	return (input);
 }
