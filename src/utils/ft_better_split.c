@@ -55,6 +55,8 @@ t_input	*ft_better_split(char *s)
 			i++;
 			while (s[i] && s[i] != '"')
 				i++;
+			if (!s[i])
+				i = 0;
 			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i + 1)));
 			i++;
 			while (--i > 0)
@@ -67,6 +69,8 @@ t_input	*ft_better_split(char *s)
 			i++;
 			while (s[i] && s[i] != '\'')
 				i++;
+			if (!s[i])
+				i = 0;
 			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i + 1)));
 			i++;
 			while (--i > 0)
@@ -92,9 +96,18 @@ t_input	*ft_better_split(char *s)
 			while (--i > 0)
 				s++;
 		}
+		if (s[i] == '|')
+		{
+			while (s[i] && s[i] == '|')
+				i++;
+			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
+			i++;
+			while (--i > 0)
+				s++;
+		}
 		while (*s && *s == ' ')
 			s++;
-		while (s[i] && !ft_strcchr(" '\"<>", s[i]))
+		while (s[i] && !ft_strcchr(" '|\"<>", s[i]))
 			i++;
 		if (i > 0)
 			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
