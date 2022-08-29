@@ -96,7 +96,7 @@ t_input	*ft_better_split(char *s)
 			s++;
 		while (s[i] && !ft_strcchr(" '\"<>", s[i]))
 			i++;
-		if (*s)
+		if (i > 0)
 			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
 		i++;
 		while (--i > 0)
