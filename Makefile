@@ -52,6 +52,7 @@ SRC_C			:= src/dataset/free.c \
 				   src/shell/loop.c \
 				   src/shell/parse_cmd.c \
 				   src/shell/signal_handler.c \
+				   src/utils/ft_better_get_words.c \
 				   src/utils/ft_better_split.c
 
 # OBJ

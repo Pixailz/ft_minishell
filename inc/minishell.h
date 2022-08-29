@@ -114,6 +114,10 @@ void	handle_sig_int(void);
 void	handle_sig_quit(void);
 void	signal_handler(int signal_code);
 
+// utils/ft_better_get_words.c
+char	ft_push_string(char *str, char *c);
+int		ft_better_get_words(char *str, char *c);
+
 // utils/ft_better_split.c
 char	**ft_better_split(char *s, char c);
 char	*ft_better_init_str(char *s, char c);

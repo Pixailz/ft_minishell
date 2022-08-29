@@ -6,45 +6,11 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 00:03:22 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/29 21:35:09 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/29 22:41:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-static int	ft_better_get_words(char *str, char c)
-{
-	int	count;
-
-	count = 0;
-	while (*str)
-	{
-		while (*str && *str == c)
-			str++;
-		if (*str == '\'')
-		{
-			if (*str && *str != '\'')
-				count++;
-			while (*str && *str != '\'')
-				str++;
-		}
-		else if (*str == '"')
-		{
-			if (*str && *str != '"')
-				count++;
-			while (*str && *str != '"')
-				str++;
-		}
-		else
-		{
-			if (*str && *str != c)
-				count++;
-			while (*str && *str != c)
-				str++;
-		}
-	}
-	return (count);
-}
 
 char	*ft_better_init_str(char *s, char c)
 {
