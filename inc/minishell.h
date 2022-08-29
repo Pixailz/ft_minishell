@@ -94,6 +94,7 @@ void	debug_line_buffer(char *line);
 void	debug_parse_splited(t_main *config);
 
 // minishell.c
+char	**do_something_with_argv(char **argv);
 int		main(int argc, char **argv);
 
 // shell/exec_engine.c
@@ -114,8 +115,8 @@ void	handle_sig_quit(void);
 void	signal_handler(int signal_code);
 
 // utils/ft_better_split.c
-char	*ft_better_init_str(char *s, char c);
 char	**ft_better_split(char *s, char c);
+char	*ft_better_init_str(char *s, char c);
 
 /* ########################################################################## */
 
