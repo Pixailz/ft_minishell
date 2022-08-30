@@ -12,110 +12,76 @@
 
 #include "minishell.h"
 
-void	ft_lstadd_backsplit(t_input **lst, t_input *new)
+void	manage_quotes(char **s, char c, t_list **input)
 {
-	t_input	*tmp;
-
-	tmp = *lst;
-	if (tmp)
-	{
-		while (tmp->next)
-			tmp = tmp->next;
-		tmp->next = new;
-	}
-	else
-		*lst = new;
-}
-
-t_input	*ft_lstnew_ps(char *s)
-{
-	t_input	*lst;
-
-	lst = malloc(sizeof(t_input));
-	if (!lst)
-		return (NULL);
-	lst->str = s;
-	lst->next = NULL;
-	return (lst);
-}
-
-t_input	*ft_better_split(char *s)
-{
-	t_input *input;
-	int 	i;
+	int	i;
 
 	i = 0;
+	if ((*s)[i] == c)
+		{
+			i++;
+			while ((*s)[i] && (*s)[i] != c)
+				i++;
+			if (!(*s)[i])
+				i = 0;
+			ft_lstadd_back(input, ft_lstnew(ft_substr(*s, 0, i + 1)));
+			i++;
+			while (--i > 0)
+				(*s)++;
+			if (**s)
+				(*s)++;
+		}
+}
+
+void	manage_symbols(char **s, char c, t_list **input)
+{
+	int	i;
+
+	i = 0;
+	if ((*s)[i] == c)
+		{
+			while ((*s)[i] && (*s)[i] == c)
+				i++;
+			ft_lstadd_back(input, ft_lstnew(ft_substr(*s, 0, i)));
+			i++;
+			while (--i > 0)
+				(*s)++;
+		}
+}
+
+void	manage_strings(char **s, t_list **input)
+{
+	int	i;
+
+	i = 0;
+	while (**s && **s == ' ')
+		(*s)++;
+	while ((*s)[i] && !ft_strcchr(" '|\"<>", (*s)[i]))
+		i++;
+	if (i > 0)
+		ft_lstadd_back(input, ft_lstnew(ft_substr(*s, 0, i)));
+	i++;
+	while (--i > 0)
+		(*s)++;
+	while (**s && **s == ' ')
+		(*s)++;
+}
+
+t_list	*ft_better_split(char *s)
+{
+	t_list	*input;
+
 	input = NULL;
 	while (*s == ' ')
 		s++;
 	while (*s)
 	{
-		if (s[i] == '"')
-		{
-			i++;
-			while (s[i] && s[i] != '"')
-				i++;
-			if (!s[i])
-				i = 0;
-			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i + 1)));
-			i++;
-			while (--i > 0)
-				s++;
-			if (*s)
-				s++;
-		}
-		if (s[i] == '\'')
-		{
-			i++;
-			while (s[i] && s[i] != '\'')
-				i++;
-			if (!s[i])
-				i = 0;
-			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i + 1)));
-			i++;
-			while (--i > 0)
-				s++;
-			if (*s)
-				s++;
-		}
-		if (s[i] == '<')
-		{
-			while (s[i] && s[i] == '<')
-				i++;
-			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
-			i++;
-			while (--i > 0)
-				s++;
-		}
-		if (s[i] == '>')
-		{
-			while (s[i] && s[i] == '>')
-				i++;
-			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
-			i++;
-			while (--i > 0)
-				s++;
-		}
-		if (s[i] == '|')
-		{
-			while (s[i] && s[i] == '|')
-				i++;
-			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
-			i++;
-			while (--i > 0)
-				s++;
-		}
-		while (*s && *s == ' ')
-			s++;
-		while (s[i] && !ft_strcchr(" '|\"<>", s[i]))
-			i++;
-		if (i > 0)
-			ft_lstadd_backsplit(&input, ft_lstnew_ps(ft_substr(s, 0, i)));
-		i++;
-		while (--i > 0)
-			s++;
-		while (*s && *s == ' ')
-			s++;
+		manage_quotes(&s, '"', &input);
+		manage_quotes(&s, '\'', &input);
+		manage_symbols(&s, '<', &input);
+		manage_symbols(&s, '>', &input);
+		manage_symbols(&s, '|', &input);
+		manage_strings(&s, &input);
 	}
 	return (input);
 }

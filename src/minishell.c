@@ -19,13 +19,13 @@ char	**do_something_with_argv(char **argv)
 
 int	main(int ac, char **av)
 {
-	t_input *test;
+	t_list *test;
 
 	(void)ac;
 	test = ft_better_split(av[1]);
 	while (test != NULL)
 	{
-		printf("%s\n", test->str);
+		printf("%s\n", (char *)test->content);
 		test = test->next;
 	}
 }

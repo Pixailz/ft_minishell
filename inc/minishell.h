@@ -51,11 +51,6 @@ readline
 /* STRUCT */
 /* ###### */
 
-typedef struct s_input{
-	char			*str;
-	struct s_input	*next;
-}	t_input;
-
 typedef struct s_cmd
 {
 	char	*name;
@@ -120,7 +115,7 @@ void	handle_sig_quit(void);
 void	signal_handler(int signal_code);
 
 // utils/ft_better_split.c
-t_input	*ft_better_split(char *s);
+t_list	*ft_better_split(char *s);
 char	*ft_better_init_str(char *s, char c);
 
 /* ########################################################################## */
