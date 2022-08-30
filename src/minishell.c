@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/30 16:20:08 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/30 21:38:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,32 +17,30 @@ char	**do_something_with_argv(char **argv)
 	return (argv);
 }
 
+char	*push_string(char *str)
+{
+	str++;
+	return (str);
+}
+
 int	main(void)
 {
-	char	string[] = "echo -n 'test'";
-	// char	string[] = "echo -n '  test  ' ";
-	// char	string[] = "echo ''\"\"";
-	// char	string[] = "echo \"-n\" ' test '";
-	// char	string[] = "echo \"\"n''";
 	char	**string_splitted;
 	int		counter;
+	// char	string[] = "echo -n 'test'";
+	// char	string[] = "echo -n '  test  ' ";
+	// char	string[] = "echo ''\"\"";				// not working
+	// char	string[] = "echo \"-n\" ' test '";
+	char	string[] = "echo \"\"n''";				// not working
 
 	string_splitted = ft_splitb(string, ' ', "'\"");
 	ft_printf("string -> [%s]\n", string);
-	counter = 0;
-	while (string_splitted[counter])
-	{
-		ft_printf("splitted[%d] -> [%s]\n", counter, string_splitted[counter]);
-		counter++;
-	}
-	// splited = ft_better_split(argv[1], ' ');
 	// counter = 0;
-	// while (splited[counter])
+	// while (string_splitted[counter])
 	// {
-	// 	ft_printf("splited[%d] : [%s]\n", counter, splited[counter]);
+	// 	ft_printf("splitted[%d] -> [%s]\n", counter, string_splitted[counter]);
 	// 	counter++;
 	// }
-	// return (0);
 }
 
 // int	main(int argc, char **argv)

@@ -95,6 +95,7 @@ void	debug_parse_splited(t_main *config);
 
 // minishell.c
 char	**do_something_with_argv(char **argv);
+char	*push_string(char *str);
 int		main(void);
 
 // shell/exec_engine.c
@@ -114,11 +115,10 @@ void	handle_sig_int(void);
 void	handle_sig_quit(void);
 void	signal_handler(int signal_code);
 
-// utils/ft_better_get_words.c
-int		ft_better_get_words(char *str, char delim, char *encl);
-
-// utils/ft_better_split.c
-char	**ft_better_split(char *s, char delim, char *encl);
+// utils/ft_splitb.c
+char	**ft_splitb(char *s, char delim, char *encl);
+int		ft_splitb_get_size(char *str, char delim, char *encl);
+int		ft_splitb_get_word(char *str, char delim, char *encl, int *end);
 
 /* ########################################################################## */
 
