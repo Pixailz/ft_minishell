@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/30 13:28:04 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:41:40 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,13 +21,15 @@ int	main(void)
 {
 	// char	string[] = "echo -n 'test'";
 	// char	string[] = "echo -n '  test  ' ";
-	// char	string[] = "echo \"-n\" ' test '";		// not working
+	// char	string[] = "echo ''\"\"";
+	// char	string[] = "echo \"-n\" ' test '";
 	char	string[] = "echo \"\"-n\"\" 'test'";	// not working
 	char	**string_splitted;
 	int		counter;
 
 	string_splitted = ft_better_split(string, ' ', "'\"");
-	// string_splitted = ft_split(string, ' ');
+	return (0);
+	string_splitted = ft_split(string, ' ');
 	ft_printf("string -> [%s]\n", string);
 	counter = 0;
 	while (string_splitted[counter])
