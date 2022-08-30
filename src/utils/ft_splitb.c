@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 00:03:22 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/30 21:35:45 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/31 01:03:12 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -69,32 +69,35 @@ int	ft_splitb_get_size(char *str, char delim, char *encl)
 	return (count);
 }
 
-char	**ft_splitb(char *s, char delim, char *encl)
+char	**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size)
 {
-	char	**tab;
-	char	*s_ptr;
-	int		tab_len;
-	int		counter;
-	int		end;
-	int		begin;
+	int	counter;
+	int	end;
+	int	begin;
 
-	if (!s)
-		return (NULL);
-	tab_len = ft_splitb_get_size(s, delim, encl);
-	tab = (char **)malloc(sizeof(char *) * (tab_len + 1));
-	counter = 0;
-	end = 0;
-	s_ptr = s;
 	while (counter < tab_len)
 	{
 		begin = ft_splitb_get_word(s_ptr, delim, encl, &end);
 		ft_printf("begin ->   [%d]\n", begin);
 		ft_printf("end   ->   [%d]\n", end - 1);
-		ft_printf("s_ptr -> [%s]\n", s_ptr);
+		ft_printf("s_ptr -> [%s]\n\n", s_ptr);
 		s_ptr = s_ptr + ((end - begin) + 1);
-		if (counter == 3)
+		if (!s_str)
 			break ;
 		counter++;
 	}
+	return ((char **)0);
+}
+
+char	**ft_splitb(char *s, char delim, char *encl)
+{
+	char	**tab;
+	int		tab_len;
+
+	if (!s)
+		return (NULL);
+	tab_len = ft_splitb_get_size(s, delim, encl);
+	tab = (char **)malloc(sizeof(char *) * (tab_len + 1));
+	tab = ft_splitb_get_words(s, delim, encl, tab_size);
 	return (tab);
 }
