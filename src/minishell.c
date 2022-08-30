@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/29 22:35:55 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/30 13:28:04 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,14 +17,24 @@ char	**do_something_with_argv(char **argv)
 	return (argv);
 }
 
-int	main(int argc, char **argv)
+int	main(void)
 {
-	char	**splited;
+	// char	string[] = "echo -n 'test'";
+	// char	string[] = "echo -n '  test  ' ";
+	// char	string[] = "echo \"-n\" ' test '";		// not working
+	char	string[] = "echo \"\"-n\"\" 'test'";	// not working
+	char	**string_splitted;
 	int		counter;
 
-	if (argc != 2)
-		return (ft_error("args", 1));
-	ft_printf("argv[1] : [%d]\n", ft_better_get_words(argv[1], " '\""));
+	string_splitted = ft_better_split(string, ' ', "'\"");
+	// string_splitted = ft_split(string, ' ');
+	ft_printf("string -> [%s]\n", string);
+	counter = 0;
+	while (string_splitted[counter])
+	{
+		ft_printf("splitted[%d] -> [%s]\n", counter, string_splitted[counter]);
+		counter++;
+	}
 	// splited = ft_better_split(argv[1], ' ');
 	// counter = 0;
 	// while (splited[counter])

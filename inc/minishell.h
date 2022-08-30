@@ -95,7 +95,7 @@ void	debug_parse_splited(t_main *config);
 
 // minishell.c
 char	**do_something_with_argv(char **argv);
-int		main(int argc, char **argv);
+int		main(void);
 
 // shell/exec_engine.c
 int		exec_engine(t_main *config);
@@ -115,12 +115,10 @@ void	handle_sig_quit(void);
 void	signal_handler(int signal_code);
 
 // utils/ft_better_get_words.c
-char	ft_push_string(char *str, char *c);
-int		ft_better_get_words(char *str, char *c);
+int		ft_better_get_words(char *str, char delim, char *encl);
 
 // utils/ft_better_split.c
-char	**ft_better_split(char *s, char c);
-char	*ft_better_init_str(char *s, char c);
+char	**ft_better_split(const char *s, char delim, const char *encl);
 
 /* ########################################################################## */
 
