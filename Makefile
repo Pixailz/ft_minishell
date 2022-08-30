@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/26 12:07:03 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/30 15:26:01 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ MAKE			:= make -C
 VERSION			:= 0.0.0
 $(eval export MAIN=1)
 
-ifneq ($(PADDING),30)
-PADDING			:= 30
+ifneq ($(PADDING),35)
+PADDING			:= 35
 endif
 
 ifeq ($(DEBUG),)

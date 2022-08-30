@@ -118,7 +118,7 @@ void	signal_handler(int signal_code);
 int		ft_better_get_words(char *str, char delim, char *encl);
 
 // utils/ft_better_split.c
-char	**ft_better_split(const char *s, char delim, const char *encl);
+char	**ft_better_split(char *s, char delim, char *encl);
 
 /* ########################################################################## */
 
