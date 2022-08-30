@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/08/26 12:07:03 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/08/30 04:58:57 by pmailly          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -52,7 +52,8 @@ SRC_C			:= src/dataset/free.c \
 				   src/shell/loop.c \
 				   src/shell/parse_cmd.c \
 				   src/shell/signal_handler.c \
-				   src/utils/ft_better_split.c
+				   src/utils/ft_better_split.c \
+				   src/builtins/export.c
 
 # OBJ
 

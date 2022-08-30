@@ -12,23 +12,29 @@
 
 #include "minishell.h"
 
+t_lst_env  *env_to_lst(char **env);
+
 char	**do_something_with_argv(char **argv)
 {
 	return (argv);
 }
 
-int	main(int ac, char **av)
+int	main(int ac, char **av, char **env)
 {
-	t_list *test;
-
-	(void)ac;
-	test = ft_better_split(av[1]);
-	while (test != NULL)
-	{
-		printf("%s\n", (char *)test->content);
-		test = test->next;
-	}
+	env_to_lst(env);
 }
+// int	main(int ac, char **av)
+// {
+// 	t_list *test;
+
+// 	(void)ac;
+// 	test = ft_better_split(av[1]);
+// 	while (test != NULL)
+// 	{
+// 		printf("%s\n", (char *)test->content);
+// 		test = test->next;
+// 	}
+// }
 
 // int	main(int argc, char **argv)
 // {

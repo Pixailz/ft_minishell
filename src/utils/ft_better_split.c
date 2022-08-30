@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	manage_quotes(char **s, char c, t_list **input)
+static void	manage_quotes(char **s, char c, t_list **input)
 {
 	int	i;
 
@@ -33,7 +33,7 @@ void	manage_quotes(char **s, char c, t_list **input)
 		}
 }
 
-void	manage_symbols(char **s, char c, t_list **input)
+static void	manage_symbols(char **s, char c, t_list **input)
 {
 	int	i;
 
@@ -49,7 +49,7 @@ void	manage_symbols(char **s, char c, t_list **input)
 		}
 }
 
-void	manage_strings(char **s, t_list **input)
+static void	manage_strings(char **s, t_list **input)
 {
 	int	i;
 
