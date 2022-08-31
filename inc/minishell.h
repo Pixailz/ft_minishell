@@ -72,6 +72,7 @@ typedef struct s_main
 typedef struct  s_lst_env{
     void    *key;
     void    *value;
+    int		index;
     void    *next;
 }   t_lst_env;
 
@@ -102,6 +103,7 @@ void	debug_parse_splited(t_main *config);
 // minishell.c
 char	**do_something_with_argv(char **argv);
 int		main(int argc, char **argv, char **env);
+//int		main(int argc, char **argv);
 
 // shell/exec_engine.c
 int		exec_engine(t_main *config);

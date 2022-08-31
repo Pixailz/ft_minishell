@@ -23,17 +23,17 @@ int	main(int ac, char **av, char **env)
 {
 	env_to_lst(env);
 }
-// int	main(int ac, char **av)
-// {
-// 	t_list *test;
 
-// 	(void)ac;
-// 	test = ft_better_split(av[1]);
-// 	while (test != NULL)
-// 	{
-// 		printf("%s\n", (char *)test->content);
-// 		test = test->next;
-// 	}
+// int	main(int ac, char **av, char **env)
+// {
+//  	t_list *test;
+//  	(void)ac;
+//  	test = ft_better_split(av[1]);
+//  	while (test != NULL)
+//  	{
+//  		printf("%s\n", (char *)test->content);
+//  		test = test->next;
+//  	}
 // }
 
 // int	main(int argc, char **argv)
