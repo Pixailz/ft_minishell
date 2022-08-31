@@ -95,8 +95,7 @@ void	debug_parse_splited(t_main *config);
 
 // minishell.c
 char	**do_something_with_argv(char **argv);
-char	*push_string(char *str);
-int		main(void);
+int		main(int argc, char **argv);
 
 // shell/exec_engine.c
 int		exec_engine(t_main *config);
@@ -118,7 +117,7 @@ void	signal_handler(int signal_code);
 // utils/ft_splitb.c
 char	**ft_splitb(char *s, char delim, char *encl);
 int		ft_splitb_get_size(char *str, char delim, char *encl);
-int		ft_splitb_get_word(char *str, char delim, char *encl, int *end);
+int		ft_splitb_get_word(char **str, char delim, char *encl);
 
 /* ########################################################################## */
 

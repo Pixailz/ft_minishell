@@ -4,6 +4,7 @@
 # compiled thing
 minishell
 obj/
+a.out
 
 # log from stderr
 /*.log

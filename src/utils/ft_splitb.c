@@ -6,38 +6,34 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 00:03:22 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/31 01:03:12 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/31 16:34:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	ft_splitb_get_word(char *str, char delim, char *encl, int *end)
+int	ft_splitb_get_word(char **str, char delim, char *encl)
 {
-	int			have_encl;
-	char		tmp_delim;
-	static int	begin = 0;
+	int		have_encl;
+	char	tmp_delim;
+	char	*str_ptr;
 
-	while (str[begin] && str[begin] == delim)
-		begin++;
-	*end = begin;
-	have_encl = ft_strcchr(encl, str[begin]);
+	while (**str && **str == delim)
+		(*str)++;
+	str_ptr = *str;
+	have_encl = ft_strcchr(encl, **str);
 	if (have_encl)
 	{
-		tmp_delim = str[begin];
-		(*end)++;
-		while (str[*end] && str[*end] != tmp_delim)
-			(*end)++;
-		(*end)++;
+		tmp_delim = **str;
+		str_ptr++;
+		while (*str_ptr && *str_ptr != tmp_delim)
+			str_ptr++;
+		str_ptr++;
 	}
 	else
-	{
-		while (str[*end] && str[*end] != delim && !ft_strcchr(encl, str[*end]))
-		{
-			(*end)++;
-		}
-	}
-	return (begin);
+		while (*str_ptr && *str_ptr != delim && !ft_strcchr(encl, *str_ptr))
+			str_ptr++;
+	return (str_ptr - *str);
 }
 
 int	ft_splitb_get_size(char *str, char delim, char *encl)
@@ -69,35 +65,46 @@ int	ft_splitb_get_size(char *str, char delim, char *encl)
 	return (count);
 }
 
-char	**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size)
-{
-	int	counter;
-	int	end;
-	int	begin;
+// char	**ft_splitb_get_words(char *s, char delim, char *encl)
+// {
+// 	int		counter;
+// 	int		end;
+// 	char	*s_ptr;
 
-	while (counter < tab_len)
-	{
-		begin = ft_splitb_get_word(s_ptr, delim, encl, &end);
-		ft_printf("begin ->   [%d]\n", begin);
-		ft_printf("end   ->   [%d]\n", end - 1);
-		ft_printf("s_ptr -> [%s]\n\n", s_ptr);
-		s_ptr = s_ptr + ((end - begin) + 1);
-		if (!s_str)
-			break ;
-		counter++;
-	}
-	return ((char **)0);
-}
+// 	end = 0;
+// 	counter = 0;
+// 	s_ptr = s;
+// 	while (*s_ptr)
+// 	{
+// 		end = ft_splitb_get_word(&s_ptr, delim, encl);
+// 		s_ptr = s_ptr + end;
+// 		counter++;
+// 	}
+// 	return ((char **)0);
+// }
 
 char	**ft_splitb(char *s, char delim, char *encl)
 {
 	char	**tab;
 	int		tab_len;
+	int		counter;
+	int		size;
+	char	*s_ptr;
 
 	if (!s)
 		return (NULL);
 	tab_len = ft_splitb_get_size(s, delim, encl);
 	tab = (char **)malloc(sizeof(char *) * (tab_len + 1));
-	tab = ft_splitb_get_words(s, delim, encl, tab_size);
+	size = 0;
+	counter = 0;
+	s_ptr = ft_strtrim(s, " ");
+	while (*s_ptr)
+	{
+		size = ft_splitb_get_word(&s_ptr, delim, encl);
+		tab[counter] = (char *)malloc(sizeof(char) * size);
+		ft_strncpy(tab[counter], s_ptr, size);
+		s_ptr = s_ptr + size;
+		counter++;
+	}
 	return (tab);
 }
