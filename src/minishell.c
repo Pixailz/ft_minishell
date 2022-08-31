@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/31 16:40:19 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/08/31 18:49:17 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,21 +26,15 @@ int	main(int argc, char **argv)
 
 	if (argc != 2)
 		return (ft_error("args", 1));
-	choice = ft_atoi(argv[1]);
-	if (choice == 1)
-		string = ft_strdup("echo -n 'test'");
-	if (choice == 2)
-		string = ft_strdup("echo -n '  test  '");
-	if (choice == 3)
-		string = ft_strdup("echo   ''\"\"");
-	if (choice == 4)
-		string = ft_strdup("echo \"-n\" ' test '");
-	if (choice == 5)
-		string = ft_strdup("echo \"\"n''");
-	if (choice == 6)
-		string = ft_strdup("test -f ./file.c && echo '  pass ' || echo '  failed '   a'");
-	string_splitted = ft_splitb(string, ' ', "'\"");
-	ft_printf("string    \t-> [%s]\n", string);
+	// string = ft_strdup("echo -n 'test'");
+	// string = ft_strdup("echo -n '  test  '");
+	// string = ft_strdup("echo   ''\"\"");
+	// string = ft_strdup("echo \"-n\" ' test '");
+	// string = ft_strdup("echo \"\"n''");
+	// string = ft_strdup("test -f ./file.c && echo '  pass ' || echo '  failed '   a'");
+	// string = ft_strdup("ec'ho 'salut");
+	string_splitted = ft_splitb(argv[1], ' ', "'\"");
+	ft_printf("string    \t-> [%s]\n", argv[1]);
 	counter = 0;
 	while (string_splitted[counter])
 	{
