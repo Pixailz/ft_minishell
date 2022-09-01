@@ -78,7 +78,6 @@ typedef struct s_main
 
 // dataset/free.c
 void	free_char_pointer_pointer(char **str);
-void	free_char_pointer_pointer_splited(char **str);
 void	free_cmd(t_cmd *cmd);
 void	free_config(t_main *config);
 void	free_entry(t_main *config);
@@ -112,7 +111,6 @@ int		main_loop(t_main *config);
 int		parse_cmd(t_main *config);
 void	init_cmd(t_main *config);
 void	parse_arg(t_main *config);
-void	parse_get_base(t_main *config);
 void	parse_splited(t_main *config);
 
 // shell/signal_handler.c
