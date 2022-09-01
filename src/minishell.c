@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/29 21:24:58 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/01 02:40:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,7 @@ char	**do_something_with_argv(char **argv)
 	return (argv);
 }
 
+<<<<<<< HEAD
 int	main(int ac, char **av, char **env)
 {
 	env_to_lst(env);
@@ -66,3 +67,17 @@ int	main(int ac, char **av, char **env)
 // 	free_entry(&config);
 // 	return (0);
 // }
+=======
+int	main(int argc, char **argv, char **envp)
+{
+	t_main	config;
+
+	if (argc != 1)
+		return (ft_error("no arguments needed", 1));
+	do_something_with_argv(argv);
+	init_entry(&config, envp);
+	main_loop(&config);
+	free_entry(&config);
+	return (0);
+}
+>>>>>>> main
