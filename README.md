@@ -3,9 +3,18 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 # TODO
 
-1. parse_cmd
-	- ft_better_split
-2. exec_engine
+1. fix ft_splitb
+	- with last enclosed if is not enclosed
+
+## first command to parse
+
+1. should work
+	- `cat -e "file.txt"`
+	- `ca't' -e "file.txt"`
+	- `cat -e "file".txt`
+	- `cat -e "file".'txt'`
+2. shouldn't work
+	- `ca't -e' "file.txt"`
 
 # TIPS
 
