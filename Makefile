@@ -46,13 +46,15 @@ LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 # SRC
 SRC_C			:= src/dataset/free.c \
 				   src/dataset/init.c \
-				   src/debug/debug_print.c \
+				   src/debug/debug_1.c \
+				   src/debug/debug_2.c \
 				   src/minishell.c \
 				   src/shell/exec_engine.c \
 				   src/shell/loop.c \
 				   src/shell/parse_cmd.c \
 				   src/shell/signal_handler.c \
-				   src/utils/ft_splitb.c
+				   src/utils/ft_splitb.c \
+				   src/utils/get_path.c
 
 # OBJ
 
