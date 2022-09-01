@@ -64,6 +64,7 @@ typedef struct s_cmd
 typedef struct s_main
 {
 	char	*prompt;
+	char	**env_path;
 	char	*line_buffer;
 	char	**line_splited;
 	t_cmd	*cmd;
