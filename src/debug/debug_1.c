@@ -1,20 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug_print.c                                      :+:      :+:    :+:   */
+/*   debug_1.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:20:53 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/29 21:38:23 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/01 01:47:11 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	debug_initial_prompt(char *prompt)
+void	debug_init(t_main *config)
 {
-	ft_printf_fd(LOG_FD, "%s initial prompt\t\t[%s]\n", GREEN_PLUS, prompt);
+	int	counter;
+
+	ft_printf_fd(LOG_FD, "%s initial prompt\t\t[%s]\n", GREEN_PLUS, \
+																config->prompt);
+	counter = 0;
+	while (config->env_path[counter])
+	{
+		ft_printf_fd(LOG_FD, "   %s path[%d]\t\t\t[%s]\n", GREEN_PLUS, \
+											counter, config->env_path[counter]);
+		counter++;
+	}
 }
 
 void	debug_line_buffer(char *line)
@@ -41,29 +51,21 @@ int	debug_catched_signal(int sig)
 
 void	debug_init_cmd(t_main *config)
 {
-	ft_printf_fd(LOG_FD, "%s nb_quote\t\t\t%d\n", GREEN_PLUS, \
+	ft_printf_fd(LOG_FD, "   %s nb_quote\t\t\t%d\n", GREEN_PLUS, \
 														config->cmd->nb_quote);
-	ft_printf_fd(LOG_FD, "%s nb_dquote\t\t\t%d\n", GREEN_PLUS, \
+	ft_printf_fd(LOG_FD, "   %s nb_dquote\t\t%d\n", GREEN_PLUS, \
 														config->cmd->nb_dquote);
 }
 
-void	debug_parse_splited(t_main *config)
+void	debug_splited_line(t_main *config)
 {
-	int	pos;
+	int	counter;
 
-	ft_printf_fd(LOG_FD, "%s cmd->name\t\t\t%s\n", GREEN_PLUS, \
-														config->cmd->name);
-	if (config->cmd->have_arg)
+	counter = 0;
+	while (config->line_splited[counter])
 	{
-		pos = 0;
-		ft_printf_fd(LOG_FD, "%s cmd->have_arg\t\tTrue\n", GREEN_PLUS);
-		while (config->cmd->arg[pos])
-		{
-			ft_printf_fd(LOG_FD, "   %s cmd->arg[%d]\t\t[%s]\n", GREEN_PLUS, pos, \
-														config->cmd->arg[pos]);
-			pos++;
-		}
+		ft_printf_fd(LOG_FD, "      %s line_splitted[%d]\t[%s]\n", GREEN_PLUS, \
+							counter, config->line_splited[counter]);
+		counter++;
 	}
-	else
-		ft_printf_fd(LOG_FD, "%s cmd->have_arg\t\tFalse\n", GREEN_PLUS);
 }
