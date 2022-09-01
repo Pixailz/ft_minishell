@@ -70,6 +70,13 @@ typedef struct s_main
 	t_cmd	*cmd;
 }			t_main;
 
+typedef struct  s_lst_env{
+    void    *key;
+    void    *value;
+    int		index;
+    void    *next;
+}   t_lst_env;
+
 /* ########################################################################## */
 
 /* ########################################################################## */
@@ -100,6 +107,11 @@ void	debug_parse_arg(t_cmd *cmd);
 
 // minishell.c
 char	**do_something_with_argv(char **argv);
+<<<<<<< HEAD
+int		main(int argc, char **argv, char **env);
+//int		main(int argc, char **argv);
+=======
+>>>>>>> main
 
 // shell/exec_engine.c
 int		exec_engine(t_main *config);
@@ -118,6 +130,11 @@ void	handle_sig_int(void);
 void	handle_sig_quit(void);
 void	signal_handler(int signal_code);
 
+<<<<<<< HEAD
+// utils/ft_better_split.c
+t_list	*ft_better_split(char *s);
+char	*ft_better_init_str(char *s, char c);
+=======
 // utils/ft_splitb.c
 char	**ft_splitb(char *s, char delim, char *encl);
 char	**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
@@ -127,6 +144,7 @@ int		ft_splitb_get_word(char **str, char delim, char *encl);
 // utils/get_path.c
 char	**get_path(char **env);
 char	*get_cmd_path(char *name, char **path);
+>>>>>>> main
 
 /* ########################################################################## */
 
