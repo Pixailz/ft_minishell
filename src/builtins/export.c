@@ -3,10 +3,10 @@
 /*                                                        :::      ::::::::   */
 /*   export.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: pmailly <marvin@42.fr>                     +#+  +:+       +#+        */
+/*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/08/30 03:22:19 by pmailly          ###   ########.fr       */
+/*   Updated: 2022/09/01 04:06:41 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,38 +28,38 @@ t_lst_env	*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new)
 	return (ptr->next);
 }
 
-static void    unlink_key_value(char *var_env, char **key, char **value)
+static void	unlink_key_value(char *var_env, char **key, char **value)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (var_env[i] && var_env[i] != '=')
-        i++;
-    if (!var_env[i])
-    {
-        *key = ft_substr(var_env, 0, i);
-        *value = NULL;
-    }
-    else
-    {
-        i++;
-        *key = ft_substr(var_env, 0, i);
-        while (--i > 0)
-            var_env++;
-        var_env++;
-        *value = ft_strdup(var_env);
-    }
+	i = 0;
+	while (var_env[i] && var_env[i] != '=')
+		i++;
+	if (!var_env[i])
+	{
+		*key = ft_substr(var_env, 0, i);
+		*value = NULL;
+	}
+	else
+	{
+		i++;
+		*key = ft_substr(var_env, 0, i);
+		while (--i > 0)
+			var_env++;
+		var_env++;
+		*value = ft_strdup(var_env);
+	}
 }
 
-static t_lst_env	*ft_lstnew_env(void *env)      
+static t_lst_env	*ft_lstnew_env(void *env)
 {
 	t_lst_env	*ptr;
 
 	ptr = (t_lst_env *)malloc(sizeof(t_lst_env));
 	if (!ptr)
 		return (FT_NULL);
-    ptr->index = 0;
-    unlink_key_value(env, (char **)&ptr->key, (char **)&ptr->value);
+	ptr->index = 0;
+	unlink_key_value(env, (char **)&ptr->key, (char **)&ptr->value);
 	ptr->next = FT_NULL;
 	return (ptr);
 }
@@ -68,20 +68,20 @@ int	ft_strcmp_env(char *s1, char *s2)
 {
 	while (*s1 && *s2 && *s1 == *s2 && *s1 != '=' && *s2 != '=')
 	{
-    	s2++;
-        s1++;
-    }
-    if (*s1 == '=' && *s2 != '=')
-        return (-1);
-    else if (*s2 == '=' && *s1 != '=')
-        return (1);
-    else
-        return ((unsigned char)*s1 - (unsigned char)*s2);
+		s2++;
+		s1++;
+	}
+	if (*s1 == '=' && *s2 != '=')
+		return (-1);
+	else if (*s2 == '=' && *s1 != '=')
+		return (1);
+	else
+		return ((unsigned char)*s1 - (unsigned char)*s2);
 }
 
 static void	index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i)
 {
-    *tmp2 = lst->next;
+	*tmp2 = lst->next;
 	while ((*tmp2)->next)
 	{
 		*tmp2 = (*tmp2)->next;
@@ -93,34 +93,34 @@ static void	index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, in
 	*tmp = lst;
 }
 
-void    index_env_lst(t_lst_env **envlst)
+void	index_env_lst(t_lst_env **envlst)
 {
-    t_lst_env   *tmp;
-    t_lst_env   *tmp2;
-    int         i;
-    int         len;
+	t_lst_env	*tmp;
+	t_lst_env	*tmp2;
+	int			i;
+	int			len;
 
-    i = 1;
-    len = 0;
-    tmp = *envlst;
-    while (tmp)
-    {
-        len++;
-        tmp = tmp->next;
-    }
-    tmp = *envlst;
-    while (i <= len)
-    {
-        while (tmp->index != 0)
-        {
-            tmp = tmp->next;
-            if (tmp == NULL)
-                return ;
-        }
-        index_env_lst2(*envlst, &tmp, &tmp2, &i);
-        tmp = *envlst; 
-    }
-    return ;
+	i = 1;
+	len = 0;
+	tmp = *envlst;
+	while (tmp)
+	{
+		len++;
+		tmp = tmp->next;
+	}
+	tmp = *envlst;
+	while (i <= len)
+	{
+		while (tmp->index != 0)
+		{
+			tmp = tmp->next;
+			if (tmp == NULL)
+				return ;
+		}
+		index_env_lst2(*envlst, &tmp, &tmp2, &i);
+		tmp = *envlst;
+	}
+	return ;
 }
 
 void    print_env(t_lst_env *envlst)

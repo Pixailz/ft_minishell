@@ -44,7 +44,8 @@ INC_DIR			:= $(addprefix -I,$(INC_TMP))
 LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 
 # SRC
-SRC_C			:= src/dataset/free.c \
+SRC_C			:= src/builtins/export.c \
+				   src/dataset/free.c \
 				   src/dataset/init.c \
 				   src/debug/debug_1.c \
 				   src/debug/debug_2.c \
@@ -54,7 +55,8 @@ SRC_C			:= src/dataset/free.c \
 				   src/shell/parse_cmd.c \
 				   src/shell/signal_handler.c \
 				   src/utils/ft_better_split.c \
-				   src/builtins/export.c
+				   src/utils/ft_splitb.c \
+				   src/utils/get_path.c
 
 # OBJ
 

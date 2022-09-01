@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:54:34 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/01 03:33:55 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/01 04:08:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,6 +65,6 @@ int	parse_cmd(t_main *config)
 	parse_splited(config);
 	free(config->line_buffer);
 	config->line_buffer = NULL;
-	free_char_pointer_pointer_splited(config->line_splited);
+	free_char_pointer_pointer(config->line_splited);
 	return (0);
 }
