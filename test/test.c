@@ -1,31 +1,36 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   test.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/01 02:40:35 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/08/31 16:10:10 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/08/31 16:12:10 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include <string.h>
+#include <stdio.h>
 
-char	**do_something_with_argv(char **argv)
+void	push_string(char **str, int n)
 {
-	return (argv);
+	int	counter;
+
+	counter = 0;
+	while (counter < n)
+	{
+		(*str)++;
+		counter++;
+	}
 }
 
-int	main(int argc, char **argv, char **envp)
+int main(void)
 {
-	t_main	config;
+	char	*test;
 
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_entry(&config, envp);
-	main_loop(&config);
-	free_entry(&config);
-	return (0);
+	test = strdup("this is a test");
+	printf("%s\n", test);
+	push_string(&test, 3);
+	printf("%s\n", test);
 }
