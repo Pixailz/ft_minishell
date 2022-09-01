@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 00:03:22 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/31 16:34:43 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/01 03:11:09 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,46 +65,41 @@ int	ft_splitb_get_size(char *str, char delim, char *encl)
 	return (count);
 }
 
-// char	**ft_splitb_get_words(char *s, char delim, char *encl)
-// {
-// 	int		counter;
-// 	int		end;
-// 	char	*s_ptr;
+char	**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size)
+{
+	int		counter;
+	int		size;
+	char	*s_ptr;
+	char	*s_ptr_ptr;
+	char	**tab;
 
-// 	end = 0;
-// 	counter = 0;
-// 	s_ptr = s;
-// 	while (*s_ptr)
-// 	{
-// 		end = ft_splitb_get_word(&s_ptr, delim, encl);
-// 		s_ptr = s_ptr + end;
-// 		counter++;
-// 	}
-// 	return ((char **)0);
-// }
+	tab = (char **)malloc(sizeof(char *) * (tab_size + 1));
+	size = 0;
+	counter = 0;
+	s_ptr = ft_strtrim(s, " ");
+	s_ptr_ptr = s_ptr;
+	while (counter < tab_size)
+	{
+		size = ft_splitb_get_word(&s_ptr, delim, encl);
+		tab[counter] = (char *)malloc(sizeof(char) * (size + 1));
+		ft_strncpy(tab[counter], s_ptr, size);
+		tab[counter][size] = 0;
+		s_ptr = s_ptr + size;
+		counter++;
+	}
+	free(s_ptr_ptr);
+	tab[tab_size] = NULL;
+	return (tab);
+}
 
 char	**ft_splitb(char *s, char delim, char *encl)
 {
 	char	**tab;
 	int		tab_len;
-	int		counter;
-	int		size;
-	char	*s_ptr;
 
 	if (!s)
 		return (NULL);
 	tab_len = ft_splitb_get_size(s, delim, encl);
-	tab = (char **)malloc(sizeof(char *) * (tab_len + 1));
-	size = 0;
-	counter = 0;
-	s_ptr = ft_strtrim(s, " ");
-	while (*s_ptr)
-	{
-		size = ft_splitb_get_word(&s_ptr, delim, encl);
-		tab[counter] = (char *)malloc(sizeof(char) * size);
-		ft_strncpy(tab[counter], s_ptr, size);
-		s_ptr = s_ptr + size;
-		counter++;
-	}
+	tab = ft_splitb_get_words(s, delim, encl, tab_len);
 	return (tab);
 }
