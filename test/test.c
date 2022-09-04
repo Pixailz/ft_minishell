@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/31 16:10:10 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/08/31 16:12:10 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/02 22:25:27 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	push_string(char **str, int n)
 	}
 }
 
-int main(void)
+int	main(void)
 {
 	char	*test;
 
