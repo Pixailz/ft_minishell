@@ -6,7 +6,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. fix ft_splitb
 	- with last enclosed if is not enclosed
 
-## first command to parse
+## first command to parse / exec
 
 1. should work
 	- `cat -e "file.txt"`
