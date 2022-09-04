@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 05:54:34 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/01 04:08:43 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/04 03:51:51 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,6 +15,7 @@
 void	init_cmd(t_main *config)
 {
 	config->cmd = (t_cmd *)malloc(sizeof(t_cmd));
+	pipe(config->cmd->pipe);
 	config->cmd->have_arg = 0;
 	config->cmd->nb_quote = ft_strcchr(config->line_buffer, '\'');
 	config->cmd->nb_dquote = ft_strcchr(config->line_buffer, '"');
@@ -42,7 +43,6 @@ void	parse_arg(t_main *config)
 
 void	parse_splited(t_main *config)
 {
-	debug_splited_line(config);
 	config->cmd->name = ft_strdup(config->line_splited[0]);
 	config->cmd->path = get_cmd_path(config->cmd->name, config->env_path);
 	if (!config->cmd->path)
