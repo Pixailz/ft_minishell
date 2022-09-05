@@ -86,11 +86,11 @@ typedef struct s_lst_env{
 // builtins/export.c
 int			ft_strcmp_env(char *s1, char *s2);
 t_lst_env	*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
-t_lst_env	*env_to_lst(char **env);
+t_lst_env  *env_to_lst(char **env);
 void		index_env_lst(t_lst_env **envlst);
-void		export_var_to_env(t_lst_env **envlst, char *var);
-void		print_env(t_lst_env *envlst);
-void		print_export(t_lst_env *envlst);
+void    export_var_to_env(t_lst_env **envlst, char *var);
+void    print_env(t_lst_env *envlst);
+void    print_export(t_lst_env *envlst);
 
 // dataset/free.c
 void		free_char_pointer_pointer(char **str);
@@ -119,6 +119,8 @@ char		**do_something_with_argv(char **argv);
 
 // shell/exec_engine.c
 int			exec_engine(t_main *config);
+void		do_command_begin(t_cmd *cmd);
+void		wait_for_all_command(t_main *config);
 
 // shell/loop.c
 int			main_loop(t_main *config);
