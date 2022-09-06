@@ -28,8 +28,11 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 ## exec with log
 `./minishell 3>exec.log; cat exec.log`
 
+## PIPE
+[PIPE](https://youtu.be/ceNaZzEoUhk?t=1576)
+
 ## AST
 1. https://github.com/pmouhali/minishell_ast
 	- https://ruslanspivak.com/lsbasi-part7/
 	- https://unix.stackexchange.com/questions/88850/precedence-of-the-shell-logical-operators
-2. https://github.com/AudeizReading/minishell/wiki/01-PARSING
+1. https://github.com/AudeizReading/minishell/wiki/01-PARSING
