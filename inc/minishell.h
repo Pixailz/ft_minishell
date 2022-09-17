@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 17:02:32 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/17 22:14:46 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,6 +67,7 @@ typedef struct s_main
 	struct s_block		*line_block;
 	struct s_context	*context;
 	struct s_lst_env	*env;
+	char				*path;
 	int					last_return_value;
 }			t_main;
 
@@ -74,6 +75,7 @@ typedef struct s_main
 
 typedef struct s_cmd
 {
+	t_list					*tmp_command;
 	char					*path;
 	char					**command;
 	pid_t					cmd_pid;
@@ -99,6 +101,7 @@ typedef struct s_context
 	int		**pipes;
 	int		default_in;
 	int		default_out;
+	char	**path;
 }			t_context;
 
 // PARSE CMD PART
@@ -155,13 +158,17 @@ int				init_signal(void);
 
 // debug/debug_init_redirection.c
 void			debug_init_redirection(t_main *config);
-void			debug_print_cmd(t_cmd *cmd, int id);
 void			debug_print_redir_1(t_redirection *lst, int mode, int id);
 void			debug_print_redir_2(t_redirection *lst, int mode, int id, int counter);
 
 // debug/debug_parse.c
 void			debug_parse(t_main *config);
 void			debug_print_line_block(t_block *line_block);
+
+// debug/debug_print_cmd.c
+void			debug_print_cmd(t_cmd *cmd, int id);
+void			debug_print_cmd_2(t_cmd *cmd, int id);
+void			debug_print_cmd_3(t_cmd *cmd, int id);
 
 // minishell.c
 char			**do_something_with_argv(char **argv);
@@ -191,6 +198,13 @@ void			exec_prepare_pipe(t_context *config);
 // shell/exec/exec/execute.c
 int				exec_entry(t_context *config);
 void			exec_command(t_context *config);
+
+// shell/exec/exec/init_cmds.c
+size_t			init_cmds_count_args(t_list *tmp);
+void			init_cmds(t_main *config);
+void			init_get_cmd_paths(t_main *config);
+void			prepare_cmds_1(t_main *config);
+void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str);
 
 // shell/exec/exec/prepare_redirection.c
 void			prepare_in_double_file(t_redirection *double_in, t_context *context);

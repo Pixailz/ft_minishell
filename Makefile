@@ -50,12 +50,14 @@ SRC_C			:= src/builtins/env.c \
 				   src/dataset/init.c \
 				   src/debug/debug_init_redirection.c \
 				   src/debug/debug_parse.c \
+				   src/debug/debug_print_cmd.c \
 				   src/minishell.c \
 				   src/shell/exec/dataset/free_exec.c \
 				   src/shell/exec/dataset/init_context.c \
 				   src/shell/exec/dataset/init_redirection.c \
 				   src/shell/exec/exec/exec_prepare.c \
 				   src/shell/exec/exec/execute.c \
+				   src/shell/exec/exec/init_cmds.c \
 				   src/shell/exec/exec/prepare_redirection.c \
 				   src/shell/exec/exec/prepare_redirection_ng.c \
 				   src/shell/exec/exec/utils.c \

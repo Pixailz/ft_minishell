@@ -48,7 +48,11 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. TODO / not working
 	- not working multiple double in
 	- `< file cat -e > file1 > file2 > fileN`
-	- `< file1 cat -e > file2 > file3 > file4`
+	- `< file1 cat -e > file2 | << file3 echo pass1 >> file4 pass2`
+	- `echo pass1 > file pass2`
+
+1. free ALL list
+1. repair command not found
 
 ## PARSING PART
 

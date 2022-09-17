@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 17:39:41 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/17 19:15:13 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void	prepare_in_double_file(t_redirection *double_in, t_context *context)
 
 void	prepare_out_file(t_redirection *out, t_context *context)
 {
-	out->file = open(out->content, O_CREAT | O_RDWR | O_TRUNC, 0000664);
+	out->file = open(out->content, O_CREAT | O_RDWR | O_TRUNC, 0000644);
 	if (out->file > -1)
 		dup2(out->file, STDOUT_FILENO);
 	else
@@ -73,7 +73,7 @@ void	prepare_out_file(t_redirection *out, t_context *context)
 void	prepare_out_double_file(t_redirection *double_out, t_context *context)
 {
 	double_out->file = open(double_out->content, \
-							O_WRONLY | O_CREAT | O_APPEND, 0000664);
+							O_WRONLY | O_CREAT | O_APPEND, 0000644);
 	if (double_out->file > -1)
 		dup2(double_out->file, STDOUT_FILENO);
 	else

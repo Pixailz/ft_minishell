@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 05:13:49 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 17:40:44 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/17 22:02:49 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,18 +45,6 @@ void	debug_print_redir_1(t_redirection *lst, int mode, int id)
 		lst = lst->next;
 		counter++;
 	}
-}
-
-void	debug_print_cmd(t_cmd *cmd, int id)
-{
-	if (!cmd->in_redir)
-		ft_printf_fd(LOG_FD, "cmd[%d]->in_redir [NULL]\n", id);
-	else
-		debug_print_redir_1(cmd->in_redir, 0, id);
-	if (!cmd->out_redir)
-		ft_printf_fd(LOG_FD, "cmd[%d]->out_redir [NULL]\n", id);
-	else
-		debug_print_redir_1(cmd->out_redir, 1, id);
 }
 
 void	debug_init_redirection(t_main *config)
