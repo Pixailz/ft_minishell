@@ -1,36 +1,34 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   test.c                                             :+:      :+:    :+:   */
+/*   debug_parse.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/31 16:10:10 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/02 22:25:27 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/17 01:51:14 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/17 02:45:13 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include <string.h>
-#include <stdio.h>
+#include "minishell.h"
 
-void	push_string(char **str, int n)
+void	debug_print_line_block(t_block *line_block)
 {
 	int	counter;
 
-	counter = 0;
-	while (counter < n)
+	counter = 1;
+	while (line_block)
 	{
-		(*str)++;
+		ft_printf_fd(LOG_FD, "line_block[%d]\t[%d][%s]\n", counter, \
+									line_block->block_id, line_block->block);
+		line_block = line_block->next;
 		counter++;
 	}
 }
 
-int	main(void)
+void	debug_parse(t_main *config)
 {
-	char	*test;
-
-	test = strdup("this is a test");
-	printf("%s\n", test);
-	push_string(&test, 3);
-	printf("%s\n", test);
+	ft_printf_fd(LOG_FD, "line_buffer\t\t[%s]\n", config->line_buffer);
+	debug_print_line_block(config->line_block);
+	ft_printf_fd(LOG_FD, "\n");
 }

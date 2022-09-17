@@ -18,6 +18,46 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 # TIPS
 
+## EXEC PART
+
+1. working like the original bash
+	- `sleep 3 | cat file`
+	- `echo pass | grep 'ass'`
+	- `echo test1 | echo test2`
+	- `echoo pass | cat file`
+	- `cat | cat -e`
+	- `ping -c4 google.com | cat -e`
+	- `grep -oE "a|b" | cat -e`
+	- `cat -e | grep -o "ass"`
+	- `cat | cat -e | cat -e`
+	- `echo pass | grep -o ass | cat -e`
+	- `echo pass | cat1 file | cat2 file`
+	- `< file cat | < file cat`
+	- `< file cat > outfile | < file cat`
+	- `< file cat > outfile1 | < file cat >> outfile2`
+	- `< file cat > file1 | < file cat -e > file2 | < file cat -e > file3 | < file cat -e >> file4`
+	- `< file cat > file1 | cat >> file2`
+	- `< file cat -e > file1 | < filee grep a1 > file2`
+	- `< file cat -e > file1 | < file grep a1 > file2`
+		- with file2 chmod 000
+	- `< file << END cat -e > file1 >> file2`<br>
+	  `TEST`<br>
+	  `END`
+		- in this order only
+	- partial double_in
+1. TODO / not working
+	- not working multiple double in
+	- `< file cat -e > file1 > file2 > fileN`
+	- `< file1 cat -e > file2 > file3 > file4`
+	- make out and double_out same list ...
+
+## PARSING PART
+
+1. working like the original bash
+	- `echo "test > test"`
+	- `ech$O test`
+1. TODO / not working
+
 ## valgrind
 > without vsupp work fine
 `valgrind --leak-check=full <exec_path>`

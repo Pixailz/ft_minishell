@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/01 03:51:36 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/17 04:40:53 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -44,17 +44,32 @@ INC_DIR			:= $(addprefix -I,$(INC_TMP))
 LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 
 # SRC
-SRC_C			:= src/builtins/export.c \
+SRC_C			:= src/builtins/env.c \
+				   src/builtins/export.c \
 				   src/dataset/free.c \
 				   src/dataset/init.c \
-				   src/debug/debug_1.c \
-				   src/debug/debug_2.c \
+				   src/debug/debug_init_redirection.c \
+				   src/debug/debug_parse.c \
 				   src/minishell.c \
-				   src/shell/exec_engine.c \
+				   src/shell/exec/dataset/free_exec.c \
+				   src/shell/exec/dataset/init_context.c \
+				   src/shell/exec/dataset/init_redirection.c \
+				   src/shell/exec/exec/exec_prepare.c \
+				   src/shell/exec/exec/exec_prepare_redirection.c \
+				   src/shell/exec/exec/execute.c \
+				   src/shell/exec/exec/utils.c \
+				   src/shell/exec/exec_engine.c \
 				   src/shell/loop.c \
-				   src/shell/parse_cmd.c \
+				   src/shell/parsing/get_block.c \
+				   src/shell/parsing/identify_pipe.c \
+				   src/shell/parsing/parse_entry.c \
+				   src/shell/parsing/replace_dollar.c \
 				   src/shell/signal_handler.c \
+				   src/utils/convert_list.c \
+				   src/utils/env_export_utils_1.c \
+				   src/utils/env_export_utils_2.c \
 				   src/utils/ft_better_split.c \
+				   src/utils/ft_better_strjoin.c \
 				   src/utils/ft_splitb.c \
 				   src/utils/get_path.c
 

@@ -1,30 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_engine.c                                      :+:      :+:    :+:   */
+/*   ft_better_strjoin.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 05:56:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/04 03:51:36 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/17 01:10:33 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/17 01:10:49 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	do_command_begin(t_cmd *cmd)
+char	*ft_better_strjoin(char *s1, char *s2)
 {
-}
+	t_size	size;
+	char	*ptr;
 
-void	wait_for_all_command(t_main *config)
-{
-
-}
-
-int	exec_engine(t_main *config)
-{
-	config->cmd->pid = fork();
-	if (config->cmd->pid == 0)
-		do_command(config->cmd);
-	wait_for_all_command(config);
+	if (!s1 && !s2)
+		return (FT_NULL);
+	else if (s1 && !s2)
+		return (s1);
+	else if (!s1 && s2)
+	{
+		return (s2);
+	}
+	size = ft_strlen((char *)s1) + ft_strlen((char *)s2) + 1;
+	ptr = ft_calloc(0b1, size + 0b1);
+	if (!ptr)
+		return (FT_NULL);
+	ptr[size] = 0;
+	ft_strcpy(ptr, (char *)s1);
+	ft_strcat(ptr, (char *)s2);
+	free(s1);
+	free(s2);
+	return (ptr);
 }
