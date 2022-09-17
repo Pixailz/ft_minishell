@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 04:28:39 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:02:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -79,14 +79,13 @@ typedef struct s_cmd
 	pid_t					cmd_pid;
 	struct s_redirection	*in_redir;
 	struct s_redirection	*out_redir;
-	struct s_redirection	*double_in_redir;
-	struct s_redirection	*double_out_redir;
 	int						return_value;
 }							t_cmd;
 
 typedef struct s_redirection
 {
 	char					*content;
+	int						is_double;
 	int						file;
 	struct s_redirection	*next;
 }				t_redirection;
@@ -156,6 +155,9 @@ int				init_signal(void);
 
 // debug/debug_init_redirection.c
 void			debug_init_redirection(t_main *config);
+void			debug_print_cmd(t_cmd *cmd, int id);
+void			debug_print_redir_1(t_redirection *lst, int mode, int id);
+void			debug_print_redir_2(t_redirection *lst, int mode, int id, int counter);
 
 // debug/debug_parse.c
 void			debug_parse(t_main *config);
@@ -174,9 +176,9 @@ int				init_context_entry(t_main *config);
 size_t			get_number_of_command(t_main *config);
 
 // shell/exec/dataset/init_redirection.c
-t_redirection	*redir_new(char *content);
+t_redirection	*redir_new(char *content, int is_double);
 void			init_redirection(t_main *config);
-void			init_redirection_lst(t_redirection **lst, char *content);
+void			init_redirection_lst(t_redirection **lst, char *content, int is_double);
 void			redir_addback(t_redirection **lst, t_redirection *new);
 
 // shell/exec/exec/exec_prepare.c
@@ -186,16 +188,20 @@ void			exec_prepare_first(t_context *config);
 void			exec_prepare_last(t_context *config);
 void			exec_prepare_pipe(t_context *config);
 
-// shell/exec/exec/exec_prepare_redirection.c
-void			exec_prepare_in_double_file(t_context *config);
-void			exec_prepare_in_file(t_context *config);
-void			exec_prepare_out_double_file(t_context *config);
-void			exec_prepare_out_file(t_context *config);
-void			exec_prepare_redirection(t_context *config);
-
 // shell/exec/exec/execute.c
 int				exec_entry(t_context *config);
 void			exec_command(t_context *config);
+
+// shell/exec/exec/prepare_redirection.c
+void			prepare_in_double_file(t_redirection *double_in, t_context *context);
+void			prepare_in_file(t_redirection *in_file, t_context *context);
+void			prepare_out_double_file(t_redirection *double_out, t_context *context);
+void			prepare_out_file(t_redirection *out, t_context *context);
+void			prepare_redirection(t_context *context);
+
+// shell/exec/exec/prepare_redirection_ng.c
+void			prepare_in_file_ng(t_context *context);
+void			prepare_out_file_ng(t_context *context);
 
 // shell/exec/exec/utils.c
 void			close_all_pipes(t_context *config);

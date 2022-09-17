@@ -49,7 +49,6 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- not working multiple double in
 	- `< file cat -e > file1 > file2 > fileN`
 	- `< file1 cat -e > file2 > file3 > file4`
-	- make out and double_out same list ...
 
 ## PARSING PART
 

@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 03:42:30 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 04:44:47 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:02:50 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_redirection	*redir_new(char *content)
+t_redirection	*redir_new(char *content, int is_double)
 {
 	t_redirection	*ptr;
 
@@ -21,6 +21,7 @@ t_redirection	*redir_new(char *content)
 		return (FT_NULL);
 	ptr->content = ft_strdup(content);
 	ptr->file = -1;
+	ptr->is_double = is_double;
 	ptr->next = FT_NULL;
 	return (ptr);
 }
@@ -37,12 +38,12 @@ void	redir_addback(t_redirection **lst, t_redirection *new)
 	ptr->next = new;
 }
 
-void	init_redirection_lst(t_redirection **lst, char *content)
+void	init_redirection_lst(t_redirection **lst, char *content, int is_double)
 {
 	if (!lst || !*lst)
-		*lst = redir_new(content);
+		*lst = redir_new(content, is_double);
 	else
-		redir_addback(lst, redir_new(content));
+		redir_addback(lst, redir_new(content, is_double));
 }
 
 void	init_redirection(t_main *config)
@@ -58,18 +59,16 @@ void	init_redirection(t_main *config)
 			counter++;
 		else if (tmp->block_id == IN_FORWARD)
 			init_redirection_lst(&config->context->cmd[counter]->in_redir, \
-				tmp->next->block);
+				tmp->next->block, 0);
 		else if (tmp->block_id == OUT_FORWARD)
 			init_redirection_lst(&config->context->cmd[counter]->out_redir, \
-				tmp->next->block);
+				tmp->next->block, 0);
 		else if (tmp->block_id == DELIMITER)
 			init_redirection_lst(\
-				&config->context->cmd[counter]->double_in_redir, \
-					tmp->next->block);
+				&config->context->cmd[counter]->in_redir, tmp->next->block, 1);
 		else if (tmp->block_id == DBL_OUT_FORWARD)
 			init_redirection_lst(\
-				&config->context->cmd[counter]->double_out_redir, \
-					tmp->next->block);
+				&config->context->cmd[counter]->out_redir, tmp->next->block, 1);
 		tmp = tmp->next;
 	}
 }

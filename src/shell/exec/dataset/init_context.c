@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   init.c                                             :+:      :+:    :+:   */
+/*   init_context.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 07:32:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 05:04:22 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/17 17:37:52 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,8 +73,6 @@ int	init_cmd(t_main *config)
 		config->context->cmd[counter]->return_value = 0;
 		config->context->cmd[counter]->in_redir = FT_NULL;
 		config->context->cmd[counter]->out_redir = FT_NULL;
-		config->context->cmd[counter]->double_in_redir = FT_NULL;
-		config->context->cmd[counter]->double_out_redir = FT_NULL;
 		counter++;
 	}
 	return (0);
