@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:49:24 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/18 21:12:17 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:31:51 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,13 +35,9 @@ void	print_command_not_found(t_context *context)
 	counter = 0;
 	while (counter < context->cmd_nb)
 	{
-		while (!context->mutex_print)
-			;
-		context->mutex_print = 0;
 		if (context->cmd[counter]->return_value == 127)
 			ft_printf_fd(STDERR_FILENO, "%s: command not found\n", \
 				context->cmd[counter]->command[0]);
-		context->mutex_print = 1;
 		counter++;
 	}
 }

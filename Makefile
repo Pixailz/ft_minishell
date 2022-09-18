@@ -60,7 +60,6 @@ SRC_C			:= src/builtins/env.c \
 				   src/shell/exec/exec/init_cmds.c \
 				   src/shell/exec/exec/prepare_redirection.c \
 				   src/shell/exec/exec/prepare_redirection_ng.c \
-				   src/shell/exec/exec/utils.c \
 				   src/shell/exec/exec_engine.c \
 				   src/shell/loop.c \
 				   src/shell/parsing/get_block.c \
@@ -68,13 +67,14 @@ SRC_C			:= src/builtins/env.c \
 				   src/shell/parsing/parse_entry.c \
 				   src/shell/parsing/replace_dollar.c \
 				   src/shell/signal_handler.c \
-				   src/utils/convert_list.c \
-				   src/utils/env_export_utils_1.c \
-				   src/utils/env_export_utils_2.c \
+				   src/utils/builtins/env_export_utils_1.c \
+				   src/utils/builtins/env_export_utils_2.c \
+				   src/utils/exec/utils.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
 				   src/utils/ft_splitb.c \
-				   src/utils/get_path.c
+				   src/utils/get_path.c \
+				   src/utils/parsing/convert_list.c
 
 # OBJ
 

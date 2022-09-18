@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 03:17:54 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:29:04 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,7 +28,7 @@ int	main_loop(t_main *config)
 			if (!ft_strncmp(config->line_buffer, "exit", 4))
 				break ;
 			parse_cmd_entry(config);
-			debug_parse(config);
+			// debug_parse(config);
 			exec_engine(config);
 		}
 	}

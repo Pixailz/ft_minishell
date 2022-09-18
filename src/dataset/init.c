@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:17:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 22:14:40 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:14:16 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ int	init_config(t_main *config, char **envp)
 	config->prompt = init_get_prompt();
 	config->line_buffer = NULL;
 	config->env = env_to_lst(envp);
-	config->path = get_path(envp);
 	config->last_return_value = 0;
 	return (0);
 }

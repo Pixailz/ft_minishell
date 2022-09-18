@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 01:38:57 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/01 02:04:59 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:22:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,4 +42,20 @@ char	**get_path(char **env)
 		return (NULL);
 	tmp = *env + 5;
 	return (ft_split(tmp, ':'));
+}
+
+char	*get_path_from_env(t_lst_env *env)
+{
+	int		i;
+
+	i = 0;
+	while (env)
+	{
+		if (!ft_strcmp_env("PATH", env->key))
+			break ;
+		env = env->next;
+	}
+	if (env)
+		return (env->value);
+	return (FT_NULL);
 }

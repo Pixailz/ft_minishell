@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/18 21:09:42 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:32:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,7 +67,6 @@ typedef struct s_main
 	struct s_block		*line_block;
 	struct s_context	*context;
 	struct s_lst_env	*env;
-	char				**path;
 	int					last_return_value;
 }			t_main;
 
@@ -102,7 +101,6 @@ typedef struct s_context
 	int		default_in;
 	int		default_out;
 	char	**path;
-	int		mutex_print;
 }			t_context;
 
 // PARSE CMD PART
@@ -218,11 +216,6 @@ void			prepare_redirection(t_context *context);
 void			prepare_in_file_ng(t_context *context);
 void			prepare_out_file_ng(t_context *context);
 
-// shell/exec/exec/utils.c
-void			close_all_pipes(t_context *config);
-void			print_command_not_found(t_context *config);
-void			wait_for_all(t_context *config);
-
 // shell/exec/exec_engine.c
 void			exec_engine(t_main *config);
 
@@ -255,19 +248,21 @@ void			handle_sig_int(void);
 void			handle_sig_quit(void);
 void			signal_handler(int signal_code);
 
-// utils/convert_list.c
-t_block			*convert_list(t_list *input);
-
-// utils/env_export_utils_1.c
+// utils/builtins/env_export_utils_1.c
 t_lst_env		*env_to_lst(char **env);
 void			export_var_to_env(t_lst_env **envlst, char *var);
 void			index_env_lst(t_lst_env **envlst);
 void			index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i);
 
-// utils/env_export_utils_2.c
+// utils/builtins/env_export_utils_2.c
 int				ft_strcmp_env(char *s1, char *s2);
 t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
 t_lst_env		*ft_lstnew_env(void *env);
+
+// utils/exec/utils.c
+void			close_all_pipes(t_context *config);
+void			print_command_not_found(t_context *context);
+void			wait_for_all(t_context *config);
 
 // utils/ft_better_split.c
 t_list			*ft_better_split(char *s);
@@ -287,6 +282,10 @@ int				ft_splitb_get_word(char **str, char delim, char *encl);
 // utils/get_path.c
 char			**get_path(char **env);
 char			*get_cmd_path(char *name, char **path);
+char			*get_path_from_env(t_lst_env *env);
+
+// utils/parsing/convert_list.c
+t_block			*convert_list(t_list *input);
 
 /* ########################################################################## */
 

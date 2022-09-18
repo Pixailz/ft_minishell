@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:06:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 01:48:30 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:30:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,6 @@ void	parse_replace_dollar(t_main *config, t_lst_env *env)
 {
 	char		*str;
 	t_list		*tmp;
-	t_lst_env	*tmp2;
 
 	tmp = config->line_splitted;
 	while (tmp)
@@ -77,15 +76,5 @@ void	parse_replace_dollar(t_main *config, t_lst_env *env)
 		free(tmp->content);
 		tmp->content = str;
 		tmp = tmp->next;
-	}
-	tmp2 = env->next;
-	while (env)
-	{
-		free(env->key);
-		free(env->value);
-		free(env);
-		env = tmp2;
-		if (tmp2)
-			tmp2 = tmp2->next;
 	}
 }

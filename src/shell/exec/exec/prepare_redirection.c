@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 19:15:13 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:04:50 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -91,8 +91,8 @@ void	prepare_redirection(t_context *context)
 	t_cmd	*cmd;
 
 	cmd = context->cmd[context->cmd_id];
-	if (cmd->in_redir)
-		prepare_in_file_ng(context);
 	if (cmd->out_redir)
 		prepare_out_file_ng(context);
+	if (cmd->in_redir)
+		prepare_in_file_ng(context);
 }

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:06:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 22:15:44 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 23:17:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ void	init_get_cmd_paths(t_main *config)
 	while (config->context->cmd[counter])
 	{
 		config->context->cmd[counter]->path = get_cmd_path(\
-			config->context->cmd[counter]->command[0], config->path);
+			config->context->cmd[counter]->command[0], config->context->path);
 		counter++;
 	}
 }
