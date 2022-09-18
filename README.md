@@ -53,6 +53,9 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 1. free ALL list
 1. repair command not found
+1. repair file not found
+	- exit with errno
+	- add support in print_command_not_found (rename it print_error)
 
 ## PARSING PART
 
