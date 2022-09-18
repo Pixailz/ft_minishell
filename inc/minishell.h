@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 22:14:46 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/18 21:09:42 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ readline
 # endif
 # define VRAI 42
 
-# define LOG_FD			3
+# define LOG_FD			255
 # define GREEN_PLUS		"[\e[38;5;82m+\e[0m]"
 # define RED_MINUS		"[\e[38;5;196m-\e[0m]"
 # define ORANGE_STAR	"[\e[38;5;214m*\e[0m]"
@@ -67,7 +67,7 @@ typedef struct s_main
 	struct s_block		*line_block;
 	struct s_context	*context;
 	struct s_lst_env	*env;
-	char				*path;
+	char				**path;
 	int					last_return_value;
 }			t_main;
 
@@ -102,6 +102,7 @@ typedef struct s_context
 	int		default_in;
 	int		default_out;
 	char	**path;
+	int		mutex_print;
 }			t_context;
 
 // PARSE CMD PART
