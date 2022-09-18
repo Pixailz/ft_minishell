@@ -20,7 +20,7 @@ t_block	*ft_lstnew_block(void *content)
 	if (!ptr)
 		return (FT_NULL);
 	ptr->block_id = STR;
-	ptr->block = content;
+	ptr->block = ft_strdup(content);
 	ptr->next = FT_NULL;
 	return (ptr);
 }

@@ -14,8 +14,11 @@
 
 void	parse_cmd_entry(t_main *config)
 {
+	t_list	*tmp;
+
 	config->line_splitted = ft_better_split(config->line_buffer);
 	parse_replace_dollar(config, config->env);
 	config->line_block = convert_list(config->line_splitted);
+	free_t_list(config->line_splitted);
 	get_block(config->line_block);
 }

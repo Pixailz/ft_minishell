@@ -16,6 +16,7 @@ t_block	*convert_list(t_list *input)
 {
 	t_block	*new_input;
 
+	new_input = FT_NULL;
 	while (input)
 	{
 		ft_lstadd_back_block(&new_input, ft_lstnew_block(input->content));
