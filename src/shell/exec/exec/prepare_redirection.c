@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 01:55:57 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 06:33:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,10 +19,8 @@ void	prepare_in_file(t_redirection *in_file, t_main *config)
 		dup2(in_file->file, STDIN_FILENO);
 	else
 	{
-		ft_printf_fd(STDERR_FILENO, \
-			"minishell: %s: No such file or directory\n", \
-				in_file->content);
-		free_exec_entry(config);
+		close_all_pipes(config->context);
+		free_config_entry(config);
 		exit(1);
 	}
 	close(in_file->file);
@@ -61,9 +59,8 @@ void	prepare_out_file(t_redirection *out, t_main *config)
 		dup2(out->file, STDOUT_FILENO);
 	else
 	{
-		ft_printf_fd(STDERR_FILENO, \
-			"minishell: %s: Permission denied\n", out->content);
-		free_exec_entry(config);
+		close_all_pipes(config->context);
+		free_config_entry(config);
 		exit(1);
 	}
 	close(out->file);
@@ -77,9 +74,8 @@ void	prepare_out_double_file(t_redirection *double_out, t_main *config)
 		dup2(double_out->file, STDOUT_FILENO);
 	else
 	{
-		ft_printf_fd(STDERR_FILENO, \
-			"minishell: %s: Permission denied\n", double_out->content);
-		free_exec_entry(config);
+		close_all_pipes(config->context);
+		free_config_entry(config);
 		exit(1);
 	}
 	close(double_out->file);

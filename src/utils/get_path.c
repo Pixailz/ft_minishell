@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 01:38:57 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 00:40:06 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 06:06:50 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@ char	*get_cmd_path(char *name, char **path)
 		tmp_cmd_path = ft_strjoin(tmp, name);
 		free(tmp);
 		tmp = FT_NULL;
-		if (access(tmp_cmd_path, F_OK | X_OK) == 0)
+		if (access(tmp_cmd_path, F_OK) == 0)
 			return (tmp_cmd_path);
 		free(tmp_cmd_path);
 		tmp_cmd_path = FT_NULL;

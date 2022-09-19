@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 05:21:11 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 06:13:37 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -149,7 +149,6 @@ void			free_cmd(t_cmd *cmd);
 void			free_cmds(t_context *context);
 
 // dataset/free/config.c
-void			free_config(t_main *config);
 void			free_config_entry(t_main *config);
 
 // dataset/free/exec.c
@@ -276,9 +275,14 @@ int				ft_strcmp_env(char *s1, char *s2);
 t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
 t_lst_env		*ft_lstnew_env(void *env);
 
+// utils/exec/print_error.c
+int				print_error_file(t_cmd *cmd);
+int				print_error_infile(t_redirection *tmp);
+int				print_error_outfile(t_redirection *tmp);
+void			print_error(t_context *context);
+
 // utils/exec/utils.c
 void			close_all_pipes(t_context *config);
-void			print_command_not_found(t_context *context);
 void			wait_for_all(t_context *config);
 
 // utils/ft_better_split.c

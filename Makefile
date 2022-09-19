@@ -74,6 +74,7 @@ SRC_C			:= src/builtins/env.c \
 				   src/shell/signal_handler.c \
 				   src/utils/builtins/env_export_utils_1.c \
 				   src/utils/builtins/env_export_utils_2.c \
+				   src/utils/exec/print_error.c \
 				   src/utils/exec/utils.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \

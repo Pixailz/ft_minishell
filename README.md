@@ -1,31 +1,19 @@
 # minishell
 https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
-# TODO
-
-1. fix ft_splitb
-	- with last enclosed if is not enclosed
-
-## first command to parse / exec
-
-1. should work
-	- `cat -e "file.txt"`
-	- `ca't' -e "file.txt"`
-	- `cat -e "file".txt`
-	- `cat -e "file".'txt'`
-2. shouldn't work
-	- `ca't -e' "file.txt"`
-
-# TIPS
-
-## EXEC PART
+# TEST / TODO
 
 1. working like the original bash
+	- `ca't' -e file`
+	- `ca't -e' "file.txt"`
+	- `cat -e "fi"le`
+	- `cat -e "fi"'le'`
 	- `sleep 3 | cat file`
 	- `echo pass | grep 'ass'`
 	- `echo test1 | echo test2`
 	- `echoo pass | cat file`
 	- `cat | cat -e`
+	- `cat | ls | cat`
 	- `ping -c4 google.com | cat -e`
 	- `grep -oE "a|b" | cat -e`
 	- `cat -e | grep -o "ass"`
@@ -40,30 +28,23 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `< file cat -e > file1 | < filee grep a1 > file2`
 	- `< file cat -e > file1 | < file grep a1 > file2`
 		- with file2 chmod 000
+	- `echo "test > test"`
+	- `ech$O test`
+	- `echo pass1 > file pass2`
+	- `echo pass >>file1 | echo pass >> file2`
+
+1. TODO / not working
+	- `cat -e "fi"le "`
 	- `< file << END cat -e > file1 >> file2`<br>
 	  `TEST`<br>
 	  `END`
 		- in this order only
-	- partial double_in
-1. TODO / not working
 	- not working multiple double in
-	- `< file cat -e > file1 > file2 > fileN`
-	- `< file1 cat -e > file2 | << file3 echo pass1 >> file4 pass2`
-	- `echo pass1 > file pass2`
-
-1. `echo pass >>file1 | echo pass >> file2`
-1. repair command not found
-1. repair file not found
-	- exit with errno
-	- add support in print_command_not_found (rename it print_error)
-1. fix space
-
-## PARSING PART
-
-1. working like the original bash
-	- `echo "test > test"`
-	- `ech$O test`
-1. TODO / not working
+1. exit with errno
+	- implement `$?`
+1. add history functionality
+1. implement color prompt, with current cwd
+1. implement clean debug to LOG_FD
 
 ## valgrind
 > without vsupp work fine
