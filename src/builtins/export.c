@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/17 01:26:12 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 00:37:26 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ void	unlink_key_value(char *var_env, char **key, char **value)
 	if (!var_env[i])
 	{
 		*key = ft_substr(var_env, 0, i);
-		*value = NULL;
+		*value = FT_NULL;
 	}
 	else
 	{
@@ -42,7 +42,7 @@ void	print_export(t_lst_env *envlst)
 
 	i = 1;
 	tmp = envlst;
-	while (tmp != NULL)
+	while (tmp != FT_NULL)
 	{
 		tmp = envlst;
 		while (tmp && tmp->index != i)

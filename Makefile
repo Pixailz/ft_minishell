@@ -46,18 +46,23 @@ LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 # SRC
 SRC_C			:= src/builtins/env.c \
 				   src/builtins/export.c \
-				   src/dataset/free.c \
-				   src/dataset/init.c \
+				   src/dataset/free/cmds.c \
+				   src/dataset/free/config.c \
+				   src/dataset/free/exec.c \
+				   src/dataset/free/pipes.c \
+				   src/dataset/free/utils/char_pointer_pointer.c \
+				   src/dataset/free/utils/list.c \
+				   src/dataset/init/config.c \
+				   src/dataset/init/context.c \
+				   src/dataset/init/redirection.c \
+				   src/dataset/init/signal.c \
 				   src/debug/debug_init_redirection.c \
 				   src/debug/debug_parse.c \
 				   src/debug/debug_print_cmd.c \
 				   src/minishell.c \
-				   src/shell/exec/dataset/free_exec.c \
-				   src/shell/exec/dataset/init_context.c \
-				   src/shell/exec/dataset/init_redirection.c \
 				   src/shell/exec/exec/exec_prepare.c \
 				   src/shell/exec/exec/execute.c \
-				   src/shell/exec/exec/init_cmds.c \
+				   src/shell/exec/exec/prepare_cmds.c \
 				   src/shell/exec/exec/prepare_redirection.c \
 				   src/shell/exec/exec/prepare_redirection_ng.c \
 				   src/shell/exec/exec_engine.c \
@@ -69,11 +74,13 @@ SRC_C			:= src/builtins/env.c \
 				   src/shell/signal_handler.c \
 				   src/utils/builtins/env_export_utils_1.c \
 				   src/utils/builtins/env_export_utils_2.c \
+				   src/utils/exec/print_error.c \
 				   src/utils/exec/utils.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
 				   src/utils/ft_splitb.c \
 				   src/utils/get_path.c \
+				   src/utils/get_prompt.c \
 				   src/utils/parsing/convert_list.c
 
 # OBJ

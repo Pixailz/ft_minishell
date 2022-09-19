@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:49:24 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/18 23:31:51 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 06:21:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,6 @@ void	wait_for_all(t_context *config)
 			config->cmd[counter - 1]->return_value = \
 							WEXITSTATUS(config->cmd[counter - 1]->return_value);
 		counter--;
-	}
-}
-
-void	print_command_not_found(t_context *context)
-{
-	int	counter;
-
-	counter = 0;
-	while (counter < context->cmd_nb)
-	{
-		if (context->cmd[counter]->return_value == 127)
-			ft_printf_fd(STDERR_FILENO, "%s: command not found\n", \
-				context->cmd[counter]->command[0]);
-		counter++;
 	}
 }
 
