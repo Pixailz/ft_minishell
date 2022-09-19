@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/18 23:32:03 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 05:21:11 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,7 +48,7 @@ readline
 # endif
 # define VRAI 42
 
-# define LOG_FD			255
+# define LOG_FD			420
 # define GREEN_PLUS		"[\e[38;5;82m+\e[0m]"
 # define RED_MINUS		"[\e[38;5;196m-\e[0m]"
 # define ORANGE_STAR	"[\e[38;5;214m*\e[0m]"
