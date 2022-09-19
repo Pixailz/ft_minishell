@@ -32,33 +32,27 @@ t_lst_env	*env_to_lst(char **env)
 	return (envlst);
 }
 
-void	export_var_to_env(t_lst_env **envlst, char *var)
+void	unlink_key_value(char *var_env, char **key, char **value)
 {
-	t_lst_env	*tmp;
-	int			i;
+	int	i;
 
-	i = 1;
-	tmp = *envlst;
-	while (tmp != FT_NULL)
-	{
-		tmp = *envlst;
-		while (tmp && tmp->index != i)
-			tmp = tmp->next;
-		if (tmp && ft_strcmp_env(var, tmp->key) == 0)
-		{
-			unlink_key_value(var, (char **)&tmp->key, (char **)&tmp->value);
-			return ;
-		}
+	i = 0;
+	while (var_env[i] && var_env[i] != '=')
 		i++;
-	}
-	ft_lstadd_back_env(envlst, ft_lstnew_env(var));
-	tmp = *envlst;
-	while (tmp != FT_NULL)
+	if (!var_env[i])
 	{
-		tmp->index = 0;
-		tmp = tmp->next;
+		*key = ft_substr(var_env, 0, i);
+		*value = FT_NULL;
 	}
-	index_env_lst(envlst);
+	else
+	{
+		i++;
+		*key = ft_substr(var_env, 0, i);
+		while (--i > 0)
+			var_env++;
+		var_env++;
+		*value = ft_strdup(var_env);
+	}
 }
 
 void	index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i)

@@ -36,7 +36,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. TODO / not working
 	- `cat -e "fi"le "`
 	- `echo pass <> file | echo pass`
-		- parsing ignore all after `<>`, create file but don't pipe output to it
+		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
 	- `< file << END cat -e > file1 >> file2`<br>
 	  `TEST`<br>
 	  `END`
@@ -44,6 +44,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- not working multiple double in
 1. exit with errno
 	- implement `$?`
+1. add history functionality
 1. implement color prompt, with current cwd
 1. implement clean debug to LOG_FD
 
