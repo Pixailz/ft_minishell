@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:18:32 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 03:09:12 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 05:35:04 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,13 +31,11 @@ void	free_cmds(t_context *context)
 	int	counter;
 
 	counter = 0;
-	ft_printf_fd(LOG_FD, "cmd_nb %d\n", context->cmd_nb);
 	while (counter < context->cmd_nb)
 	{
-		ft_printf_fd(LOG_FD, "counter %d\n", counter);
 		free_cmd(context->cmd[counter]);
-		free(context->cmd);
-		context->cmd = FT_NULL;
 		counter++;
 	}
+	free(context->cmd);
+	context->cmd = FT_NULL;
 }
