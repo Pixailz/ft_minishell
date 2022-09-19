@@ -44,7 +44,6 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- not working multiple double in
 1. exit with errno
 	- implement `$?`
-1. add history functionality
 1. implement color prompt, with current cwd
 1. implement clean debug to LOG_FD
 

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 06:13:37 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 16:44:18 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ waitpid
 readline
 */
 # include <readline/readline.h>
+/*
+add_history
+*/
+# include <readline/history.h>
 
 /* ########################################################################## */
 
@@ -61,6 +65,7 @@ readline
 
 typedef struct s_main
 {
+	char				*base_prompt;
 	char				*prompt;
 	char				*line_buffer;
 	t_list				*line_splitted;
@@ -306,7 +311,9 @@ char			*get_cmd_path(char *name, char **path);
 char			*get_path_from_env(t_lst_env *env);
 
 // utils/get_prompt.c
-char			*get_prompt(void);
+char			*get_base_prompt(t_main *config);
+char			*get_hostname(void);
+void			get_base_prompt_assemble(t_main *config, t_list *prompt);
 
 // utils/parsing/convert_list.c
 t_block			*convert_list(t_list *input);
