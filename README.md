@@ -51,7 +51,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `< file1 cat -e > file2 | << file3 echo pass1 >> file4 pass2`
 	- `echo pass1 > file pass2`
 
-1. free ALL list
+1. `echo pass >>file1 | echo pass >> file2`
 1. repair command not found
 1. repair file not found
 	- exit with errno
