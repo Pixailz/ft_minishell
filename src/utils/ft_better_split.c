@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/26 00:03:22 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 01:04:15 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 00:40:02 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,9 +67,9 @@ t_list	*ft_better_split(char *s)
 {
 	t_list	*input;
 
-	input = NULL;
+	input = FT_NULL;
 	if (!s)
-		return (NULL);
+		return (FT_NULL);
 	while (*s == ' ')
 		s++;
 	while (*s)

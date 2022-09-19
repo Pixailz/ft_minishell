@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 01:38:57 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/18 23:22:47 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 00:40:06 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,14 +22,14 @@ char	*get_cmd_path(char *name, char **path)
 		tmp = ft_strjoin(*path, "/");
 		tmp_cmd_path = ft_strjoin(tmp, name);
 		free(tmp);
-		tmp = NULL;
+		tmp = FT_NULL;
 		if (access(tmp_cmd_path, F_OK | X_OK) == 0)
 			return (tmp_cmd_path);
 		free(tmp_cmd_path);
-		tmp_cmd_path = NULL;
+		tmp_cmd_path = FT_NULL;
 		path++;
 	}
-	return (NULL);
+	return (FT_NULL);
 }
 
 char	**get_path(char **env)
@@ -39,16 +39,13 @@ char	**get_path(char **env)
 	while (ft_strncmp("PATH", *env, 4))
 		env++;
 	if (!*env)
-		return (NULL);
+		return (FT_NULL);
 	tmp = *env + 5;
 	return (ft_split(tmp, ':'));
 }
 
 char	*get_path_from_env(t_lst_env *env)
 {
-	int		i;
-
-	i = 0;
 	while (env)
 	{
 		if (!ft_strcmp_env("PATH", env->key))

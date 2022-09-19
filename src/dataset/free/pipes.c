@@ -1,31 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   pipes.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 02:12:46 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 00:49:48 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/19 02:01:56 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**do_something_with_argv(char **argv)
+void	free_pipes(t_context *context)
 {
-	return (argv);
-}
+	int	counter;
 
-int	main(int argc, char **argv, char **envp)
-{
-	t_main	config;
-
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_config_entry(&config, envp);
-	main_loop(&config);
-	free_config_entry(&config);
-	return (0);
+	counter = 0;
+	while (counter < context->cmd_nb - 1)
+	{
+		free(context->pipes[counter]);
+		context->pipes[counter] = FT_NULL;
+		counter++;
+	}
+	free(context->pipes);
+	context->pipes = FT_NULL;
 }

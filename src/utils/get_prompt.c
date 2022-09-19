@@ -1,19 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   free_exec.c                                        :+:      :+:    :+:   */
+/*   get_prompt.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 05:23:49 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 05:45:37 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/19 00:19:48 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// TODO
-void	free_exec_entry(t_context *context)
+char	*get_prompt(void)
 {
-	return ;
+	return (ft_strdup("minishell@hostname:~/Documents$ "));
 }

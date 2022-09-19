@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:16:02 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 02:09:33 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 02:04:00 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ t_block	*ft_lstnew_block(void *content)
 	if (!ptr)
 		return (FT_NULL);
 	ptr->block_id = STR;
-	ptr->block = content;
+	ptr->block = ft_strdup(content);
 	ptr->next = FT_NULL;
 	return (ptr);
 }

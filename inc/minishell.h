@@ -144,15 +144,46 @@ void			print_env(t_lst_env *envlst);
 void			print_export(t_lst_env *envlst);
 void			unlink_key_value(char *var_env, char **key, char **value);
 
-// dataset/free.c
-void			free_char_pointer_pointer(char **str);
-void			free_config(t_main *config);
-void			free_entry(t_main *config);
+// dataset/free/cmds.c
+void			free_cmd(t_cmd *cmd);
+void			free_cmds(t_context *context);
 
-// dataset/init.c
-char			*init_get_prompt(void);
+// dataset/free/config.c
+void			free_config(t_main *config);
+void			free_config_entry(t_main *config);
+
+// dataset/free/exec.c
+void			free_exec_entry(t_main *config);
+
+// dataset/free/pipes.c
+void			free_pipes(t_context *context);
+
+// dataset/free/utils/char_pointer_pointer.c
+void			free_char_pointer_pointer(char **str);
+
+// dataset/free/utils/list.c
+void			free_t_block(t_block *lst);
+void			free_t_list(t_list *lst);
+void			free_t_list_env(t_lst_env *lst);
+void			free_t_redirection(t_redirection *lst);
+
+// dataset/init/config.c
 int				init_config(t_main *config, char **envp);
-int				init_entry(t_main *config, char **envp);
+int				init_config_entry(t_main *config, char **envp);
+
+// dataset/init/context.c
+int				init_cmd(t_main *config);
+int				init_context(t_main *config);
+int				init_context_entry(t_main *config);
+size_t			get_number_of_command(t_main *config);
+
+// dataset/init/redirection.c
+t_redirection	*redir_new(char *content, int is_double);
+void			init_redirection(t_main *config);
+void			init_redirection_lst(t_redirection **lst, char *content, int is_double);
+void			redir_addback(t_redirection **lst, t_redirection *new);
+
+// dataset/init/signal.c
 int				init_signal(void);
 
 // debug/debug_init_redirection.c
@@ -172,33 +203,18 @@ void			debug_print_cmd_3(t_cmd *cmd, int id);
 // minishell.c
 char			**do_something_with_argv(char **argv);
 
-// shell/exec/dataset/free_exec.c
-void			free_exec_entry(t_context *context);
-
-// shell/exec/dataset/init_context.c
-int				init_cmd(t_main *config);
-int				init_context(t_main *config);
-int				init_context_entry(t_main *config);
-size_t			get_number_of_command(t_main *config);
-
-// shell/exec/dataset/init_redirection.c
-t_redirection	*redir_new(char *content, int is_double);
-void			init_redirection(t_main *config);
-void			init_redirection_lst(t_redirection **lst, char *content, int is_double);
-void			redir_addback(t_redirection **lst, t_redirection *new);
-
 // shell/exec/exec/exec_prepare.c
-void			exec_prepare_between(t_context *config);
-void			exec_prepare_entry(t_context *config);
-void			exec_prepare_first(t_context *config);
-void			exec_prepare_last(t_context *config);
-void			exec_prepare_pipe(t_context *config);
+void			exec_prepare_between(t_context *context);
+void			exec_prepare_entry(t_main *config);
+void			exec_prepare_first(t_context *context);
+void			exec_prepare_last(t_context *context);
+void			exec_prepare_pipe(t_context *context);
 
 // shell/exec/exec/execute.c
-int				exec_entry(t_context *config);
-void			exec_command(t_context *config);
+int				exec_entry(t_main *config);
+void			exec_command(t_main *config);
 
-// shell/exec/exec/init_cmds.c
+// shell/exec/exec/prepare_cmds.c
 size_t			init_cmds_count_args(t_list *tmp);
 void			init_cmds(t_main *config);
 void			init_get_cmd_paths(t_main *config);
@@ -206,20 +222,21 @@ void			prepare_cmds_1(t_main *config);
 void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str);
 
 // shell/exec/exec/prepare_redirection.c
-void			prepare_in_double_file(t_redirection *double_in, t_context *context);
-void			prepare_in_file(t_redirection *in_file, t_context *context);
-void			prepare_out_double_file(t_redirection *double_out, t_context *context);
-void			prepare_out_file(t_redirection *out, t_context *context);
-void			prepare_redirection(t_context *context);
+void			prepare_in_double_file(t_redirection *double_in);
+void			prepare_in_file(t_redirection *in_file, t_main *config);
+void			prepare_out_double_file(t_redirection *double_out, t_main *config);
+void			prepare_out_file(t_redirection *out, t_main *config);
+void			prepare_redirection(t_main *config);
 
 // shell/exec/exec/prepare_redirection_ng.c
-void			prepare_in_file_ng(t_context *context);
-void			prepare_out_file_ng(t_context *context);
+void			prepare_in_file_ng(t_main *config);
+void			prepare_out_file_ng(t_main *config);
 
 // shell/exec/exec_engine.c
 void			exec_engine(t_main *config);
 
 // shell/loop.c
+int				is_command_empty(t_main *config);
 int				main_loop(t_main *config);
 
 // shell/parsing/get_block.c
@@ -283,6 +300,9 @@ int				ft_splitb_get_word(char **str, char delim, char *encl);
 char			**get_path(char **env);
 char			*get_cmd_path(char *name, char **path);
 char			*get_path_from_env(t_lst_env *env);
+
+// utils/get_prompt.c
+char			*get_prompt(void);
 
 // utils/parsing/convert_list.c
 t_block			*convert_list(t_list *input);

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:46:10 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 01:03:28 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 00:40:07 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ t_lst_env	*env_to_lst(char **env)
 	int			i;
 
 	i = -1;
-	envlst = NULL;
-	while (env[++i] != NULL)
+	envlst = FT_NULL;
+	while (env[++i] != FT_NULL)
 		ft_lstadd_back_env(&envlst, ft_lstnew_env(env[i]));
 	index_env_lst(&envlst);
 	return (envlst);
@@ -39,7 +39,7 @@ void	export_var_to_env(t_lst_env **envlst, char *var)
 
 	i = 1;
 	tmp = *envlst;
-	while (tmp != NULL)
+	while (tmp != FT_NULL)
 	{
 		tmp = *envlst;
 		while (tmp && tmp->index != i)
@@ -53,7 +53,7 @@ void	export_var_to_env(t_lst_env **envlst, char *var)
 	}
 	ft_lstadd_back_env(envlst, ft_lstnew_env(var));
 	tmp = *envlst;
-	while (tmp != NULL)
+	while (tmp != FT_NULL)
 	{
 		tmp->index = 0;
 		tmp = tmp->next;
@@ -96,7 +96,7 @@ void	index_env_lst(t_lst_env **envlst)
 		while (tmp->index != 0)
 		{
 			tmp = tmp->next;
-			if (tmp == NULL)
+			if (tmp == FT_NULL)
 				return ;
 		}
 		index_env_lst2(*envlst, &tmp, &tmp2, &i);

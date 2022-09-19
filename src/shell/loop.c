@@ -6,29 +6,41 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/18 23:29:04 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 02:22:57 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	is_command_empty(t_main *config)
+{
+	char	*ptr;
+
+	ptr = config->line_buffer;
+	while (ft_isspace(*ptr))
+		ptr++;
+	return (*ptr == '\0');
+}
 
 int	main_loop(t_main *config)
 {
 	while (VRAI)
 	{
 		config->line_buffer = readline(config->prompt);
-		if (config->line_buffer == NULL)
+		if (config->line_buffer == FT_NULL)
 		{
 			ft_printf("\n");
-			free_entry(config);
+			ft_printf_fd(LOG_FD, "CTRL+D pressed\n");
+			free_config_entry(config);
 			exit(-1);
 		}
 		else
 		{
+			if (is_command_empty(config))
+				continue ;
 			if (!ft_strncmp(config->line_buffer, "exit", 4))
 				break ;
 			parse_cmd_entry(config);
-			// debug_parse(config);
 			exec_engine(config);
 		}
 	}

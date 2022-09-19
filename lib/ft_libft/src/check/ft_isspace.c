@@ -1,31 +1,18 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   ft_isspace.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 02:12:46 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/18 23:48:57 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/19 00:26:40 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft_check.h"
 
-char	**do_something_with_argv(char **argv)
+int	ft_isspace(const char c)
 {
-	return (argv);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_main	config;
-
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_config_entry(&config, envp);
-	main_loop(&config);
-	free_config_entry(&config);
-	return (0);
+	return (c == ' ' || (c >= 9 && c <= 13));
 }

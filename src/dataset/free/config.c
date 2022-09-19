@@ -1,31 +1,30 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   minishell.c                                        :+:      :+:    :+:   */
+/*   config.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/05/11 23:57:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 02:12:46 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 00:13:28 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/19 02:26:10 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	**do_something_with_argv(char **argv)
+void	free_config_entry(t_main *config)
 {
-	return (argv);
-}
-
-int	main(int argc, char **argv, char **envp)
-{
-	t_main	config;
-
-	if (argc != 1)
-		return (ft_error("no arguments needed", 1));
-	do_something_with_argv(argv);
-	init_config_entry(&config, envp);
-	main_loop(&config);
-	free_config_entry(&config);
-	return (0);
+	ft_printf_fd(LOG_FD, "free_config_entry\n");
+	free(config->prompt);
+	config->prompt = FT_NULL;
+	if (config->line_buffer)
+	{
+		free(config->line_buffer);
+		config->line_buffer = FT_NULL;
+	}
+	if (config->context)
+		free_exec_entry(config);
+	free_t_list_env(config->env);
+	free(config->prompt);
+	config->prompt = FT_NULL;
 }
