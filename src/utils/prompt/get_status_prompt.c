@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 00:50:36 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 02:40:30 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ char	*get_status_prompt(t_main *config)
 
 	if (config->last_return_value == 0)
 		status = ft_strdup(GREEN_PLUS);
-	else if (g_last_return_value == 130)
+	else if (config->last_return_value == 130)
 		status = ft_strdup(ORANGE_STAR);
 	else
 		status = ft_strdup(RED_MINUS);
