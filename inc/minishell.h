@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 01:22:20 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 02:37:22 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,8 +60,6 @@ add_history
 # define RED_MINUS		"[\e[38;5;196m-\e[0m]"
 # define ORANGE_STAR	"[\e[38;5;214m*\e[0m]"
 # define BLUE_STAR	"[\e[38;5;75m*\e[0m]"
-
-int	g_last_return_value;
 
 /* ########################################################################## */
 
