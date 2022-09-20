@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 06:13:37 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:22:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,10 @@ waitpid
 readline
 */
 # include <readline/readline.h>
+/*
+add_history
+*/
+# include <readline/history.h>
 
 /* ########################################################################## */
 
@@ -49,9 +53,15 @@ readline
 # define VRAI 42
 
 # define LOG_FD			420
+# define BASE_PROMPT_C1	"\e[01;32m"
+# define BASE_PROMPT_C2	"\e[01;34m"
+# define RESET_C		"\e[0m"
 # define GREEN_PLUS		"[\e[38;5;82m+\e[0m]"
 # define RED_MINUS		"[\e[38;5;196m-\e[0m]"
 # define ORANGE_STAR	"[\e[38;5;214m*\e[0m]"
+# define BLUE_STAR	"[\e[38;5;75m*\e[0m]"
+
+int	g_last_return_value;
 
 /* ########################################################################## */
 
@@ -61,6 +71,10 @@ readline
 
 typedef struct s_main
 {
+	char				*prompt_base;
+	char				*user;
+	char				*home;
+	char				*cwd;
 	char				*prompt;
 	char				*line_buffer;
 	t_list				*line_splitted;
@@ -141,8 +155,11 @@ typedef struct s_lst_env{
 void			print_env(t_lst_env *envlst);
 
 // builtins/export.c
+void			export_var_to_env(t_lst_env **envlst, char *var);
 void			print_export(t_lst_env *envlst);
-void			unlink_key_value(char *var_env, char **key, char **value);
+
+// builtins/unset.c
+void    unset(char *var, t_lst_env **env);
 
 // dataset/free/cmds.c
 void			free_cmd(t_cmd *cmd);
@@ -187,17 +204,23 @@ int				init_signal(void);
 
 // debug/debug_init_redirection.c
 void			debug_init_redirection(t_main *config);
-void			debug_print_redir_1(t_redirection *lst, int mode, int id);
-void			debug_print_redir_2(t_redirection *lst, int mode, int id, int counter);
+void			debug_print_redir_1(t_redirection *lst, int mode);
+void			debug_print_redir_2(t_redirection *lst, int mode, int counter);
 
 // debug/debug_parse.c
 void			debug_parse(t_main *config);
-void			debug_print_line_block(t_block *line_block);
 
 // debug/debug_print_cmd.c
-void			debug_print_cmd(t_cmd *cmd, int id);
-void			debug_print_cmd_2(t_cmd *cmd, int id);
-void			debug_print_cmd_3(t_cmd *cmd, int id);
+void			debug_print_cmd(t_cmd *cmd);
+void			debug_print_cmd_2(t_cmd *cmd);
+void			debug_print_cmd_3(t_cmd *cmd);
+
+// debug/debug_prompt.c
+void			debug_prompt(t_main *config);
+void			debug_prompt_base(t_main *config);
+
+// debug/debug_signal.c
+int				debug_signal(int signal_code);
 
 // minishell.c
 char			**do_something_with_argv(char **argv);
@@ -252,7 +275,7 @@ int				is_pipe(t_block *input);
 void			identify_redirection(t_block *input);
 
 // shell/parsing/parse_entry.c
-void			parse_cmd_entry(t_main *config);
+void			parse_cmd(t_main *config);
 
 // shell/parsing/replace_dollar.c
 char			*find_key(char **input, t_lst_env *env);
@@ -266,14 +289,17 @@ void			signal_handler(int signal_code);
 
 // utils/builtins/env_export_utils_1.c
 t_lst_env		*env_to_lst(char **env);
-void			export_var_to_env(t_lst_env **envlst, char *var);
 void			index_env_lst(t_lst_env **envlst);
 void			index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i);
+void			unlink_key_value(char *var_env, char **key, char **value);
 
 // utils/builtins/env_export_utils_2.c
 int				ft_strcmp_env(char *s1, char *s2);
 t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
 t_lst_env		*ft_lstnew_env(void *env);
+
+// utils/builtins/get_cwd.c
+char			*get_cwd(void);
 
 // utils/exec/print_error.c
 int				print_error_file(t_cmd *cmd);
@@ -300,16 +326,29 @@ char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
 int				ft_splitb_get_size(char *str, char delim, char *encl);
 int				ft_splitb_get_word(char **str, char delim, char *encl);
 
+// utils/get_env.c
+char			*get_env(char *key, t_lst_env *env);
+
 // utils/get_path.c
 char			**get_path(char **env);
 char			*get_cmd_path(char *name, char **path);
-char			*get_path_from_env(t_lst_env *env);
-
-// utils/get_prompt.c
-char			*get_prompt(void);
 
 // utils/parsing/convert_list.c
 t_block			*convert_list(t_list *input);
+
+// utils/prompt/get_base_prompt.c
+char			*assemble_base_prompt(char *user, char **hostname);
+char			*get_base_prompt(t_main *config);
+char			*get_hostname(void);
+
+// utils/prompt/get_prompt.c
+char			*get_prompt_2(t_main *config, char *tmp_1);
+char			*get_prompt_no_tilde(t_main *config);
+char			*get_prompt_tilde(t_main *config);
+void			get_prompt(t_main *config);
+
+// utils/prompt/get_status_prompt.c
+char			*get_status_prompt(t_main *config);
 
 /* ########################################################################## */
 

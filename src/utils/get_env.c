@@ -1,18 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   get_prompt.c                                       :+:      :+:    :+:   */
+/*   get_env.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 00:19:48 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 22:54:09 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/19 22:54:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*get_prompt(void)
+char	*get_env(char *key, t_lst_env *env)
 {
-	return (ft_strdup("minishell@hostname:~/Documents$ "));
+	while (env)
+	{
+		if (!ft_strcmp_env(key, env->key))
+			break ;
+		env = env->next;
+	}
+	if (env)
+		return (env->value);
+	return (FT_NULL);
 }

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 07:32:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 00:21:02 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/19 22:57:58 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,7 +42,7 @@ int	init_context(t_main *config)
 	config->context->default_out = dup(1);
 	config->context->pipes = malloc(sizeof(int *) * \
 												(config->context->cmd_nb - 1));
-	config->context->path = ft_split(get_path_from_env(config->env), ':');
+	config->context->path = ft_split(get_env("PATH", config->env), ':');
 	if (!config->context->pipes)
 		return (2);
 	counter = 0;

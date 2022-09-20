@@ -46,6 +46,7 @@ LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 # SRC
 SRC_C			:= src/builtins/env.c \
 				   src/builtins/export.c \
+				   src/builtins/unset.c \
 				   src/dataset/free/cmds.c \
 				   src/dataset/free/config.c \
 				   src/dataset/free/exec.c \
@@ -59,6 +60,8 @@ SRC_C			:= src/builtins/env.c \
 				   src/debug/debug_init_redirection.c \
 				   src/debug/debug_parse.c \
 				   src/debug/debug_print_cmd.c \
+				   src/debug/debug_prompt.c \
+				   src/debug/debug_signal.c \
 				   src/minishell.c \
 				   src/shell/exec/exec/exec_prepare.c \
 				   src/shell/exec/exec/execute.c \
@@ -74,14 +77,18 @@ SRC_C			:= src/builtins/env.c \
 				   src/shell/signal_handler.c \
 				   src/utils/builtins/env_export_utils_1.c \
 				   src/utils/builtins/env_export_utils_2.c \
+				   src/utils/builtins/get_cwd.c \
 				   src/utils/exec/print_error.c \
 				   src/utils/exec/utils.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
 				   src/utils/ft_splitb.c \
+				   src/utils/get_env.c \
 				   src/utils/get_path.c \
-				   src/utils/get_prompt.c \
-				   src/utils/parsing/convert_list.c
+				   src/utils/parsing/convert_list.c \
+				   src/utils/prompt/get_base_prompt.c \
+				   src/utils/prompt/get_prompt.c \
+				   src/utils/prompt/get_status_prompt.c
 
 # OBJ
 

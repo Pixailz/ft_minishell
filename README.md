@@ -44,9 +44,14 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- not working multiple double in
 1. exit with errno
 	- implement `$?`
-1. add history functionality
-1. implement color prompt, with current cwd
-1. implement clean debug to LOG_FD
+1. built-ins
+	- [ ] echo et l’option -n
+	- [ ] cd uniquement avec un chemin relatif ou absolu
+	- [ ] pwd sans aucune option
+	- [x] export sans aucune option
+	- [x] unset sans aucune option
+	- [x] env sans aucune option ni argument
+	- [ ] exit sans aucune option
 
 ## valgrind
 > without vsupp work fine

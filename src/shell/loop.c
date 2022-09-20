@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 02:22:57 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:21:27 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,18 +30,19 @@ int	main_loop(t_main *config)
 		if (config->line_buffer == FT_NULL)
 		{
 			ft_printf("\n");
-			ft_printf_fd(LOG_FD, "CTRL+D pressed\n");
 			free_config_entry(config);
-			exit(-1);
+			exit(debug_signal(EOF));
 		}
 		else
 		{
 			if (is_command_empty(config))
 				continue ;
-			if (!ft_strncmp(config->line_buffer, "exit", 4))
-				break ;
-			parse_cmd_entry(config);
+			if (config->line_buffer[0] != ' ')
+				add_history(config->line_buffer);
+			parse_cmd(config);
+			debug_parse(config);
 			exec_engine(config);
+			get_prompt(config);
 		}
 	}
 	return (0);

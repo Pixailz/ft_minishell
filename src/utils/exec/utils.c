@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:49:24 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 06:21:03 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:46:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,7 @@ void	wait_for_all(t_context *config)
 	{
 		waitpid(config->cmd[counter - 1]->cmd_pid, \
 									&config->cmd[counter - 1]->return_value, 0);
-		if (WIFEXITED(config->cmd[counter - 1]->return_value))
-			config->cmd[counter - 1]->return_value = \
+		config->cmd[counter - 1]->return_value = \
 							WEXITSTATUS(config->cmd[counter - 1]->return_value);
 		counter--;
 	}

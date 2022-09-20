@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:26:21 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 03:07:34 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 00:02:31 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	parse_cmd_entry(t_main *config)
+void	parse_cmd(t_main *config)
 {
 	t_list	*tmp;
 
