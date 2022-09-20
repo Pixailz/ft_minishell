@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 23:48:17 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 07:51:27 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,7 @@ char	*get_hostname(void)
 		tmp = ft_strdup(hostnames[0]);
 		free_char_pointer_pointer(hostnames);
 	}
+	tmp = ft_strdup(buff);
 	return (tmp);
 }
 
@@ -43,14 +44,14 @@ char	*assemble_base_prompt(char *user, char **hostname)
 	char	*prompt_tmp_1;
 	char	*prompt_tmp_2;
 
-	prompt_tmp_1 = ft_strjoin(BASE_PROMPT_C1, user);
+	prompt_tmp_1 = ft_strjoin(C_PROMPT_BASE, user);
 	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, "@");
 	free(prompt_tmp_1);
 	prompt_tmp_1 = ft_strjoin(prompt_tmp_2, *hostname);
 	free(*hostname);
 	*hostname = FT_NULL;
 	free(prompt_tmp_2);
-	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, RESET_C);
+	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, C_RESET);
 	free(prompt_tmp_1);
 	prompt_tmp_1 = ft_strjoin(prompt_tmp_2, ":");
 	free(prompt_tmp_2);

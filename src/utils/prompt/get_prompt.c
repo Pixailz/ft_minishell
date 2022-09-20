@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 02:01:44 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 08:08:08 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ char	*get_prompt_tilde(t_main *config)
 	int		len_home;
 	int		len_other;
 
-	prompt_tmp_1 = ft_strjoin(BASE_PROMPT_C2, "~");
+	prompt_tmp_1 = ft_strjoin(C_PROMPT_PATH, "~");
 	len_home = ft_strlen(config->home);
 	len_other = ft_strlen(config->cwd) - len_home;
 	if (!len_other)
@@ -30,7 +30,7 @@ char	*get_prompt_tilde(t_main *config)
 	free(path);
 	path = FT_NULL;
 	free(prompt_tmp_1);
-	prompt_tmp_1 = ft_strjoin(prompt_tmp_2, RESET_C);
+	prompt_tmp_1 = ft_strjoin(prompt_tmp_2, C_RESET);
 	free(prompt_tmp_2);
 	prompt_tmp_2 = FT_NULL;
 	return (prompt_tmp_1);
@@ -41,8 +41,8 @@ char	*get_prompt_no_tilde(t_main *config)
 	char	*prompt_tmp_1;
 	char	*prompt_tmp_2;
 
-	prompt_tmp_1 = ft_strjoin(BASE_PROMPT_C2, config->cwd);
-	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, RESET_C);
+	prompt_tmp_1 = ft_strjoin(C_PROMPT_PATH, config->cwd);
+	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, C_RESET);
 	free(prompt_tmp_1);
 	prompt_tmp_1 = FT_NULL;
 	return (prompt_tmp_2);
@@ -58,7 +58,6 @@ char	*get_prompt_2(t_main *config, char *tmp_1)
 	free(tmp_3);
 	tmp_3 = ft_strjoin(tmp_2, tmp_1);
 	free(tmp_2);
-	free(tmp_1);
 	return (tmp_3);
 }
 
@@ -79,11 +78,13 @@ void	get_prompt(t_main *config)
 	free(prompt_tmp_1);
 	prompt_tmp_1 = ft_strjoin(config->prompt_base, prompt_tmp_2);
 	free(prompt_tmp_2);
+	if (DEBUG)
+		prompt_tmp_2 = get_prompt_2(config, prompt_tmp_1);
+	else
+		prompt_tmp_2 = ft_strdup(prompt_tmp_1);
+	free(prompt_tmp_1);
 	if (config->prompt)
 		free(config->prompt);
-	if (DEBUG)
-		config->prompt = get_prompt_2(config, prompt_tmp_1);
-	else
-		config->prompt = prompt_tmp_1;
+	config->prompt = ft_strjoin(prompt_tmp_2, C_PROMPT_CMD);
 	debug_prompt(config);
 }

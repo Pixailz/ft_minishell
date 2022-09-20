@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 02:37:22 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 08:12:44 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -53,9 +53,33 @@ add_history
 # define VRAI 42
 
 # define LOG_FD			420
-# define BASE_PROMPT_C1	"\e[01;32m"
-# define BASE_PROMPT_C2	"\e[01;34m"
-# define RESET_C		"\e[0m"
+# define C_RED			"\e[31m"
+# define B_RED			"\e[01;31m"
+# define C_GREEN		"\e[32m"
+# define B_GREEN		"\e[01;32m"
+# define C_LIGHT_GREEN	"\e[38;5;42m"
+# define B_LIGHT_GREEN	"\e[01;38;5;42m"
+# define C_YELLOW		"\e[33m"
+# define B_YELLOW		"\e[01;33m"
+# define C_ORANGE		"\e[38;5;208m"
+# define B_ORANGE		"\e[01;38;5;208m"
+# define C_BLUE			"\e[34m"
+# define B_BLUE			"\e[01;34m"
+# define C_PURPLE		"\e[35m"
+# define B_PURPLE		"\e[01;35m"
+# define C_MAGENTA		"\e[36m"
+# define B_MAGENTA		"\e[01;36m"
+# define C_WHITE		"\e[37m"
+# define B_WHITE		"\e[01;37m"
+# define C_BLACK		"\e[30m"
+# define B_BLACK		"\e[01;30m"
+
+# define C_RESET		"\e[0m"
+
+# define C_PROMPT_BASE	C_RED
+# define C_PROMPT_PATH	B_BLUE
+# define C_PROMPT_CMD	C_YELLOW
+
 # define GREEN_PLUS		"[\e[38;5;82m+\e[0m]"
 # define RED_MINUS		"[\e[38;5;196m-\e[0m]"
 # define ORANGE_STAR	"[\e[38;5;214m*\e[0m]"
