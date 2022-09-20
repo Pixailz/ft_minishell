@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 08:02:07 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 06:12:11 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 02:41:38 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ void	exec_command(t_main *config)
 	cmd = config->context->cmd[config->context->cmd_id];
 	exec_prepare_entry(config);
 	close_all_pipes(config->context);
+	return_code = 0;
 	if (!cmd->path)
 		return_code = 127;
 	else if (access(cmd->path, X_OK) != 0)
