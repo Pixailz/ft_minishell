@@ -3,6 +3,26 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 # TEST / TODO
 
+1. TODO / not working
+	- `cat -e "fi"le "`
+	- `echo pass <> file | echo pass`
+		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
+	- `< file << END cat -e > file1 >> file2`<br>
+	  `TEST`<br>
+	  `END`
+		- in this order only
+	- not working multiple double in
+1. exit with errno
+	- implement `$?`
+1. built-ins
+	- [ ] echo et l’option -n
+	- [ ] cd uniquement avec un chemin relatif ou absolu
+	- [ ] pwd sans aucune option
+	- [x] export sans aucune option
+	- [x] unset sans aucune option
+	- [x] env sans aucune option ni argument
+	- [ ] exit sans aucune option
+1. debug print
 1. working like the original bash
 	- `ca't' -e file`
 	- `ca't -e' "file.txt"`
@@ -32,26 +52,6 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `ech$O test`
 	- `echo pass1 > file pass2`
 	- `echo pass >>file1 | echo pass >> file2`
-
-1. TODO / not working
-	- `cat -e "fi"le "`
-	- `echo pass <> file | echo pass`
-		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
-	- `< file << END cat -e > file1 >> file2`<br>
-	  `TEST`<br>
-	  `END`
-		- in this order only
-	- not working multiple double in
-1. exit with errno
-	- implement `$?`
-1. built-ins
-	- [ ] echo et l’option -n
-	- [ ] cd uniquement avec un chemin relatif ou absolu
-	- [ ] pwd sans aucune option
-	- [x] export sans aucune option
-	- [x] unset sans aucune option
-	- [x] env sans aucune option ni argument
-	- [ ] exit sans aucune option
 
 ## valgrind
 > without vsupp work fine
