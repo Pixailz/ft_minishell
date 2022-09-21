@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 04:52:22 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:06:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,9 @@ char	*get_prompt_tilde(t_main *config)
 	len_other = ft_strlen(config->cwd) - len_home;
 	if (!len_other)
 	{
-
-		return (prompt_tmp_1);
+		prompt_tmp_2 = ft_strjoin(prompt_tmp_1, C_RESET);
+		free(prompt_tmp_1);
+		return (prompt_tmp_2);
 	}
 	path = ft_substr(config->cwd, len_home, len_other);
 	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, path);

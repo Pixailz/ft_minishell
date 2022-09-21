@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 06:43:04 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 20:02:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,39 +62,39 @@ errno
 
 # define LOG_FD			420
 
-# define C_RED			"\001\e[31m\002"
-# define C_GREEN		"\001\e[32;m\002"
-# define C_LIGHT_GREEN	"\001\e[38;5;112m\002"
-# define C_YELLOW		"\001\e[33m\002"
-# define C_ORANGE		"\001\e[38;5;208m\002"
-# define C_BLUE			"\001\e[34m\002"
-# define C_PURPLE		"\001\e[35m\002"
-# define C_MAGENTA		"\001\e[36m\002"
-# define C_WHITE		"\001\e[37m\002"
-# define C_BLACK		"\001\e[30m\002"
+# define C_RED			"\001\033[31m\002"
+# define C_GREEN		"\001\033[32;m\002"
+# define C_LIGHT_GREEN	"\001\033[38;5;112m\002"
+# define C_YELLOW		"\001\033[33m\002"
+# define C_ORANGE		"\001\033[38;5;208m\002"
+# define C_BLUE			"\001\033[34m\002"
+# define C_PURPLE		"\001\033[35m\002"
+# define C_MAGENTA		"\001\033[36m\002"
+# define C_WHITE		"\001\033[37m\002"
+# define C_BLACK		"\001\033[30m\002"
 
-# define B_RED			"\001\e[01;31m\002"
-# define B_GREEN		"\001\e[01;32m\002"
-# define B_LIGHT_GREEN	"\001\e[01;38;5;112m\002"
-# define B_YELLOW		"\001\e[01;33m\002"
-# define B_ORANGE		"\001\e[01;38;5;208m\002"
-# define B_BLUE			"\001\e[01;34m\002"
-# define B_PURPLE		"\001\e[01;35m\002"
-# define B_MAGENTA		"\001\e[01;36m\002"
-# define B_WHITE		"\001\e[01;37m\002"
-# define B_BLACK		"\001\e[01;30m\002"
+# define B_RED			"\001\033[01;31m\002"
+# define B_GREEN		"\001\033[01;32m\002"
+# define B_LIGHT_GREEN	"\001\033[01;38;5;112m\002"
+# define B_YELLOW		"\001\033[01;33m\002"
+# define B_ORANGE		"\001\033[01;38;5;208m\002"
+# define B_BLUE			"\001\033[01;34m\002"
+# define B_PURPLE		"\001\033[01;35m\002"
+# define B_MAGENTA		"\001\033[01;36m\002"
+# define B_WHITE		"\001\033[01;37m\002"
+# define B_BLACK		"\001\033[01;30m\002"
 
-# define C_RESET		"\001\e[0m\002"
+# define C_RESET		"\001\033[0m\002"
 
 # define C_PROMPT_ROOT	B_RED
 # define C_PROMPT_BASE	B_ORANGE
 # define C_PROMPT_PATH	B_BLUE
 # define C_PROMPT_CMD	C_LIGHT_GREEN
 
-# define GREEN_PLUS		"\001\e[0m[\e[38;5;82m+\e[0m]\002"
-# define RED_MINUS		"\001\e[0m[\e[38;5;196m-\e[0m]\002"
-# define ORANGE_STAR	"\001\e[0m[\e[38;5;214m*\e[0m]\002"
-# define BLUE_STAR		"\001\e[0m[\e[38;5;75m*\e[0m]\002"
+# define GREEN_PLUS		"\001\033[0m[\033[38;5;82m+\033[0m]\002"
+# define RED_MINUS		"\001\033[0m[\033[38;5;196m-\033[0m]\002"
+# define ORANGE_STAR	"\001\033[0m[\033[38;5;214m*\033[0m]\002"
+# define BLUE_STAR		"\001\033[0m[\033[38;5;75m*\033[0m]\002"
 
 /* ########################################################################## */
 
