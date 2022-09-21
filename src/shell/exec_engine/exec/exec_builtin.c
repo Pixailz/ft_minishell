@@ -1,25 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_engine.c                                      :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/04 03:52:38 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 00:47:56 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 08:51:17 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 05:52:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	exec_engine(t_main *config)
+int	exec_builtin(t_cmd *cmd)
 {
-	init_context_entry(config);
-	prepare_cmds_1(config);
-	init_cmds(config);
-	init_redirection(config);
-	init_get_cmd_paths(config);
-	debug_init_redirection(config);
-	config->last_return_value = exec_entry(config);
-	free_exec_entry(config);
+	int		error_code;
+
+	error_code = 0;
+	if (cmd->builtin == CD)
+		error_code = builtin_cd(cmd);
+	if (cmd->builtin == PWD)
+		error_code = builtin_pwd(cmd);
+	if (cmd->builtin == ECHO)
+		error_code = builtin_echo(cmd);
+	return (error_code);
 }

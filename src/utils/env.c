@@ -1,43 +1,44 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   unset.c                                            :+:      :+:    :+:   */
+/*   env.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 05:03:33 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/21 06:21:10 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 22:54:09 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 04:37:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	unset(char *var, t_lst_env **env)
+char	*get_env(char *key, t_lst_env *env)
 {
-	t_lst_env	*tmp;
-
-	tmp = NULL;
-	while (*env)
+	while (env)
 	{
-		if (!ft_strcmp_env(var, (*env)->key))
+		if (!ft_strcmp_env(key, env->key))
 			break ;
-		tmp = *env;
-		*env = (*env)->next;
+		env = env->next;
 	}
-	if (!*env)
-		return ;
-	else if (!tmp)
+	if (env)
+		return (env->value);
+	return (FT_NULL);
+}
+
+void	set_env(char *key, char *value, t_lst_env **env)
+{
+	t_lst_env	*env_ptr;
+
+	env_ptr = *env;
+	while (env_ptr)
 	{
-		tmp = *env;
-		*env = (*env)->next;
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
+		if (!ft_strcmp_env(key, env_ptr->key))
+			break ;
+		env_ptr = env_ptr->next;
 	}
-	else
+	if (env_ptr)
 	{
-		free(tmp->key);
-		free(tmp->value);
-		free(tmp);
+		free(env_ptr->value);
+		env_ptr->value = (void *)ft_strdup(value);
 	}
 }

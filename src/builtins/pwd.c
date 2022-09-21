@@ -1,21 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   debug_parse.c                                      :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 01:51:14 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 00:04:14 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 10:33:10 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/20 10:51:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	debug_parse(t_main *config)
+int	builtin_pwd(t_cmd *cmd)
 {
-	ft_printf_fd(LOG_FD, "%s parsing:\n", BLUE_STAR);
-	ft_printf_fd(LOG_FD, "   %s line_buffer [%s]\n", \
-											GREEN_PLUS, config->line_buffer);
-	ft_printf_fd(LOG_FD, "\n");
+	char	*buff;
+
+	do_something_with_cmd(cmd);
+	buff = get_cwd();
+	ft_printf("%s\n", buff);
+	free(buff);
+	return (0);
 }

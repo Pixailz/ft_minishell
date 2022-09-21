@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 08:08:08 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 04:52:22 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ char	*get_prompt_tilde(t_main *config)
 	len_home = ft_strlen(config->home);
 	len_other = ft_strlen(config->cwd) - len_home;
 	if (!len_other)
+	{
+
 		return (prompt_tmp_1);
+	}
 	path = ft_substr(config->cwd, len_home, len_other);
 	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, path);
 	free(path);
@@ -61,12 +64,19 @@ char	*get_prompt_2(t_main *config, char *tmp_1)
 	return (tmp_3);
 }
 
+void	get_prompt_init(t_main *config)
+{
+	free(config->cwd);
+	config->cwd = get_cwd();
+	config->home = get_env("HOME", config->env);
+}
+
 void	get_prompt(t_main *config)
 {
 	char	*prompt_tmp_1;
 	char	*prompt_tmp_2;
 
-	config->home = get_env("HOME", config->env);
+	get_prompt_init(config);
 	if (ft_strncmp(config->cwd, config->home, ft_strlen(config->home)))
 		prompt_tmp_1 = get_prompt_no_tilde(config);
 	else
@@ -86,5 +96,6 @@ void	get_prompt(t_main *config)
 	if (config->prompt)
 		free(config->prompt);
 	config->prompt = ft_strjoin(prompt_tmp_2, C_PROMPT_CMD);
+	free(prompt_tmp_2);
 	debug_prompt(config);
 }

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 07:32:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 22:57:58 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 05:21:08 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,6 +75,8 @@ int	init_cmd(t_main *config)
 		config->context->cmd[counter]->in_redir = FT_NULL;
 		config->context->cmd[counter]->out_redir = FT_NULL;
 		config->context->cmd[counter]->tmp_command = FT_NULL;
+		config->context->cmd[counter]->cmd_pid = 0;
+		config->context->cmd[counter]->path = FT_NULL;
 		counter++;
 	}
 	return (0);

@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/17 04:40:53 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/20 22:06:08 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -20,8 +20,8 @@ MAKE			:= make -C
 VERSION			:= 0.0.0
 $(eval export MAIN=1)
 
-ifneq ($(PADDING),35)
-PADDING			:= 35
+ifneq ($(PADDING),60)
+PADDING			:= 60
 endif
 
 ifeq ($(DEBUG),)
@@ -44,8 +44,11 @@ INC_DIR			:= $(addprefix -I,$(INC_TMP))
 LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 
 # SRC
-SRC_C			:= src/builtins/env.c \
+SRC_C			:= src/builtins/cd.c \
+				   src/builtins/echo.c \
+				   src/builtins/env.c \
 				   src/builtins/export.c \
+				   src/builtins/pwd.c \
 				   src/builtins/unset.c \
 				   src/dataset/free/cmds.c \
 				   src/dataset/free/config.c \
@@ -57,35 +60,43 @@ SRC_C			:= src/builtins/env.c \
 				   src/dataset/init/context.c \
 				   src/dataset/init/redirection.c \
 				   src/dataset/init/signal.c \
-				   src/debug/debug_init_redirection.c \
-				   src/debug/debug_parse.c \
-				   src/debug/debug_print_cmd.c \
-				   src/debug/debug_prompt.c \
-				   src/debug/debug_signal.c \
+				   src/debug/builtin.c \
+				   src/debug/init_redirection.c \
+				   src/debug/parse.c \
+				   src/debug/print.c \
+				   src/debug/print_bool.c \
+				   src/debug/print_cmd.c \
+				   src/debug/prompt.c \
+				   src/debug/signal.c \
 				   src/minishell.c \
-				   src/shell/exec/exec/exec_prepare.c \
-				   src/shell/exec/exec/execute.c \
-				   src/shell/exec/exec/prepare_cmds.c \
-				   src/shell/exec/exec/prepare_redirection.c \
-				   src/shell/exec/exec/prepare_redirection_ng.c \
-				   src/shell/exec/exec_engine.c \
+				   src/shell/exec_engine/exec/exec_builtin.c \
+				   src/shell/exec_engine/exec/exec_prepare.c \
+				   src/shell/exec_engine/exec/execute.c \
+				   src/shell/exec_engine/exec/prepare_cmds.c \
+				   src/shell/exec_engine/exec/prepare_redirection.c \
+				   src/shell/exec_engine/exec/prepare_redirection_ng.c \
+				   src/shell/exec_engine/exec_engine.c \
 				   src/shell/loop.c \
-				   src/shell/parsing/get_block.c \
-				   src/shell/parsing/identify_pipe.c \
-				   src/shell/parsing/parse_entry.c \
-				   src/shell/parsing/replace_dollar.c \
+				   src/shell/parsing_cmd/get_block.c \
+				   src/shell/parsing_cmd/identify_pipe.c \
+				   src/shell/parsing_cmd/parse_entry.c \
+				   src/shell/parsing_cmd/replace_dollar.c \
 				   src/shell/signal_handler.c \
+				   src/utils/builtins.c \
+				   src/utils/builtins/args.c \
+				   src/utils/builtins/do_something_with_cmd.c \
 				   src/utils/builtins/env_export_utils_1.c \
 				   src/utils/builtins/env_export_utils_2.c \
 				   src/utils/builtins/get_cwd.c \
+				   src/utils/builtins/params.c \
+				   src/utils/env.c \
 				   src/utils/exec/print_error.c \
 				   src/utils/exec/utils.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
 				   src/utils/ft_splitb.c \
-				   src/utils/get_env.c \
-				   src/utils/get_path.c \
 				   src/utils/parsing/convert_list.c \
+				   src/utils/path.c \
 				   src/utils/prompt/get_base_prompt.c \
 				   src/utils/prompt/get_prompt.c \
 				   src/utils/prompt/get_status_prompt.c

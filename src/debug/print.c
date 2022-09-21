@@ -1,30 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.c                                           :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:13:28 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 04:56:34 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 20:20:23 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 05:40:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_config_entry(t_main *config)
+void	debug_print(int type, void *ptr)
 {
-	free(config->prompt_base);
-	config->prompt_base = FT_NULL;
-	free(config->prompt);
-	config->prompt = FT_NULL;
-	if (config->context)
-		free_exec_entry(config);
-	if (config->env != FT_NULL)
-		free_t_list_env(config->env);
-	free(config->prompt);
-	config->prompt = FT_NULL;
-	free(config->cwd);
-	config->cwd = FT_NULL;
-	rl_clear_history();
+	if (!DEBUG)
+		return ;
+}
+
+void	debug_print_question_mark(t_main *config)
+{
+	ft_printf_fd(LOG_FD, "question mark [%d]\n", config->last_return_value);
+}
+
+void	debug_print_post_exec(t_main *config)
+{
+	ft_printf_fd(LOG_FD, "post_exec [%d]\n", config->last_return_value);
 }

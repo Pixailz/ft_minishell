@@ -58,10 +58,10 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 `valgrind --leak-check=full <exec_path>`
 
 > with vsupp suppress ALL leak linked to readline ...
-`valgrind --leak-check=full --suppressions=vsupp <exec_path>`
+`make re DEBUG=1 && valgrind  --leak-check=full --show-leak-kinds=all --suppressions=vsupp --trace-children=yes --track-fds=yes ./minishell 420>exec.log ; cat exec.log`
 
 ## exec with log
-`./minishell 3>exec.log; cat exec.log`
+`./minishell 420>exec.log; cat exec.log`
 
 ## PIPE
 [PIPE](https://youtu.be/ceNaZzEoUhk?t=1576)

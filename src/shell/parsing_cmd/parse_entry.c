@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:26:21 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 00:02:31 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 09:30:17 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,8 @@ void	parse_cmd(t_main *config)
 	config->line_splitted = ft_better_split(config->line_buffer);
 	parse_replace_dollar(config, config->env);
 	config->line_block = convert_list(config->line_splitted);
+	debug_parse(config);
+	free(config->line_buffer);
 	tmp = config->line_splitted;
 	while (tmp)
 	{

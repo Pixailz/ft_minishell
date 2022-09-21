@@ -1,30 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   config.c                                           :+:      :+:    :+:   */
+/*   exec_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:13:28 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 04:56:34 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/04 03:52:38 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 05:41:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_config_entry(t_main *config)
+void	exec_engine(t_main *config)
 {
-	free(config->prompt_base);
-	config->prompt_base = FT_NULL;
-	free(config->prompt);
-	config->prompt = FT_NULL;
-	if (config->context)
-		free_exec_entry(config);
-	if (config->env != FT_NULL)
-		free_t_list_env(config->env);
-	free(config->prompt);
-	config->prompt = FT_NULL;
-	free(config->cwd);
-	config->cwd = FT_NULL;
-	rl_clear_history();
+	init_context_entry(config);
+	prepare_cmds_1(config);
+	init_cmds(config);
+	init_redirection(config);
+	init_get_cmd_paths(config);
+	debug_init_redirection(config);
+	config->last_return_value = exec_entry(config);
+	debug_print_post_exec(config);
+	free_exec_entry(config);
 }

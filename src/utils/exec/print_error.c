@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 06:20:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 07:00:11 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 06:26:58 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -62,10 +62,20 @@ int	print_error_file(t_cmd *cmd)
 	return (0);
 }
 
+void	print_error_2(t_cmd *cmd)
+{
+	if (cmd->return_value == 127)
+		ft_printf_fd(STDERR_FILENO, "%s: command not found\n", cmd->command[0]);
+	if (cmd->return_value == 126)
+		ft_printf_fd(STDERR_FILENO,
+			"minishell: %s: Permission denied\n", cmd->path);
+}
+
 void	print_error(t_context *context)
 {
-	int	counter;
-	int	error[0xffff];
+	int		counter;
+	int		error[0xffff];
+	t_cmd	*cmd;
 
 	counter = context->cmd_nb - 1;
 	while (counter >= 0)
@@ -78,13 +88,9 @@ void	print_error(t_context *context)
 	{
 		if (!error[counter])
 		{
-			if (context->cmd[counter]->return_value == 127)
-				ft_printf_fd(STDERR_FILENO, "%s: command not found\n", \
-					context->cmd[counter]->command[0]);
-			if (context->cmd[counter]->return_value == 126)
-				ft_printf_fd(STDERR_FILENO, \
-					"minishell: %s: Permission denied\n", \
-						context->cmd[counter]->path);
+			cmd = context->cmd[counter];
+			if (cmd->return_value)
+				print_error_2(cmd);
 		}
 		counter++;
 	}

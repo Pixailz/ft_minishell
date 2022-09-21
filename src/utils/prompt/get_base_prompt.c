@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 07:51:27 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 19:19:58 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,10 @@ char	*assemble_base_prompt(char *user, char **hostname)
 	char	*prompt_tmp_1;
 	char	*prompt_tmp_2;
 
-	prompt_tmp_1 = ft_strjoin(C_PROMPT_BASE, user);
+	if (!ft_strncmp(user, "root", 4))
+		prompt_tmp_1 = ft_strjoin(C_PROMPT_ROOT, user);
+	else
+		prompt_tmp_1 = ft_strjoin(C_PROMPT_BASE, user);
 	prompt_tmp_2 = ft_strjoin(prompt_tmp_1, "@");
 	free(prompt_tmp_1);
 	prompt_tmp_1 = ft_strjoin(prompt_tmp_2, *hostname);
