@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/20 22:06:08 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/21 21:38:23 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -189,27 +189,27 @@ endef
 # **************************************************************************** #
 # Rules
 
-all:			setup $(TARGET)
+$(TARGET):				$(LIBFT) $(OBJ_C)
+	@printf "$(green_plus) $(font_color)Creation of $(bold)$@$(reset)\n"
+	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
+
+$(LIBFT):
+	@$(MAKE) lib/ft_libft all
+
+all:			setup
 	@printf "$$usage"
+
+$(OBJ_SUBDIR):
+	$(foreach dir,$@,$(call make_dir,$(dir)))
 
 $(OBJ_DIR)/%.o: 		$(SRC_DIR)/%.c
 	$(call print_padded,$^,$@)
 	@$(CC) -o $@ -c $< $(CFLAGS)
 
-$(LIBFT):
-	@$(MAKE) lib/ft_libft all
-
-$(TARGET):				$(LIBFT) $(OBJ_C)
-	@printf "$(green_plus) $(font_color)Creation of $(bold)$@$(reset)\n"
-	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
-
 setup:					call_logo $(OBJ_SUBDIR)
 
 call_logo:
 	@printf "$(ascii_color)$$ascii_art"
-
-$(OBJ_SUBDIR):
-	$(foreach dir,$@,$(call make_dir,$(dir)))
 
 clean_all:				clean
 	@$(MAKE) lib/ft_libft clean
@@ -227,6 +227,10 @@ fclean:					clean
 
 re_lib:
 	@$(MAKE) lib/ft_libft re all
+
+test:					setup $(OBJ_C) $(LIBFT)
+
+	@$(CC) $(TEST) -o ./test/$@ $(filter-out obj/minishell.o,$(OBJ_C)) $(LIBS) $(CFLAGS)
 
 re:						fclean all
 
