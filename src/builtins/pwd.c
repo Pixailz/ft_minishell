@@ -1,36 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   pwd.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 01:13:17 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 10:33:10 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/20 10:51:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sig_int(void)
+int	builtin_pwd(t_cmd *cmd)
 {
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	char	*buff;
 
-void	handle_sig_quit(void)
-{
-	ft_printf("\b\b  \b\b");
-	rl_redisplay();
-}
-
-void	signal_handler(int signal_code)
-{
-	if (signal_code == SIGINT)
-		handle_sig_int();
-	if (signal_code == SIGQUIT)
-		handle_sig_quit();
-	debug_signal(signal_code);
+	do_something_with_cmd(cmd);
+	buff = get_cwd();
+	ft_printf("%s\n", buff);
+	free(buff);
+	return (0);
 }

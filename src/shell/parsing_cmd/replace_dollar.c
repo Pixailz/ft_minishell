@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:06:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 02:37:51 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 06:19:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,13 @@ char	*find_key(char **input, t_lst_env *env)
 	return (ft_strdup("\0"));
 }
 
-char	*replace_key(char *input, t_lst_env *env)
+char	*replace_question_mark(t_main *config)
+{
+	debug_print_question_mark(config);
+	return (ft_itoa(config->last_return_value));
+}
+
+char	*replace_key(t_main *config, char *input, t_lst_env *env)
 {
 	int		i;
 	char	*str;
@@ -59,7 +65,13 @@ char	*replace_key(char *input, t_lst_env *env)
 			i--;
 			input++;
 		}
-		str = ft_better_strjoin(str, find_key(&input, env));
+		if (input[0] == '$' && input[1] == '?')
+		{
+			str = ft_better_strjoin(str, ft_itoa(config->last_return_value));
+			input += 2;
+		}
+		else
+			str = ft_better_strjoin(str, find_key(&input, env));
 	}
 	return (str);
 }
@@ -72,7 +84,7 @@ void	parse_replace_dollar(t_main *config, t_lst_env *env)
 	tmp = config->line_splitted;
 	while (tmp)
 	{
-		str = replace_key(tmp->content, env);
+		str = replace_key(config, tmp->content, env);
 		free(tmp->content);
 		tmp->content = str;
 		tmp = tmp->next;

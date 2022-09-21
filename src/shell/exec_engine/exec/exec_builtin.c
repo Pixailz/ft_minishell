@@ -1,36 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   exec_builtin.c                                     :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 01:13:17 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 08:51:17 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 05:52:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sig_int(void)
+int	exec_builtin(t_cmd *cmd)
 {
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	int		error_code;
 
-void	handle_sig_quit(void)
-{
-	ft_printf("\b\b  \b\b");
-	rl_redisplay();
-}
-
-void	signal_handler(int signal_code)
-{
-	if (signal_code == SIGINT)
-		handle_sig_int();
-	if (signal_code == SIGQUIT)
-		handle_sig_quit();
-	debug_signal(signal_code);
+	error_code = 0;
+	if (cmd->builtin == CD)
+		error_code = builtin_cd(cmd);
+	if (cmd->builtin == PWD)
+		error_code = builtin_pwd(cmd);
+	if (cmd->builtin == ECHO)
+		error_code = builtin_echo(cmd);
+	return (error_code);
 }

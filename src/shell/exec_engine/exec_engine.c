@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   exec_engine.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 01:13:17 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/04 03:52:38 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 05:41:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sig_int(void)
+void	exec_engine(t_main *config)
 {
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
-
-void	handle_sig_quit(void)
-{
-	ft_printf("\b\b  \b\b");
-	rl_redisplay();
-}
-
-void	signal_handler(int signal_code)
-{
-	if (signal_code == SIGINT)
-		handle_sig_int();
-	if (signal_code == SIGQUIT)
-		handle_sig_quit();
-	debug_signal(signal_code);
+	init_context_entry(config);
+	prepare_cmds_1(config);
+	init_cmds(config);
+	init_redirection(config);
+	init_get_cmd_paths(config);
+	debug_init_redirection(config);
+	config->last_return_value = exec_entry(config);
+	debug_print_post_exec(config);
+	free_exec_entry(config);
 }

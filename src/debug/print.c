@@ -1,36 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   print.c                                            :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 01:13:17 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 20:20:23 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/21 05:40:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sig_int(void)
+void	debug_print(int type, void *ptr)
 {
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+	if (!DEBUG)
+		return ;
 }
 
-void	handle_sig_quit(void)
+void	debug_print_question_mark(t_main *config)
 {
-	ft_printf("\b\b  \b\b");
-	rl_redisplay();
+	ft_printf_fd(LOG_FD, "question mark [%d]\n", config->last_return_value);
 }
 
-void	signal_handler(int signal_code)
+void	debug_print_post_exec(t_main *config)
 {
-	if (signal_code == SIGINT)
-		handle_sig_int();
-	if (signal_code == SIGQUIT)
-		handle_sig_quit();
-	debug_signal(signal_code);
+	ft_printf_fd(LOG_FD, "post_exec [%d]\n", config->last_return_value);
 }

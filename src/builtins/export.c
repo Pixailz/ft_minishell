@@ -6,34 +6,11 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/19 00:37:26 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/21 04:14:37 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-void	unlink_key_value(char *var_env, char **key, char **value)
-{
-	int	i;
-
-	i = 0;
-	while (var_env[i] && var_env[i] != '=')
-		i++;
-	if (!var_env[i])
-	{
-		*key = ft_substr(var_env, 0, i);
-		*value = FT_NULL;
-	}
-	else
-	{
-		i++;
-		*key = ft_substr(var_env, 0, i);
-		while (--i > 0)
-			var_env++;
-		var_env++;
-		*value = ft_strdup(var_env);
-	}
-}
 
 void	print_export(t_lst_env *envlst)
 {
@@ -53,4 +30,33 @@ void	print_export(t_lst_env *envlst)
 			printf("declare -x %s\n", (char *)tmp->key);
 		i++;
 	}
+}
+
+void	export_var_to_env(t_lst_env **envlst, char *var)
+{
+	t_lst_env	*tmp;
+	int			i;
+
+	i = 1;
+	tmp = *envlst;
+	while (tmp != FT_NULL)
+	{
+		tmp = *envlst;
+		while (tmp && tmp->index != i)
+			tmp = tmp->next;
+		if (tmp && ft_strcmp_env(var, tmp->key) == 0)
+		{
+			unlink_key_value(var, (char **)&tmp->key, (char **)&tmp->value);
+			return ;
+		}
+		i++;
+	}
+	ft_lstadd_back_env(envlst, ft_lstnew_env(var));
+	tmp = *envlst;
+	while (tmp != FT_NULL)
+	{
+		tmp->index = 0;
+		tmp = tmp->next;
+	}
+	index_env_lst(envlst);
 }

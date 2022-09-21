@@ -1,36 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal_handler.c                                   :+:      :+:    :+:   */
+/*   get_status_prompt.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 01:13:17 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/20 02:40:30 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	handle_sig_int(void)
+char	*get_status_prompt(t_main *config)
 {
-	ft_printf("\n");
-	rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
-}
+	char	*status;
 
-void	handle_sig_quit(void)
-{
-	ft_printf("\b\b  \b\b");
-	rl_redisplay();
-}
-
-void	signal_handler(int signal_code)
-{
-	if (signal_code == SIGINT)
-		handle_sig_int();
-	if (signal_code == SIGQUIT)
-		handle_sig_quit();
-	debug_signal(signal_code);
+	if (config->last_return_value == 0)
+		status = ft_strdup(GREEN_PLUS);
+	else if (config->last_return_value == 130)
+		status = ft_strdup(ORANGE_STAR);
+	else
+		status = ft_strdup(RED_MINUS);
+	return (status);
 }

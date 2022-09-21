@@ -36,7 +36,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. TODO / not working
 	- `cat -e "fi"le "`
 	- `echo pass <> file | echo pass`
-		- parsing ignore all after `<>`, create file but don't pipe output to it
+		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
 	- `< file << END cat -e > file1 >> file2`<br>
 	  `TEST`<br>
 	  `END`
@@ -44,18 +44,24 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- not working multiple double in
 1. exit with errno
 	- implement `$?`
-1. implement color prompt, with current cwd
-1. implement clean debug to LOG_FD
+1. built-ins
+	- [ ] echo et l’option -n
+	- [ ] cd uniquement avec un chemin relatif ou absolu
+	- [ ] pwd sans aucune option
+	- [x] export sans aucune option
+	- [x] unset sans aucune option
+	- [x] env sans aucune option ni argument
+	- [ ] exit sans aucune option
 
 ## valgrind
 > without vsupp work fine
 `valgrind --leak-check=full <exec_path>`
 
 > with vsupp suppress ALL leak linked to readline ...
-`valgrind --leak-check=full --suppressions=vsupp <exec_path>`
+`make re DEBUG=1 && valgrind  --leak-check=full --show-leak-kinds=all --suppressions=vsupp --trace-children=yes --track-fds=yes ./minishell 420>exec.log ; cat exec.log`
 
 ## exec with log
-`./minishell 3>exec.log; cat exec.log`
+`./minishell 420>exec.log; cat exec.log`
 
 ## PIPE
 [PIPE](https://youtu.be/ceNaZzEoUhk?t=1576)
