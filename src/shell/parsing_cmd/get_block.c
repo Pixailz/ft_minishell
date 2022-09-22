@@ -76,7 +76,7 @@ void	trim_quotes(t_block *input)
 
 	while (input)
 	{
-		if (input->block[0] == '"' || input->block[0] == '\'')
+		if (ft_strlen(input->block) > 1 && (input->block[0] == '"' || input->block[0] == '\''))
 		{
 			tmp = input->block;
 			input->block++;

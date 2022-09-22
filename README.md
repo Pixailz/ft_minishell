@@ -34,7 +34,6 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `echo pass >>file1 | echo pass >> file2`
 
 1. TODO / not working
-	- `cat -e "fi"le "`
 	- `echo pass <> file | echo pass`
 		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
 	- `< file << END cat -e > file1 >> file2`<br>
