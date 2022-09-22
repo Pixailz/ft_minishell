@@ -69,6 +69,9 @@ valgrind  --leak-check=full \
 ## exec with log
 `./minishell 420>exec.log; cat exec.log`
 
+## termios
+https://stackoverflow.com/a/27559151
+
 ## PIPE
 [PIPE](https://youtu.be/ceNaZzEoUhk?t=1576)
 
