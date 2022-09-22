@@ -5,7 +5,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 1. TODO / not working
 	- `echo pass <> file | echo pass`
-		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
+		- parsing, create `file` but don't pipe output to it
 	- not working multiple double in
 1. exit with errno
 	- implement `$?`
