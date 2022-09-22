@@ -4,7 +4,6 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 # TEST / TODO
 
 1. TODO / not working
-	- `cat -e "fi"le "`
 	- `echo pass <> file | echo pass`
 		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
 	- not working multiple double in
