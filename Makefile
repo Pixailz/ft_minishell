@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/21 23:45:48 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/22 17:00:19 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ TARGET			:= minishell
 RM				:= rm -rf
 CC				:= gcc
 MAKE			:= make -C
-VERSION			:= 0.0.0
+VERSION			:= 1.0.0
 $(eval export MAIN=1)
 
 ifneq ($(PADDING),60)
@@ -89,6 +89,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/utils/builtins/env_export_utils_1.c \
 				   src/utils/builtins/env_export_utils_2.c \
 				   src/utils/builtins/get_cwd.c \
+				   src/utils/builtins/is_good_var_env.c \
 				   src/utils/builtins/params.c \
 				   src/utils/env.c \
 				   src/utils/exec/print_error.c \

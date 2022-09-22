@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 05:03:33 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/22 07:08:54 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:55:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,4 +47,9 @@ void	unset(char *var, t_lst_env **env)
 	else
 		unset2(tmp, env, first);
 	index_env_lst(env);
+}
+
+int	builtin_unset(t_cmd *cmd)
+{
+
 }

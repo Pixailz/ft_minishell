@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 06:30:28 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 16:51:58 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -81,10 +81,10 @@ void	get_prompt(t_main *config)
 	free(prompt_tmp_1);
 	prompt_tmp_1 = ft_strjoin(config->prompt_base, prompt_tmp_2);
 	free(prompt_tmp_2);
-	if (DEBUG)
-		prompt_tmp_2 = get_prompt_2(config, prompt_tmp_1);
-	else
+	if (OLD_STYLE)
 		prompt_tmp_2 = ft_strdup(prompt_tmp_1);
+	else
+		prompt_tmp_2 = get_prompt_2(config, prompt_tmp_1);
 	free(prompt_tmp_1);
 	if (config->prompt)
 		free(config->prompt);

@@ -79,3 +79,26 @@ https://stackoverflow.com/a/27559151
 	- https://ruslanspivak.com/lsbasi-part7/
 	- https://unix.stackexchange.com/questions/88850/precedence-of-the-shell-logical-operators
 1. https://github.com/AudeizReading/minishell/wiki/01-PARSING
+
+### USAGE
+
+> log
+```h
+# define DEBUG				<0|1>
+# define LOG_FD				<FD_LOG_OUTPUT>
+```
+
+> prompt
+```h
+# define OLD_STYLE			<0|1>
+
+# define C_PROMPT_ROOT		<COLOR_CODE>
+# define C_PROMPT_BASE		<COLOR_CODE>
+# define C_PROMPT_PATH		<COLOR_CODE>
+# define C_PROMPT_CMD		<COLOR_CODE>
+
+# define C_PROMPT_STATUS_1	<COLOR_CODE>
+# define C_PROMPT_STATUS_2	<COLOR_CODE>
+# define C_PROMPT_STATUS_0	<COLOR_CODE>
+```
+
