@@ -1,33 +1,35 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec_builtin.c                                     :+:      :+:    :+:   */
+/*   ft_isdir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 08:51:17 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 07:18:17 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/22 03:26:51 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 04:23:00 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	exec_builtin(t_cmd *cmd, t_main *config)
+/**
+ * @brief			check if path, absolute or not is present
+ *
+ * @param dir_path	path of the dir to test
+ * @note
+ *	Needed lib
+ *		sys/stat.h
+ * @return (int)	0 on success, 1 if not a dir, 2 no such file or dir
+ */
+int	ft_isdir(char *dir_name)
 {
-	int		error_code;
+	struct stat	tmp;
+	int			error_code;
 
 	error_code = 0;
-	if (cmd->builtin == CD)
-		error_code = builtin_cd(cmd, config);
-	if (cmd->builtin == PWD)
-		error_code = builtin_pwd(cmd);
-	if (cmd->builtin == ECHOO)
-		error_code = builtin_echo(cmd);
-	if (cmd->builtin == EXPORT)
-		error_code = builtin_export(cmd, config);
-	if (cmd->builtin == ENV)
-		error_code = builtin_env(config->env);
-	if (cmd->builtin == UNSET)
-		error_code = builtin_unset();
+	if (stat(dir_name, &tmp))
+		return (errno);
+	if (!S_ISDIR(tmp.st_mode))
+		error_code = 1;
 	return (error_code);
 }

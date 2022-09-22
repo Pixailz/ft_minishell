@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 21:45:30 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 22:04:42 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 07:20:24 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ char	*get_cwd(void)
 {
 	char	*cwd;
 
-	cwd = ft_calloc(1, 2048);
-	getcwd(cwd, 2048);
+	cwd = ft_calloc(1, 0x1000);
+	getcwd(cwd, 0x1000);
 	return (cwd);
 }

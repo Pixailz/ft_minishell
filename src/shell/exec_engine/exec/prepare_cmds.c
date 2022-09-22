@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:06:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 05:20:44 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 07:16:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,9 +23,9 @@ void	init_get_cmd_paths(t_main *config)
 		cmd = config->context->cmd[counter];
 		if (cmd->path != FT_NULL)
 			free(cmd->path);
-		if (cmd->builtin == NONE)
+		if (cmd->builtin == NOT_BUILTIN)
 			cmd->path = get_cmd_path(cmd->command[0], config->context->path);
-		else
+		else if (cmd->builtin != NONE)
 			cmd->path = ft_strjoin("built/", cmd->command[0]);
 		counter++;
 	}

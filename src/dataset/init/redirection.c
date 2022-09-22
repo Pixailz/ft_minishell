@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 03:42:30 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 05:27:13 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:24:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,13 +59,13 @@ void	init_redirection(t_main *config)
 	{
 		if (tmp->block_id == PIPE)
 			counter++;
-		else if (tmp->block_id == IN_FORWARD && is_last(context))
+		else if (tmp->block_id == IN_FORWARD)
 			init_redirection_lst(&context->cmd[counter]->in_redir, \
 				tmp->next->block, 0);
 		else if (tmp->block_id == OUT_FORWARD)
 			init_redirection_lst(&context->cmd[counter]->out_redir,
 				tmp->next->block, 0);
-		else if (tmp->block_id == DELIMITER && is_last(context))
+		else if (tmp->block_id == DELIMITER)
 			init_redirection_lst(\
 				&context->cmd[counter]->in_redir, tmp->next->block, 1);
 		else if (tmp->block_id == DBL_OUT_FORWARD)

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 10:53:31 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 06:39:44 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:46:10 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ int	builtin_echo(t_cmd *cmd)
 	int	counter;
 	int	have_n;
 
-	if (have_args(cmd))
+	if (!have_args(cmd))
 	{
 		ft_printf("\n");
 		return (0);

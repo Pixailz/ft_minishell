@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 20:02:03 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 07:16:59 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,19 +28,23 @@ SIGINT
 */
 # include <signal.h>
 /*
-waitpid
+waitpid()
 */
 # include <sys/wait.h>
 /*
-readline
+stat()
+*/
+# include <sys/stat.h>
+/*
+readline()
 */
 # include <readline/readline.h>
 /*
-add_history
+add_history()
 */
 # include <readline/history.h>
 /*
-chdir
+chdir()
 */
 # include <unistd.h>
 /*
@@ -89,7 +93,7 @@ errno
 # define C_PROMPT_ROOT	B_RED
 # define C_PROMPT_BASE	B_ORANGE
 # define C_PROMPT_PATH	B_BLUE
-# define C_PROMPT_CMD	C_LIGHT_GREEN
+# define C_PROMPT_CMD	C_RESET
 
 # define GREEN_PLUS		"\001\033[0m[\033[38;5;82m+\033[0m]\002"
 # define RED_MINUS		"\001\033[0m[\033[38;5;196m-\033[0m]\002"
@@ -129,10 +133,13 @@ typedef struct s_main
 enum e_builtin_type
 {
 	NONE,
+	NOT_BUILTIN,
 	CD,
 	PWD,
-	ECHO,
-	EXPORT
+	ECHOO,
+	EXPORT,
+	ENV,
+	UNSET
 };
 
 typedef struct s_cmd
@@ -162,7 +169,7 @@ typedef struct s_context
 	int		pipe_id;
 	int		default_in;
 	int		default_out;
-	t_bool	fork_last;
+	t_bool	fork_first;
 	int		**pipes;
 	t_cmd	**cmd;
 	char	**path;
@@ -204,7 +211,7 @@ typedef struct s_lst_env{
 /* ##### */
 
 // builtins/cd.c
-int				builtin_cd(t_cmd *cmd);
+int				builtin_cd(t_cmd *cmd, t_main *config);
 int				cd_get_error_code(t_cmd *cmd);
 void			builtin_cd_update_pwd(t_main *config);
 
@@ -213,17 +220,19 @@ int				builtin_echo(t_cmd *cmd);
 int				builtin_echo_have_params(t_cmd *cmd);
 
 // builtins/env.c
-void			print_env(t_lst_env *envlst);
+int				builtin_env(t_lst_env *envlst);
 
 // builtins/export.c
+int				builtin_export(t_cmd *cmd, t_main *config);
+int				print_export(t_lst_env *envlst);
 void			export_var_to_env(t_lst_env **envlst, char *var);
-void			print_export(t_lst_env *envlst);
 
 // builtins/pwd.c
 int				builtin_pwd(t_cmd *cmd);
 
 // builtins/unset.c
 void			unset(char *var, t_lst_env **env);
+void			unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first);
 
 // dataset/free/cmds.c
 void			free_cmd(t_cmd *cmd);
@@ -257,6 +266,10 @@ int				init_context(t_main *config);
 int				init_context_entry(t_main *config);
 size_t			get_number_of_command(t_main *config);
 
+// dataset/init/get_prompt.c
+int				get_prompt_init(t_main *config);
+void			get_prompt_init_cwd(t_main *config);
+
 // dataset/init/redirection.c
 t_redirection	*redir_new(char *content, int is_double);
 void			init_redirection(t_main *config);
@@ -280,9 +293,8 @@ void			debug_print_redir_2(t_redirection *lst, int mode, int counter);
 void			debug_parse(t_main *config);
 
 // debug/print.c
-void			debug_print(int type, void *ptr);
+void			debug_print_entry(int type, void *ptr);
 void			debug_print_post_exec(t_main *config);
-void			debug_print_question_mark(t_main *config);
 
 // debug/print_bool.c
 
@@ -301,7 +313,7 @@ int				debug_signal(int signal_code);
 char			**do_something_with_argv(char **argv);
 
 // shell/exec_engine/exec/exec_builtin.c
-int				exec_builtin(t_cmd *cmd);
+int				exec_builtin(t_cmd *cmd, t_main *config);
 
 // shell/exec_engine/exec/exec_prepare.c
 void			exec_prepare_between(t_context *context);
@@ -311,11 +323,11 @@ void			exec_prepare_last(t_context *context);
 void			exec_prepare_pipe(t_context *context);
 
 // shell/exec_engine/exec/execute.c
-int				exec_command(t_main *config, int is_last);
+int				exec_command(t_main *config);
 int				exec_entry(t_main *config);
 int				execve_ng(t_cmd *cmd);
 int				is_last(t_context *context);
-void			exec_command_child(t_main *config, int islast);
+void			exec_command_child(t_main *config);
 
 // shell/exec_engine/exec/prepare_cmds.c
 size_t			init_cmds_count_args(t_list *tmp);
@@ -360,8 +372,9 @@ void			parse_cmd(t_main *config);
 
 // shell/parsing_cmd/replace_dollar.c
 char			*find_key(t_main *config, char **input, t_lst_env *env);
+char			*find_key_2(int i, char **input, char **key, t_lst_env *env);
 char			*replace_key(t_main *config, char *input, t_lst_env *env);
-char			*replace_question_mark(t_main *config);
+char			*replace_question_mark(t_main *config, char **input);
 void			parse_replace_dollar(t_main *config, t_lst_env *env);
 
 // shell/signal_handler.c
@@ -371,11 +384,12 @@ void			signal_handler(int signal_code);
 
 // utils/builtins.c
 int				get_builtin(t_cmd *cmd);
-t_bool			get_fork_last(int type);
+t_bool			get_fork_first(int type);
 void			get_builtins(t_main *config);
 
 // utils/builtins/args.c
 t_bool			have_args(t_cmd *cmd);
+t_bool			have_multiple_args(t_cmd *cmd);
 
 // utils/builtins/do_something_with_cmd.c
 void			*do_something_with_cmd(t_cmd *cmd);
@@ -435,6 +449,9 @@ t_block			*convert_list(t_list *input);
 char			**get_path(char **env);
 char			*get_cmd_path(char *name, char **path);
 
+// utils/prompt/ft_isdir.c
+int				ft_isdir(char *dir_name);
+
 // utils/prompt/get_base_prompt.c
 char			*assemble_base_prompt(char *user, char **hostname);
 char			*get_base_prompt(t_main *config);
@@ -445,7 +462,6 @@ char			*get_prompt_2(t_main *config, char *tmp_1);
 char			*get_prompt_no_tilde(t_main *config);
 char			*get_prompt_tilde(t_main *config);
 void			get_prompt(t_main *config);
-void			get_prompt_init(t_main *config);
 
 // utils/prompt/get_status_prompt.c
 char			*get_status_prompt(t_main *config);

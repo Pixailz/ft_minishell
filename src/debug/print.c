@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 20:20:23 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 21:07:15 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:09:18 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,12 +21,13 @@ void	debug_print_entry(int type, void *ptr)
 	return ((void)ptr);
 }
 
-void	debug_print_question_mark(t_main *config)
-{
-	ft_printf_fd(LOG_FD, "question mark [%d]\n", config->last_return_value);
-}
-
 void	debug_print_post_exec(t_main *config)
 {
-	ft_printf_fd(LOG_FD, "post_exec [%d]\n", config->last_return_value);
+	if (config->last_return_value == 0)
+		ft_printf_fd(LOG_FD, "  %s post_exec [0]\n", GREEN_PLUS);
+	else if (config->last_return_value == 130)
+		ft_printf_fd(LOG_FD, "  %s post_exec [130]\n", ORANGE_STAR);
+	else
+		ft_printf_fd(LOG_FD, "  %s post_exec [%d]\n", RED_MINUS, \
+			config->last_return_value);
 }

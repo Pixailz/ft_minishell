@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/21 04:14:37 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:59:17 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_export(t_lst_env *envlst)
+int	print_export(t_lst_env *envlst)
 {
 	t_lst_env	*tmp;
 	int			i;
@@ -30,6 +30,7 @@ void	print_export(t_lst_env *envlst)
 			printf("declare -x %s\n", (char *)tmp->key);
 		i++;
 	}
+	return (0);
 }
 
 void	export_var_to_env(t_lst_env **envlst, char *var)
@@ -59,4 +60,19 @@ void	export_var_to_env(t_lst_env **envlst, char *var)
 		tmp = tmp->next;
 	}
 	index_env_lst(envlst);
+}
+
+int	builtin_export(t_cmd *cmd, t_main *config)
+{
+	int	counter;
+
+	if (!have_args(cmd))
+		return (print_export(config->env));
+	counter = 1;
+	while (cmd->command[counter])
+	{
+		export_var_to_env(&config->env, cmd->command[counter]);
+		counter++;
+	}
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 20:06:43 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 06:30:28 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,12 @@ char	*get_prompt_2(t_main *config, char *tmp_1)
 	return (tmp_3);
 }
 
-void	get_prompt_init(t_main *config)
-{
-	free(config->cwd);
-	config->cwd = get_cwd();
-	config->home = get_env("HOME", config->env);
-}
-
 void	get_prompt(t_main *config)
 {
 	char	*prompt_tmp_1;
 	char	*prompt_tmp_2;
 
-	get_prompt_init(config);
-	if (ft_strncmp(config->cwd, config->home, ft_strlen(config->home)))
+	if (get_prompt_init(config))
 		prompt_tmp_1 = get_prompt_no_tilde(config);
 	else
 		prompt_tmp_1 = get_prompt_tilde(config);

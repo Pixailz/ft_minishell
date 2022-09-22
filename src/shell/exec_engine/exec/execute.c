@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 08:02:07 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 06:26:28 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 07:16:15 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	execve_ng(t_cmd *cmd)
 	return (error_code);
 }
 
-int	exec_command(t_main *config, int is_last)
+int	exec_command(t_main *config)
 {
 	t_context	*context;
 	t_cmd		*cmd;
@@ -36,11 +36,11 @@ int	exec_command(t_main *config, int is_last)
 	cmd = context->cmd[config->context->cmd_id];
 	exec_prepare_entry(config);
 	close_all_pipes(config->context);
-	if (cmd->builtin == NONE)
+	if (cmd->builtin == NOT_BUILTIN)
 		error_code = execve_ng(cmd);
-	else
-		error_code = exec_builtin(cmd);
-	if (is_last)
+	else if (cmd->builtin != NONE)
+		error_code = exec_builtin(cmd, config);
+	if (config->context->fork_first)
 	{
 		free_config_entry(config);
 		exit (error_code);
@@ -50,16 +50,16 @@ int	exec_command(t_main *config, int is_last)
 
 int	is_last(t_context *context)
 {
-	return (context->cmd_nb == 1 && context->fork_last);
+	return (context->cmd_nb != 1 && context->fork_first);
 }
 
-void	exec_command_child(t_main *config, int islast)
+void	exec_command_child(t_main *config)
 {
 	t_cmd	*cmd;
 
 	cmd = config->context->cmd[config->context->cmd_id];
-	cmd->return_value = exec_command(config, islast);
-	if (islast)
+	cmd->return_value = exec_command(config);
+	if (!config->context->fork_first)
 	{
 		if (cmd->builtin == CD)
 			if (!cmd->return_value)
@@ -69,28 +69,28 @@ void	exec_command_child(t_main *config, int islast)
 
 int	exec_entry(t_main *config)
 {
-	int		counter;
-	t_bool	islast;
+	int			counter;
+	t_context	*context;
 
+	context = config->context;
 	counter = 0;
 	while (counter < config->context->cmd_nb)
 	{
-		islast = is_last(config->context);
-		if (islast)
-			config->context->cmd[counter]->cmd_pid = fork();
-		if (config->context->cmd[counter]->cmd_pid == 0)
-			exec_command_child(config, islast);
-		if (config->context->cmd_id == 0)
-			config->context->cmd_id++;
+		if (context->cmd_nb != 1 || context->fork_first)
+			context->cmd[counter]->cmd_pid = fork();
+		if (context->cmd[counter]->cmd_pid == 0)
+			exec_command_child(config);
+		if (context->cmd_id == 0)
+			context->cmd_id++;
 		else
 		{
-			config->context->cmd_id++;
-			config->context->pipe_id++;
+			context->cmd_id++;
+			context->pipe_id++;
 		}
 		counter++;
 	}
-	close_all_pipes(config->context);
-	wait_for_all(config->context);
-	print_error(config->context);
-	return (config->context->cmd[config->context->cmd_nb - 1]->return_value);
+	close_all_pipes(context);
+	wait_for_all(context);
+	print_error(context);
+	return (context->cmd[context->cmd_nb - 1]->return_value);
 }

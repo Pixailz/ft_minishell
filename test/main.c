@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   args.c                                             :+:      :+:    :+:   */
+/*   main.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/20 20:03:48 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 06:43:57 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/21 21:05:26 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 04:08:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-t_bool	have_args(t_cmd *cmd)
+int	main(int argc, char **argv)
 {
 	int	error_code;
 
-	error_code = 0;
-	if (cmd->command[0] != FT_NULL)
-		if (cmd->command[1] != FT_NULL)
-			error_code = 1;
-	return (error_code);
-}
-
-t_bool	have_multiple_args(t_cmd *cmd)
-{
-	return (cmd->command[2] != FT_NULL);
+	if (argc != 2)
+		return (ft_error("only one arg", 1));
+	error_code = ft_isdir(argv[1]);
+	if (!error_code)
+		ft_printf("%s is a dir\n");
+	else if (error_code == 2)
+		ft_printf("%s do not exists\n");
+	else if (error_code == 1)
+		ft_printf("%s is not a dir\n");
+	return (0);
 }

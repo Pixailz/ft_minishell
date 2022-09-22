@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/21 21:38:23 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/21 23:45:48 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -58,6 +58,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/dataset/free/utils/list.c \
 				   src/dataset/init/config.c \
 				   src/dataset/init/context.c \
+				   src/dataset/init/get_prompt.c \
 				   src/dataset/init/redirection.c \
 				   src/dataset/init/signal.c \
 				   src/debug/builtin.c \
@@ -97,6 +98,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/utils/ft_splitb.c \
 				   src/utils/parsing/convert_list.c \
 				   src/utils/path.c \
+				   src/utils/prompt/ft_isdir.c \
 				   src/utils/prompt/get_base_prompt.c \
 				   src/utils/prompt/get_prompt.c \
 				   src/utils/prompt/get_status_prompt.c
@@ -196,7 +198,7 @@ $(TARGET):				$(LIBFT) $(OBJ_C)
 $(LIBFT):
 	@$(MAKE) lib/ft_libft all
 
-all:			setup
+all:			setup $(TARGET)
 	@printf "$$usage"
 
 $(OBJ_SUBDIR):

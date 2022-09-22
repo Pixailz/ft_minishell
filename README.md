@@ -7,19 +7,15 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `cat -e "fi"le "`
 	- `echo pass <> file | echo pass`
 		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
-	- `< file << END cat -e > file1 >> file2`<br>
-	  `TEST`<br>
-	  `END`
-		- in this order only
 	- not working multiple double in
 1. exit with errno
 	- implement `$?`
 1. built-ins
-	- [ ] echo et l’option -n
-	- [ ] cd uniquement avec un chemin relatif ou absolu
-	- [ ] pwd sans aucune option
+	- [x] echo et l’option -n
+	- [x] cd uniquement avec un chemin relatif ou absolu
+	- [x] pwd sans aucune option
 	- [x] export sans aucune option
-	- [x] unset sans aucune option
+	- [ ] WORINPROGRESS unset sans aucune option
 	- [x] env sans aucune option ni argument
 	- [ ] exit sans aucune option
 1. debug print
@@ -53,12 +49,22 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `echo pass1 > file pass2`
 	- `echo pass >>file1 | echo pass >> file2`
 
-## valgrind
+## DEBUG
 > without vsupp work fine
 `valgrind --leak-check=full <exec_path>`
 
 > with vsupp suppress ALL leak linked to readline ...
 `make re DEBUG=1 && valgrind  --leak-check=full --show-leak-kinds=all --suppressions=vsupp --trace-children=yes --track-fds=yes ./minishell 420>exec.log ; cat exec.log`
+
+> MEGALINE
+```
+./scripts/ft_helper/ft_helper && make re DEBUG=1 && \
+valgrind  --leak-check=full \
+          --show-leak-kinds=all \
+          --suppressions=$(pwd)/vsupp \
+          --trace-children=yes \
+          --track-fds=yes ./minishell 420>exec.log ; cat exec.log
+```
 
 ## exec with log
 `./minishell 420>exec.log; cat exec.log`
