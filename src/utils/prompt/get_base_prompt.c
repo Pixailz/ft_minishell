@@ -66,7 +66,7 @@ char	*get_base_prompt(t_main *config)
 	char	*hostname;
 	char	*prompt;
 
-	config->user = getenv("USER");
+	config->user = getenv("LOGNAME");
 	hostname = get_hostname();
 	prompt = assemble_base_prompt(config->user, &hostname);
 	return (prompt);
