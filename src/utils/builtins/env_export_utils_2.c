@@ -19,7 +19,7 @@ int	ft_strcmp_env(char *s1, char *s2)
 		s2++;
 		s1++;
 	}
-	if ((*s1 == '=' && !(s2)) || (*s2 == '=' && !(*s1)))
+	if ((*s1 == '=' && !(*s2)) || (*s2 == '=' && !(*s1)))
 		return (0);
 	else
 		return ((unsigned char)*s1 - (unsigned char)*s2);

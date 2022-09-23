@@ -36,21 +36,20 @@ int	print_export(t_lst_env *envlst)
 void	export_var_to_env(t_lst_env **envlst, char *var)
 {
 	t_lst_env	*tmp;
-	int			i;
 
-	i = 1;
 	tmp = *envlst;
 	while (tmp != FT_NULL)
 	{
 		tmp = *envlst;
-		while (tmp && tmp->index != i)
-			tmp = tmp->next;
-		if (tmp && ft_strcmp_env(var, tmp->key) == 0)
+		while (tmp)
 		{
-			unlink_key_value(var, (char **)&tmp->key, (char **)&tmp->value);
-			return ;
+			if (tmp && ft_strcmp_env(var, tmp->key) == 0)
+			{
+				unlink_key_value(var, (char **)&tmp->key, (char **)&tmp->value);
+				return ;
+			}
+			tmp = tmp->next;
 		}
-		i++;
 	}
 	ft_lstadd_back_env(envlst, ft_lstnew_env(var));
 	tmp = *envlst;

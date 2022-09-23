@@ -18,7 +18,7 @@ int	is_good_var_env_first(char c)
 		return (True);
 	if (ft_isdigit(c))
 		return (False);
-	if (c >= 'A' && c <= 'Z')
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (True);
 	return (False);
 }
@@ -29,7 +29,7 @@ int	is_good_var_env_char(char c)
 		return (True);
 	if (ft_isdigit(c))
 		return (True);
-	if (c >= 'A' && c <= 'Z')
+	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
 		return (True);
 	return (False);
 }
@@ -52,9 +52,7 @@ int	is_good_var_env(char *str)
 	{
 		if (str[counter] == '=')
 			break ;
-		if (is_good_var_env_char(str[counter]))
-			counter++;
-		else
+		if (!is_good_var_env_char(str[counter]))
 			return (0);
 		counter++;
 	}

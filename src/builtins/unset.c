@@ -16,7 +16,8 @@ void	unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first)
 {
 	tmp->next = (*env)->next;
 	free((*env)->key);
-	free((*env)->value);
+	if ((*env)->value)
+		free((*env)->value);
 	free((*env));
 	*env = first;
 }
@@ -41,7 +42,8 @@ void	unset(char *var, t_lst_env **env)
 	{
 		*env = (*env)->next;
 		free(first->key);
-		free(first->value);
+		if (first->value)
+			free(first->value);
 		free(first);
 	}
 	else

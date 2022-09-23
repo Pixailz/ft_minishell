@@ -18,8 +18,6 @@ int	builtin_env(t_lst_env *envlst)
 	{
 		if (envlst && envlst->value)
 			printf("%s%s\n", (char *)envlst->key, (char *)envlst->value);
-		else
-			printf("%s\n", (char *)envlst->key);
 		envlst = envlst->next;
 	}
 	return (0);
