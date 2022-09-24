@@ -28,6 +28,6 @@ int	exec_builtin(t_cmd *cmd, t_main *config)
 	if (cmd->builtin == ENV)
 		error_code = builtin_env(config->env);
 	if (cmd->builtin == UNSET)
-		error_code = builtin_unset(cmd);
+		error_code = builtin_unset(cmd, config);
 	return (error_code);
 }

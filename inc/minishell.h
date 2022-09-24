@@ -238,7 +238,7 @@ void			export_var_to_env(t_lst_env **envlst, char *var);
 int				builtin_pwd(t_cmd *cmd);
 
 // builtins/unset.c
-int				builtin_unset(t_cmd *cmd);
+int				builtin_unset(t_cmd *cmd, t_main *config);
 void			unset(char *var, t_lst_env **env);
 void			unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first);
 

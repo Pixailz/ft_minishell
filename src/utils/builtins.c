@@ -36,7 +36,7 @@ t_bool	get_fork_first(int type)
 	int	error_code;
 
 	error_code = True;
-	if (type == CD || type == EXPORT)
+	if (type == CD || type == UNSET || type == EXPORT)
 		error_code = False;
 	return (error_code);
 }

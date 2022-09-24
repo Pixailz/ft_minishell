@@ -20,6 +20,12 @@ void	unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first)
 		free((*env)->value);
 	free((*env));
 	*env = first;
+	while (*env)
+	{
+		(*env)->index = 0;
+		(*env) = (*env)->next;
+	}
+	*env = first;
 }
 
 void	unset(char *var, t_lst_env **env)
@@ -51,7 +57,17 @@ void	unset(char *var, t_lst_env **env)
 	index_env_lst(*env);
 }
 
-int	builtin_unset(t_cmd *cmd)
+int	builtin_unset(t_cmd *cmd, t_main *config)
 {
+	int	counter;
 
+	if (!have_args(cmd))
+		return (0);
+	counter = 1;
+	while (cmd->command[counter])
+	{
+		unset(cmd->command[counter], &config->env);
+		counter++;
+	}
+	return (0);
 }
