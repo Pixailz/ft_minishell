@@ -48,7 +48,7 @@ void	unset(char *var, t_lst_env **env)
 	}
 	else
 		unset2(tmp, env, first);
-	index_env_lst(env);
+	index_env_lst(*env);
 }
 
 int	builtin_unset(t_cmd *cmd)

@@ -58,7 +58,7 @@ void	export_var_to_env(t_lst_env **envlst, char *var)
 		tmp->index = 0;
 		tmp = tmp->next;
 	}
-	index_env_lst(envlst);
+	index_env_lst(*envlst);
 }
 
 int	builtin_export(t_cmd *cmd, t_main *config)

@@ -33,6 +33,8 @@ t_lst_env	*ft_lstnew_env(void *env)
 	if (!ptr)
 		return (FT_NULL);
 	ptr->index = 0;
+	ptr->key=NULL;
+	ptr->value=NULL;
 	unlink_key_value(env, (char **)&ptr->key, (char **)&ptr->value);
 	ptr->next = FT_NULL;
 	return (ptr);

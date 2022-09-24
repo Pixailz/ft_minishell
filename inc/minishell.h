@@ -404,7 +404,7 @@ void			*do_something_with_cmd(t_cmd *cmd);
 
 // utils/builtins/env_export_utils_1.c
 t_lst_env		*env_to_lst(char **env);
-void			index_env_lst(t_lst_env **envlst);
+void			index_env_lst(t_lst_env *env);
 void			index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i);
 void			unlink_key_value(char *var_env, char **key, char **value);
 

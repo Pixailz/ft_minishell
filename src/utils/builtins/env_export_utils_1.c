@@ -28,7 +28,7 @@ t_lst_env	*env_to_lst(char **env)
 	envlst = FT_NULL;
 	while (env[++i] != FT_NULL)
 		ft_lstadd_back_env(&envlst, ft_lstnew_env(env[i]));
-	index_env_lst(&envlst);
+	index_env_lst(envlst);
 	return (envlst);
 }
 
@@ -37,6 +37,10 @@ void	unlink_key_value(char *var_env, char **key, char **value)
 	int	i;
 
 	i = 0;
+	if (*key)
+		free(*key);
+	if (*value)
+		free(*value);
 	while (var_env[i] && var_env[i] != '=')
 		i++;
 	if (!var_env[i])
@@ -55,45 +59,32 @@ void	unlink_key_value(char *var_env, char **key, char **value)
 	}
 }
 
-void	index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i)
-{
-	*tmp2 = lst->next;
-	while ((*tmp2)->next)
-	{
-		*tmp2 = (*tmp2)->next;
-		if ((*tmp2)->index == 0 && ft_strcmp_env((*tmp)->key, (*tmp2)->key) > 0)
-			*tmp = *tmp2;
-	}
-	(*tmp)->index = *i;
-	(*i)++;
-	*tmp = lst;
-}
-
-void	index_env_lst(t_lst_env **envlst)
+void	index_env_lst(t_lst_env *env)
 {
 	t_lst_env	*tmp;
-	t_lst_env	*tmp2;
+	t_lst_env	*first;
 	int			i;
-	int			len;
 
 	i = 1;
-	len = 0;
-	tmp = *envlst;
-	while (tmp)
+	first = env;
+	while (env)
 	{
-		len++;
-		tmp = tmp->next;
-	}
-	tmp = *envlst;
-	while (i <= len)
-	{
-		while (tmp->index != 0)
+		env = first;
+		while (env && env->index != 0)
+			env = env->next;
+		tmp = env;
+		while (tmp)
 		{
 			tmp = tmp->next;
-			if (tmp == FT_NULL)
-				return ;
+			while (tmp && (tmp->index != 0 || ft_strcmp_env(tmp->key, env->key) > 0))
+				tmp = tmp->next;
+			if (tmp)
+				env = tmp;
+			else
+			{
+				env->index = i;
+				i++;
+			}
 		}
-		index_env_lst2(*envlst, &tmp, &tmp2, &i);
 	}
-	return ;
 }
