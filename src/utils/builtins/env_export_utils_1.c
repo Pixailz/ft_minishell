@@ -65,7 +65,7 @@ void	index_env_lst(t_lst_env *env)
 	t_lst_env	*first;
 	int			i;
 
-	i = 1;
+	i = 0;
 	first = env;
 	while (env)
 	{
@@ -80,11 +80,8 @@ void	index_env_lst(t_lst_env *env)
 				tmp = tmp->next;
 			if (tmp)
 				env = tmp;
-			else
-			{
+			else if (++i)
 				env->index = i;
-				i++;
-			}
 		}
 	}
 }
