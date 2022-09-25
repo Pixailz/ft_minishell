@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 00:46:10 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 02:21:50 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:45:29 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	index_env_lst(t_lst_env *env)
 		while (tmp)
 		{
 			tmp = tmp->next;
-			while (tmp && (tmp->index != 0 || ft_strcmp_env(tmp->key, env->key) > 0))
+			while (tmp && (tmp->index != 0 \
+					|| ft_strcmp_env(tmp->key, env->key) > 0))
 				tmp = tmp->next;
 			if (tmp)
 				env = tmp;

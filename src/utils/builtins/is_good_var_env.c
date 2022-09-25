@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 15:39:45 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 00:13:01 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:41:59 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,27 +44,18 @@ int	is_good_var_env(char *str)
 	if (counter == 0 && is_good_var_env_first(str[counter]))
 		counter++;
 	else
-	{
-		ft_printf_fd(LOG_FD, "bad first character\n");
 		return (0);
-	}
 	while (counter < len)
 	{
-		if (str[counter] == '=')
+		if (str[counter] == '=' || str[counter] == '+')
 			break ;
 		if (!is_good_var_env_char(str[counter]))
 			return (0);
 		counter++;
 	}
-	if (str[counter] == '=')
-	{
-		ft_printf_fd(LOG_FD, "str[counter] == '='\n");
+	if (str[counter] == '=' || (str[counter] == '+' && str[counter + 1] == '='))
 		return (1);
-	}
 	else if (len == counter)
-	{
-		ft_printf_fd(LOG_FD, "len == counter\n");
 		return (1);
-	}
 	return (0);
 }
