@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:56:52 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:25:59 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -123,6 +123,7 @@ typedef enum e_bool
 typedef struct s_main
 {
 	int					last_return_value;
+	int					interrupt;
 	char				*prompt_base;
 	char				*user;
 	char				*home;
@@ -378,6 +379,7 @@ void			exec_engine(t_main *config);
 int				is_command_empty(t_main *config);
 int				main_loop(t_main *config);
 void			exit_ctrl_d(t_main *config);
+void			handle_interrupt(t_main *config);
 
 // shell/parsing_cmd/get_block.c
 t_block			*ft_lstadd_back_block(t_block **lst, t_block *new);
@@ -507,7 +509,7 @@ void			get_prompt(t_main *config);
 char			*get_status_prompt(t_main *config);
 char			*get_status_prompt_array(t_main *config);
 char			*get_status_prompt_assemble(int status_code, char **array);
-int				get_status_prompt_color(int status_code);
+int				get_status_prompt_color(t_main *config);
 
 /* ########################################################################## */
 

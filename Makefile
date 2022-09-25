@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/24 21:14:58 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/25 19:29:23 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ TARGET			:= minishell
 RM				:= rm -rf
 CC				:= gcc
 MAKE			:= make -C
-VERSION			:= 1.0.0
+VERSION			:= 3.0.4
 $(eval export MAIN=1)
 
 ifneq ($(PADDING),60)

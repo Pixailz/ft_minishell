@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:35:55 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 01:02:45 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 19:28:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void	builtin_exit_post_exec(t_cmd *cmd, t_main *config)
 
 int	exit_get_exit_code(char *exit_code)
 {
-	int	code;
+	long long	code;
 
 	code = ft_patoll(exit_code, 0);
 	while (code < 0)

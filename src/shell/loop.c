@@ -6,11 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 00:31:11 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:32:04 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+int	g_interrupt = 0;
 
 int	is_command_empty(t_main *config)
 {
@@ -32,11 +34,23 @@ void	exit_ctrl_d(t_main *config)
 	}
 }
 
+void	handle_interrupt(t_main *config)
+{
+	config->interrupt = 0;
+	if (g_interrupt == 1)
+	{
+		config->interrupt = 1;
+		config->last_return_value = 130;
+		g_interrupt = 0;
+	}
+}
+
 int	main_loop(t_main *config)
 {
 	while (VRAI)
 	{
 		config->line_buffer = readline(config->prompt);
+		handle_interrupt(config);
 		ft_printf("%s", C_RESET);
 		if (config->line_buffer != FT_NULL && config->line_buffer[0] != ' ')
 			add_history(config->line_buffer);

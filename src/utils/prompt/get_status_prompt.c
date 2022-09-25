@@ -6,33 +6,20 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 05:02:10 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 21:29:29 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-// char	*get_status_prompt(t_main *config)
-// {
-// 	char	*status;
-
-// 	if (config->last_return_value == 0)
-// 		status = ft_strdup(GREEN_PLUS);
-// 	else if (config->last_return_value == 130)
-// 		status = ft_strdup(ORANGE_STAR);
-// 	else
-// 		status = ft_strdup(RED_MINUS);
-// 	return (status);
-// }
-
-int	get_status_prompt_color(int status_code)
+int	get_status_prompt_color(t_main *config)
 {
 	int	error_color;
 
 	error_color = 0;
-	if (!status_code)
+	if (!config->last_return_value)
 		error_color = 1;
-	else if (status_code == 130)
+	else if (config->interrupt)
 		error_color = 2;
 	return (error_color);
 }
@@ -94,7 +81,7 @@ char	*get_status_prompt(t_main *config)
 
 	array = get_status_prompt_array(config);
 	status = get_status_prompt_assemble(\
-		get_status_prompt_color(config->last_return_value), \
+		get_status_prompt_color(config), \
 		&array);
 	return (status);
 }
