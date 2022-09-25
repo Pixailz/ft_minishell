@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 21:24:30 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 01:08:02 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,26 @@
 
 extern int	g_interrupt;
 
+// void	ioctl_handler(void)
+// {
+// 	struct termios	tmp;
+// 	struct winsize	win;
+
+// 	ioctl(0, TIOCGWINSZ, &win);
+// 	ioctl(0, TIOCSWINSZ, &win);
+// 	ioctl(0, TCGETS, &tmp);
+// 	ioctl(0, TCSETSW, &tmp);
+// 	ioctl(0, TCXONC, TCOON);
+// 	ioctl(255, TIOCSPGRP, &tmp);
+// }
+
 void	handle_sig_int(void)
 {
 	ft_printf("\n");
 	rl_on_new_line();
 	rl_replace_line("", 0);
 	rl_redisplay();
+	// ioctl_handler();
 	g_interrupt = 1;
 }
 

@@ -50,12 +50,15 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 ## DEBUG
 > without vsupp work fine
+
 `valgrind --leak-check=full <exec_path>`
 
 > with vsupp suppress ALL leak linked to readline ...
+
 `make re DEBUG=1 && valgrind  --leak-check=full --show-leak-kinds=all --suppressions=vsupp --trace-children=yes --track-fds=yes ./minishell 420>exec.log ; cat exec.log`
 
 > MEGALINE
+
 ```
 ./scripts/ft_helper/ft_helper && make re DEBUG=1 && \
 valgrind  --leak-check=full \
@@ -65,20 +68,15 @@ valgrind  --leak-check=full \
           --track-fds=yes ./minishell 420>exec.log ; cat exec.log
 ```
 
+> strace with ioctl
+
+`strace -e trace=ioctl bash`
+
 ## exec with log
 `./minishell 420>exec.log; cat exec.log`
 
 ## termios
 https://stackoverflow.com/a/27559151
-
-## PIPE
-[PIPE](https://youtu.be/ceNaZzEoUhk?t=1576)
-
-## AST
-1. https://github.com/pmouhali/minishell_ast
-	- https://ruslanspivak.com/lsbasi-part7/
-	- https://unix.stackexchange.com/questions/88850/precedence-of-the-shell-logical-operators
-1. https://github.com/AudeizReading/minishell/wiki/01-PARSING
 
 ### USAGE
 

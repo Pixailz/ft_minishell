@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 21:25:59 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:13:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,38 +19,46 @@
 
 # include "libft.h"
 
-/*
-O_RDONLY
-*/
 # include <fcntl.h>
-/*
-SIGINT
-*/
+/* O_RDONLY
+ */
+
 # include <signal.h>
-/*
-waitpid()
-*/
+/* SIGINT
+ */
+
 # include <sys/wait.h>
-/*
-stat()
-*/
+/* waitpid()
+ */
+
 # include <sys/stat.h>
-/*
-readline()
-*/
+/* stat()
+ */
+
 # include <readline/readline.h>
-/*
-add_history()
-*/
+/* readline()
+ */
+
 # include <readline/history.h>
-/*
-chdir()
-*/
+/* add_history()
+ */
+
 # include <unistd.h>
-/*
-errno
-*/
+/* chdir()
+ */
+
 # include <errno.h>
+/* errno
+ */
+
+# include <sys/ioctl.h>
+/* ioctl()
+ * TCXONC
+ */
+
+# include <termios.h>
+/* TCOON
+ */
 
 /* ########################################################################## */
 
