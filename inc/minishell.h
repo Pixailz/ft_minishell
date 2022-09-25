@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 04:46:09 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 07:56:52 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -357,14 +357,17 @@ void			init_get_cmd_paths(t_main *config);
 void			prepare_cmds_1(t_main *config);
 void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str);
 
-// shell/exec_engine/exec/prepare_redirection.c
-void			prepare_in_double_file(t_redirection *double_in);
+// shell/exec_engine/exec/prepare_redir.c
 void			prepare_in_file(t_redirection *in_file, t_main *config);
 void			prepare_out_double_file(t_redirection *double_out, t_main *config);
 void			prepare_out_file(t_redirection *out, t_main *config);
 void			prepare_redirection(t_main *config);
 
-// shell/exec_engine/exec/prepare_redirection_ng.c
+// shell/exec_engine/exec/prepare_redir_heredoc.c
+void			prepare_in_double_file(t_redirection *double_in);
+void			prepare_in_double_file_join(t_list *buf_lst);
+
+// shell/exec_engine/exec/prepare_redir_ng.c
 void			prepare_in_file_ng(t_main *config);
 void			prepare_out_file_ng(t_main *config);
 

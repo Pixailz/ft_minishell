@@ -76,8 +76,9 @@ SRC_C			:= src/builtins/cd.c \
 				   src/shell/exec_engine/exec/exec_prepare.c \
 				   src/shell/exec_engine/exec/execute.c \
 				   src/shell/exec_engine/exec/prepare_cmds.c \
-				   src/shell/exec_engine/exec/prepare_redirection.c \
-				   src/shell/exec_engine/exec/prepare_redirection_ng.c \
+				   src/shell/exec_engine/exec/prepare_redir.c \
+				   src/shell/exec_engine/exec/prepare_redir_heredoc.c \
+				   src/shell/exec_engine/exec/prepare_redir_ng.c \
 				   src/shell/exec_engine/exec_engine.c \
 				   src/shell/loop.c \
 				   src/shell/parsing_cmd/get_block.c \

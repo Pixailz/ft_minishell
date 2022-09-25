@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 03:26:51 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/24 23:41:51 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 07:01:18 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@
  * 	Needed lib
  * 		sys/stat.h
  * @return (int)	1 if, dir_path, is a directory and have permission,
- * 					2 if not a file, otherwise return 0
+ * 					2 if not a directory, otherwise return 0
  */
 int	ft_isdir(char *dir_name, int mode)
 {

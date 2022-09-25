@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/24 19:27:36 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 05:02:10 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,7 +52,7 @@ char	*get_status_prompt_array(t_main *config)
 	}
 	else if (config->last_return_value >= 10 && config->last_return_value <= 99)
 	{
-		tmp_2[1] = ' ';
+		tmp_2[0] = ' ';
 		tmp_2[1] = tmp_1[0];
 		tmp_2[2] = tmp_1[1];
 	}
