@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/22 06:19:35 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 07:10:19 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/24 23:34:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	get_prompt_init(t_main *config)
 
 	error_code = 0;
 	get_prompt_init_cwd(config);
-	if (ft_isdir(config->home) != 0)
+	if (ft_isdir(config->home, 0) != 0)
 		error_code = 1;
 	else if (ft_strncmp(config->cwd, config->home, ft_strlen(config->home)))
 		error_code = 1;

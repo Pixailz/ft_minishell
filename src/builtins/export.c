@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/22 15:51:49 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:21:50 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,17 +61,30 @@ void	export_var_to_env(t_lst_env **envlst, char *var)
 	index_env_lst(*envlst);
 }
 
+int	print_export_failed(char *var)
+{
+	ft_printf_fd(STDERR_FILENO, \
+		"minishell: export: `%s': not a valid identifier\n", var);
+	return (1);
+}
+
 int	builtin_export(t_cmd *cmd, t_main *config)
 {
 	int	counter;
+	int	is_good;
 
 	if (!have_args(cmd))
 		return (print_export(config->env));
 	counter = 1;
-	while (cmd->command[counter] && is_good_var_env(cmd->command[counter]))
+	while (cmd->command[counter])
 	{
+		is_good = is_good_var_env(cmd->command[counter]);
+		if (!is_good)
+			break ;
 		export_var_to_env(&config->env, cmd->command[counter]);
 		counter++;
 	}
+	if (!is_good)
+		return (print_export_failed(cmd->command[counter]));
 	return (0);
 }

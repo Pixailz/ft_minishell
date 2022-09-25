@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:56:14 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 06:02:17 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/24 23:42:18 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,20 +25,20 @@ int	cd_get_error_code(t_cmd *cmd)
 {
 	int	isdir;
 
-	isdir = ft_isdir(cmd->command[1]);
-	if (isdir == 1)
+	isdir = ft_isdir(cmd->command[1], 0);
+	if (isdir == 2)
 	{
 		ft_printf_fd(STDERR_FILENO, \
 			"minishell: cd: %s: Not a directory\n", cmd->command[1]);
 		return (1);
 	}
-	else if (isdir == 2)
+	else if (isdir == 0)
 	{
 		ft_printf_fd(STDERR_FILENO, \
 			"minishell: cd: %s: No such file or directory\n", cmd->command[1]);
 		return (1);
 	}
-	else if (access(cmd->command[1], X_OK) != 0)
+	else if (!ft_isdir(cmd->command[1], S_IXUSR))
 	{
 		ft_printf_fd(STDERR_FILENO, \
 			"minishell: cd: %s: Permission denied\n", cmd->command[1]);

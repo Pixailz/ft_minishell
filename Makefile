@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/22 17:00:19 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/24 21:14:58 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -47,6 +47,7 @@ LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
 SRC_C			:= src/builtins/cd.c \
 				   src/builtins/echo.c \
 				   src/builtins/env.c \
+				   src/builtins/exit.c \
 				   src/builtins/export.c \
 				   src/builtins/pwd.c \
 				   src/builtins/unset.c \
@@ -71,6 +72,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/debug/signal.c \
 				   src/minishell.c \
 				   src/shell/exec_engine/exec/exec_builtin.c \
+				   src/shell/exec_engine/exec/exec_minishell.c \
 				   src/shell/exec_engine/exec/exec_prepare.c \
 				   src/shell/exec_engine/exec/execute.c \
 				   src/shell/exec_engine/exec/prepare_cmds.c \
@@ -96,10 +98,13 @@ SRC_C			:= src/builtins/cd.c \
 				   src/utils/exec/utils.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
+				   src/utils/ft_isdir.c \
+				   src/utils/ft_isfile.c \
+				   src/utils/ft_patoi.c \
+				   src/utils/ft_patoll.c \
 				   src/utils/ft_splitb.c \
 				   src/utils/parsing/convert_list.c \
 				   src/utils/path.c \
-				   src/utils/prompt/ft_isdir.c \
 				   src/utils/prompt/get_base_prompt.c \
 				   src/utils/prompt/get_prompt.c \
 				   src/utils/prompt/get_status_prompt.c
@@ -232,7 +237,6 @@ re_lib:
 	@$(MAKE) lib/ft_libft re all
 
 test:					setup $(OBJ_C) $(LIBFT)
-
 	@$(CC) $(TEST) -o ./test/$@ $(filter-out obj/minishell.o,$(OBJ_C)) $(LIBS) $(CFLAGS)
 
 re:						fclean all

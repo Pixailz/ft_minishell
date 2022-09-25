@@ -13,16 +13,11 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- [x] echo et l’option -n
 	- [x] cd uniquement avec un chemin relatif ou absolu
 	        - CDPATH
-        - [x] pwd sans aucune option
+	- [x] pwd sans aucune option
 	- [x] export sans aucune option
-	- [ ] WORINPROGRESS unset sans aucune option
+	- [x] unset sans aucune option
 	- [x] env sans aucune option ni argument
-	- [ ] exit sans aucune option
-                - without option exit with last_return_value
-                - with options exit with 2 if not a numbers
-                - exit with args (0-255)
-                - print 'exit' anyway
-                - SHLVL
+	- [x] exit sans aucune option
 1. debug print
 1. working like the original bash
 	- `ca't' -e file`

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 16:52:57 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/24 22:52:12 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -146,7 +146,9 @@ enum e_builtin_type
 	ECHOO,
 	EXPORT,
 	ENV,
-	UNSET
+	UNSET,
+	EXIT,
+	MINISHELL
 };
 
 typedef struct s_cmd
@@ -229,9 +231,17 @@ int				builtin_echo_have_params(t_cmd *cmd);
 // builtins/env.c
 int				builtin_env(t_lst_env *envlst);
 
+// builtins/exit.c
+int				builtin_exit(t_cmd *cmd, t_main *config);
+int				exit_check_exit_code(char *exit_code);
+int				exit_check_shlvl(t_main *config);
+int				exit_get_exit_code(char *exit_code);
+void			builtin_exit_post_exec(t_cmd *cmd, t_main *config);
+
 // builtins/export.c
 int				builtin_export(t_cmd *cmd, t_main *config);
 int				print_export(t_lst_env *envlst);
+int				print_export_failed(char *var);
 void			export_var_to_env(t_lst_env **envlst, char *var);
 
 // builtins/pwd.c
@@ -289,7 +299,7 @@ int				init_signal(void);
 
 // debug/builtin.c
 void			debug_builtin(t_cmd *cmd);
-void			debug_params(t_cmd *cmd);
+void			debug_builtin_echo(t_cmd *cmd);
 void			debug_print_builtin(int builtin);
 
 // debug/init_redirection.c
@@ -322,6 +332,9 @@ char			**do_something_with_argv(char **argv);
 
 // shell/exec_engine/exec/exec_builtin.c
 int				exec_builtin(t_cmd *cmd, t_main *config);
+
+// shell/exec_engine/exec/exec_minishell.c
+int				exec_minishell(t_main *config);
 
 // shell/exec_engine/exec/exec_prepare.c
 void			exec_prepare_between(t_context *context);
@@ -361,6 +374,7 @@ void			exec_engine(t_main *config);
 // shell/loop.c
 int				is_command_empty(t_main *config);
 int				main_loop(t_main *config);
+void			exit_ctrl_d(t_main *config);
 
 // shell/parsing_cmd/get_block.c
 t_block			*ft_lstadd_back_block(t_block **lst, t_block *new);
@@ -405,7 +419,6 @@ void			*do_something_with_cmd(t_cmd *cmd);
 // utils/builtins/env_export_utils_1.c
 t_lst_env		*env_to_lst(char **env);
 void			index_env_lst(t_lst_env *env);
-void			index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i);
 void			unlink_key_value(char *var_env, char **key, char **value);
 
 // utils/builtins/env_export_utils_2.c
@@ -449,6 +462,20 @@ void			manage_symbols(char **s, char c, t_list **input);
 // utils/ft_better_strjoin.c
 char			*ft_better_strjoin(char *s1, char *s2);
 
+// utils/ft_isdir.c
+int				ft_isdir(char *dir_name, int mode);
+
+// utils/ft_isfile.c
+int				ft_isfile(char *file_path, int mode);
+
+// utils/ft_patoi.c
+int				ft_is_good_int(t_int64 n, int neg);
+int				ft_patoi(char *nstr, int *has_overflow);
+
+// utils/ft_patoll.c
+int				ft_is_good_long_long(t_int64 n, int neg);
+t_int64			ft_patoll(char *nstr, int *has_overflow);
+
 // utils/ft_splitb.c
 char			**ft_splitb(char *s, char delim, char *encl);
 char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
@@ -461,9 +488,6 @@ t_block			*convert_list(t_list *input);
 // utils/path.c
 char			**get_path(char **env);
 char			*get_cmd_path(char *name, char **path);
-
-// utils/prompt/ft_isdir.c
-int				ft_isdir(char *dir_name);
 
 // utils/prompt/get_base_prompt.c
 char			*assemble_base_prompt(char *user, char **hostname);

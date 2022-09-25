@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 08:02:07 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 07:16:15 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:10:24 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,6 +64,8 @@ void	exec_command_child(t_main *config)
 		if (cmd->builtin == CD)
 			if (!cmd->return_value)
 				builtin_cd_update_pwd(config);
+		if (cmd->builtin == EXIT)
+			builtin_exit_post_exec(cmd, config);
 	}
 }
 

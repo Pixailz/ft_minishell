@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:51:17 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 15:55:33 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 00:16:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,5 +29,9 @@ int	exec_builtin(t_cmd *cmd, t_main *config)
 		error_code = builtin_env(config->env);
 	if (cmd->builtin == UNSET)
 		error_code = builtin_unset(cmd, config);
+	if (cmd->builtin == EXIT)
+		error_code = builtin_exit(cmd, config);
+	if (cmd->builtin == MINISHELL)
+		error_code = exec_minishell(config);
 	return (error_code);
 }

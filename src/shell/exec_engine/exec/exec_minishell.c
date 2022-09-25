@@ -1,29 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   exec_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/21 21:05:26 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 04:08:35 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/24 22:50:17 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/25 00:15:44 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	main(int argc, char **argv)
+int	exec_minishell(t_main *config)
 {
-	int	error_code;
+	char	*tmp_1;
+	char	*tmp_2;
+	int		tmp_int;
 
-	if (argc != 2)
-		return (ft_error("only one arg", 1));
-	error_code = ft_isdir(argv[1]);
-	if (!error_code)
-		ft_printf("%s is a dir\n");
-	else if (error_code == 2)
-		ft_printf("%s do not exists\n");
-	else if (error_code == 1)
-		ft_printf("%s is not a dir\n");
+	tmp_1 = get_env("SHLVL", config->env);
+	tmp_int = ft_atoi(tmp_1) + 1;
+	tmp_2 = ft_itoa(tmp_int);
+	tmp_1 = ft_strjoin("SHLVL=", tmp_2);
+	free(tmp_2);
+	export_var_to_env(&config->env, tmp_1);
+	free(tmp_1);
 	return (0);
 }

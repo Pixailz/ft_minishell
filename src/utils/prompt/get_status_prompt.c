@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 16:50:57 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:27:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -71,7 +71,6 @@ char	*get_status_prompt_assemble(int status_code, char **array)
 	char	*tmp_1;
 	char	*tmp_2;
 
-	ft_printf_fd(LOG_FD, "status: [%d]\n", status_code);
 	if (status_code == 1)
 		tmp_1 = ft_strjoin("[", C_PROMPT_STATUS_1);
 	else if (status_code == 2)
@@ -97,6 +96,5 @@ char	*get_status_prompt(t_main *config)
 	status = get_status_prompt_assemble(\
 		get_status_prompt_color(config->last_return_value), \
 		&array);
-	ft_printf_fd(LOG_FD, "return_code: [%s]\n", status);
 	return (status);
 }
