@@ -419,6 +419,7 @@ void			signal_handler(int signal_code);
 
 // utils/builtins.c
 int				get_builtin(t_cmd *cmd);
+int				is_good_builin(char *from, char *to);
 t_bool			get_fork_first(int type);
 void			get_builtins(t_main *config);
 

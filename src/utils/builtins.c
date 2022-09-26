@@ -6,29 +6,43 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:27:04 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 00:06:06 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 02:23:37 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
+int	is_good_builin(char *from, char *to)
+{
+	int	is_good;
+	int	len_to;
+
+	is_good = 1;
+	len_to = ft_strlen(to);
+	if (ft_strlen(from) != len_to)
+		is_good = 0;
+	else if (ft_strncmp(from, to, len_to))
+		is_good = 0;
+	return (is_good);
+}
+
 int	get_builtin(t_cmd *cmd)
 {
 	if (cmd->command[0] == FT_NULL)
 		return (NONE);
-	else if (!ft_strncmp(cmd->command[0], "cd", 2))
+	else if (is_good_builin(cmd->command[0], "cd"))
 		return (CD);
-	else if (!ft_strncmp(cmd->command[0], "pwd", 3))
+	else if (is_good_builin(cmd->command[0], "pwd"))
 		return (PWD);
-	else if (!ft_strncmp(cmd->command[0], "echo", 4))
+	else if (is_good_builin(cmd->command[0], "echo"))
 		return (ECHOO);
-	else if (!ft_strncmp(cmd->command[0], "export", 6))
+	else if (is_good_builin(cmd->command[0], "export"))
 		return (EXPORT);
-	else if (!ft_strncmp(cmd->command[0], "env", 3))
+	else if (is_good_builin(cmd->command[0], "env"))
 		return (ENV);
-	else if (!ft_strncmp(cmd->command[0], "unset", 5))
+	else if (is_good_builin(cmd->command[0], "unset"))
 		return (UNSET);
-	else if (!ft_strncmp(cmd->command[0], "exit", 4))
+	else if (is_good_builin(cmd->command[0], "exit"))
 		return (EXIT);
 	else if (ft_isfile(cmd->command[0], S_IXUSR) == 1)
 		return (MINISHELL);
