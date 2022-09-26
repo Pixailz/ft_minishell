@@ -6,8 +6,10 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. TODO / not working
 	- `echo pass <> file | echo pass`
 		- parsing, create `file` but don't pipe output to it
-	- fix double in with ctrl+c
-1. handle ctrl+c
+1. fix double in by forking before taking input
+	- restore signal
+	- fork
+	- re init signal
 1. built-ins
 	- [x] echo et l’option -n
 	- [x] cd uniquement avec un chemin relatif ou absolu
