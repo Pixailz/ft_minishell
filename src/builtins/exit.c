@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:35:55 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 19:28:47 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:36:09 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -96,14 +96,11 @@ int	exit_check_exit_code(char *exit_code)
 
 int	builtin_exit(t_cmd *cmd, t_main *config)
 {
-	int	exit_code;
-
-	exit_code = 0;
 	if (!config->context->fork_first)
 		ft_printf("exit\n");
-	if (have_args(cmd))
-		exit_code++;
+	if (!have_args(cmd))
+		return (0);
 	if (have_multiple_args(cmd))
-		exit_code++;
-	return (exit_code);
+		return (2);
+	return (1);
 }

@@ -261,6 +261,39 @@ int				builtin_unset(t_cmd *cmd, t_main *config);
 void			unset(char *var, t_lst_env **env);
 void			unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first);
 
+// builtins/utils/args.c
+t_bool			have_args(t_cmd *cmd);
+t_bool			have_multiple_args(t_cmd *cmd);
+
+// builtins/utils/do_something_with_cmd.c
+void			*do_something_with_cmd(t_cmd *cmd);
+
+// builtins/utils/env.c
+char			*get_env(char *key, t_lst_env *env);
+void			set_env(char *key, char *value, t_lst_env **env);
+
+// builtins/utils/env_export_utils_1.c
+t_lst_env		*env_to_lst(char **env);
+void			index_env_lst(t_lst_env *env);
+void			unlink_key_value(char *var_env, char **key, char **value);
+
+// builtins/utils/env_export_utils_2.c
+int				ft_strcmp_env(char *s1, char *s2);
+t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
+t_lst_env		*ft_lstnew_env(void *env);
+
+// builtins/utils/get_cwd.c
+char			*get_cwd(void);
+
+// builtins/utils/is_good_var_env.c
+int				is_good_var_env(char *str);
+int				is_good_var_env_char(char c);
+int				is_good_var_env_first(char c);
+
+// builtins/utils/params.c
+t_bool			have_params(char *options, t_cmd *cmd);
+t_bool			is_params(const char *argv, const char *options);
+
 // dataset/free/cmds.c
 void			free_cmd(t_cmd *cmd);
 void			free_cmds(t_context *context);
@@ -302,9 +335,6 @@ t_redirection	*redir_new(char *content, int is_double);
 void			init_redirection(t_main *config);
 void			init_redirection_lst(t_redirection **lst, char *content, int is_double);
 void			redir_addback(t_redirection **lst, t_redirection *new);
-
-// dataset/init/signal.c
-int				init_signal(void);
 
 // debug/builtin.c
 void			debug_builtin(t_cmd *cmd);
@@ -383,6 +413,27 @@ void			prepare_out_file_ng(t_main *config);
 // shell/exec_engine/exec_engine.c
 void			exec_engine(t_main *config);
 
+// shell/exec_engine/utils/builtins.c
+int				get_builtin(t_cmd *cmd);
+int				is_good_builin(char *from, char *to);
+t_bool			get_fork_first(int type);
+void			get_builtins(t_main *config);
+
+// shell/exec_engine/utils/path.c
+char			**get_path(char **env);
+char			*get_cmd_path(char *name, char **path);
+
+// shell/exec_engine/utils/print_error.c
+int				print_error_file(t_cmd *cmd);
+int				print_error_infile(t_redirection *tmp);
+int				print_error_outfile(t_redirection *tmp);
+void			print_error(t_context *context);
+void			print_error_2(t_cmd *cmd);
+
+// shell/exec_engine/utils/utils.c
+void			close_all_pipes(t_context *context);
+void			wait_for_all(t_context *context);
+
 // shell/loop.c
 int				is_command_empty(t_main *config);
 int				main_loop(t_main *config);
@@ -412,60 +463,35 @@ char			*replace_key(t_main *config, char *input, t_lst_env *env);
 char			*replace_question_mark(t_main *config, char **input);
 void			parse_replace_dollar(t_main *config, t_lst_env *env);
 
-// shell/signal_handler.c
+// shell/parsing_cmd/utils/convert_list.c
+t_block			*convert_list(t_list *input);
+
+// shell/prompt/get_base_prompt.c
+char			*assemble_base_prompt(char *user, char **hostname);
+char			*get_base_prompt(t_main *config);
+char			*get_hostname(void);
+
+// shell/prompt/get_prompt.c
+char			*get_prompt_2(t_main *config, char *tmp_1);
+char			*get_prompt_no_tilde(t_main *config);
+char			*get_prompt_tilde(t_main *config);
+void			get_prompt(t_main *config);
+
+// shell/prompt/get_status_prompt.c
+char			*get_status_prompt(t_main *config);
+char			*get_status_prompt_array(t_main *config);
+char			*get_status_prompt_assemble(int status_code, char **array);
+int				get_status_prompt_color(t_main *config);
+
+// shell/signal_handling/handler.c
 void			handle_sig_int(void);
-void			handle_sig_quit(void);
+void			handle_sig_int_here_doc(void);
 void			signal_handler(int signal_code);
+void			signal_handler_here_doc(int signal_code);
 
-// utils/builtins.c
-int				get_builtin(t_cmd *cmd);
-int				is_good_builin(char *from, char *to);
-t_bool			get_fork_first(int type);
-void			get_builtins(t_main *config);
-
-// utils/builtins/args.c
-t_bool			have_args(t_cmd *cmd);
-t_bool			have_multiple_args(t_cmd *cmd);
-
-// utils/builtins/do_something_with_cmd.c
-void			*do_something_with_cmd(t_cmd *cmd);
-
-// utils/builtins/env_export_utils_1.c
-t_lst_env		*env_to_lst(char **env);
-void			index_env_lst(t_lst_env *env);
-void			unlink_key_value(char *var_env, char **key, char **value);
-
-// utils/builtins/env_export_utils_2.c
-int				ft_strcmp_env(char *s1, char *s2);
-t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
-t_lst_env		*ft_lstnew_env(void *env);
-
-// utils/builtins/get_cwd.c
-char			*get_cwd(void);
-
-// utils/builtins/is_good_var_env.c
-int				is_good_var_env(char *str);
-int				is_good_var_env_char(char c);
-int				is_good_var_env_first(char c);
-
-// utils/builtins/params.c
-t_bool			have_params(char *options, t_cmd *cmd);
-t_bool			is_params(const char *argv, const char *options);
-
-// utils/env.c
-char			*get_env(char *key, t_lst_env *env);
-void			set_env(char *key, char *value, t_lst_env **env);
-
-// utils/exec/print_error.c
-int				print_error_file(t_cmd *cmd);
-int				print_error_infile(t_redirection *tmp);
-int				print_error_outfile(t_redirection *tmp);
-void			print_error(t_context *context);
-void			print_error_2(t_cmd *cmd);
-
-// utils/exec/utils.c
-void			close_all_pipes(t_context *context);
-void			wait_for_all(t_context *context);
+// shell/signal_handling/signal.c
+int				set_signal_base(void);
+int				set_signal_here_doc(void);
 
 // utils/ft_better_split.c
 t_list			*ft_better_split(char *s);
@@ -495,30 +521,6 @@ char			**ft_splitb(char *s, char delim, char *encl);
 char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
 int				ft_splitb_get_size(char *str, char delim, char *encl);
 int				ft_splitb_get_word(char **str, char delim, char *encl);
-
-// utils/parsing/convert_list.c
-t_block			*convert_list(t_list *input);
-
-// utils/path.c
-char			**get_path(char **env);
-char			*get_cmd_path(char *name, char **path);
-
-// utils/prompt/get_base_prompt.c
-char			*assemble_base_prompt(char *user, char **hostname);
-char			*get_base_prompt(t_main *config);
-char			*get_hostname(void);
-
-// utils/prompt/get_prompt.c
-char			*get_prompt_2(t_main *config, char *tmp_1);
-char			*get_prompt_no_tilde(t_main *config);
-char			*get_prompt_tilde(t_main *config);
-void			get_prompt(t_main *config);
-
-// utils/prompt/get_status_prompt.c
-char			*get_status_prompt(t_main *config);
-char			*get_status_prompt_array(t_main *config);
-char			*get_status_prompt_assemble(int status_code, char **array);
-int				get_status_prompt_color(t_main *config);
 
 /* ########################################################################## */
 

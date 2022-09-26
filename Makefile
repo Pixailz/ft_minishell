@@ -51,6 +51,14 @@ SRC_C			:= src/builtins/cd.c \
 				   src/builtins/export.c \
 				   src/builtins/pwd.c \
 				   src/builtins/unset.c \
+				   src/builtins/utils/args.c \
+				   src/builtins/utils/do_something_with_cmd.c \
+				   src/builtins/utils/env.c \
+				   src/builtins/utils/env_export_utils_1.c \
+				   src/builtins/utils/env_export_utils_2.c \
+				   src/builtins/utils/get_cwd.c \
+				   src/builtins/utils/is_good_var_env.c \
+				   src/builtins/utils/params.c \
 				   src/dataset/free/cmds.c \
 				   src/dataset/free/config.c \
 				   src/dataset/free/exec.c \
@@ -61,7 +69,6 @@ SRC_C			:= src/builtins/cd.c \
 				   src/dataset/init/context.c \
 				   src/dataset/init/get_prompt.c \
 				   src/dataset/init/redirection.c \
-				   src/dataset/init/signal.c \
 				   src/debug/builtin.c \
 				   src/debug/init_redirection.c \
 				   src/debug/parse.c \
@@ -80,35 +87,28 @@ SRC_C			:= src/builtins/cd.c \
 				   src/shell/exec_engine/exec/prepare_redir_heredoc.c \
 				   src/shell/exec_engine/exec/prepare_redir_ng.c \
 				   src/shell/exec_engine/exec_engine.c \
+				   src/shell/exec_engine/utils/builtins.c \
+				   src/shell/exec_engine/utils/path.c \
+				   src/shell/exec_engine/utils/print_error.c \
+				   src/shell/exec_engine/utils/utils.c \
 				   src/shell/loop.c \
 				   src/shell/parsing_cmd/get_block.c \
 				   src/shell/parsing_cmd/identify_pipe.c \
 				   src/shell/parsing_cmd/parse_entry.c \
 				   src/shell/parsing_cmd/replace_dollar.c \
-				   src/shell/signal_handler.c \
-				   src/utils/builtins.c \
-				   src/utils/builtins/args.c \
-				   src/utils/builtins/do_something_with_cmd.c \
-				   src/utils/builtins/env_export_utils_1.c \
-				   src/utils/builtins/env_export_utils_2.c \
-				   src/utils/builtins/get_cwd.c \
-				   src/utils/builtins/is_good_var_env.c \
-				   src/utils/builtins/params.c \
-				   src/utils/env.c \
-				   src/utils/exec/print_error.c \
-				   src/utils/exec/utils.c \
+				   src/shell/parsing_cmd/utils/convert_list.c \
+				   src/shell/prompt/get_base_prompt.c \
+				   src/shell/prompt/get_prompt.c \
+				   src/shell/prompt/get_status_prompt.c \
+				   src/shell/signal_handling/handler.c \
+				   src/shell/signal_handling/signal.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
 				   src/utils/ft_isdir.c \
 				   src/utils/ft_isfile.c \
 				   src/utils/ft_patoi.c \
 				   src/utils/ft_patoll.c \
-				   src/utils/ft_splitb.c \
-				   src/utils/parsing/convert_list.c \
-				   src/utils/path.c \
-				   src/utils/prompt/get_base_prompt.c \
-				   src/utils/prompt/get_prompt.c \
-				   src/utils/prompt/get_status_prompt.c
+				   src/utils/ft_splitb.c
 
 # OBJ
 

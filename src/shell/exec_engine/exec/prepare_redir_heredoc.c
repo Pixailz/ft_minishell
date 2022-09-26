@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 02:30:00 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:57:05 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,6 +31,11 @@ void	prepare_in_double_file_join(t_list *buf_lst)
 	close(file_out);
 	unlink(".here_doc");
 	free_t_list(buf_lst);
+}
+
+void	forked_double_in(void)
+{
+
 }
 
 void	prepare_in_double_file(t_redirection *double_in)

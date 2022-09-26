@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 08:49:07 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:38:41 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,7 @@
 
 int	set_signal_here_doc(void)
 {
-
+	signal(SIGINT, signal_handler_here_doc);
 }
 
 int	set_signal_base(void)

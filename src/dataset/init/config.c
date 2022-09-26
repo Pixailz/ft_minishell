@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:08 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/24 19:43:02 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:28:34 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,6 +30,6 @@ int	init_config(t_main *config, char **envp)
 int	init_config_entry(t_main *config, char **envp)
 {
 	init_config(config, envp);
-	init_signal();
+	set_signal_base();
 	return (0);
 }

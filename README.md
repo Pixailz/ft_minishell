@@ -13,7 +13,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. built-ins
 	- [x] echo et l’option -n
 	- [x] cd uniquement avec un chemin relatif ou absolu
-	        - CDPATH
+		- CDPATH
 	- [x] pwd sans aucune option
 	- [x] export sans aucune option
 	- [x] unset sans aucune option
