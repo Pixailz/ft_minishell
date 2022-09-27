@@ -6,58 +6,74 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 12:57:05 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:42:05 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	prepare_in_double_file_join(t_list *buf_lst)
-{
-	t_list	*tmp;
-	int		file_in;
-	int		file_out;
+extern int	g_interrupt;
 
-	tmp = buf_lst;
-	file_in = open(".here_doc", O_CREAT | O_WRONLY, 0000644);
-	while (tmp)
+char	*get_tmp_file(void)
+{
+	char	*file_name;
+
+	file_name = ft_tmpfile();
+	if (ft_isfile(file_name, 0) == 1)
 	{
-		write(file_in, tmp->content, ft_strlen(tmp->content));
-		tmp = tmp->next;
+		free(file_name);
+		file_name = get_tmp_file();
 	}
-	close(file_in);
-	file_out = open(".here_doc", O_RDONLY);
-	dup2(file_out, STDIN_FILENO);
-	close(file_out);
-	unlink(".here_doc");
-	free_t_list(buf_lst);
+	return (file_name);
 }
 
-void	forked_double_in(void)
+void	forked_double_in(t_redirection *double_in, t_main *conf, char **file_n)
 {
+	char	*buff;
+	int		file;
 
+	g_interrupt = 0;
+	file = open(*file_n, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
+	buff = readline("> ");
+	while (buff && ft_strcmp(buff, double_in->content))
+	{
+		ft_printf_fd(file, "%s\n", buff);
+		free(buff);
+		buff = readline("> ");
+	}
+	if (!buff && !g_interrupt)
+		ft_printf_fd(STDERR_FILENO, \
+			"\nwarning : here-document delimited by EOF(wanted '%s')\n", \
+				double_in->content);
+	else if (buff)
+		free(buff);
+	close(file);
+	free_config_entry(conf);
+	free(*file_n);
+	exit(g_interrupt);
 }
 
-void	prepare_in_double_file(t_redirection *double_in)
+void	prepare_in_double_file(t_redirection *double_in, t_main *config)
 {
-	char	*buf;
-	t_list	*buf_lst;
+	char	*file_name;
+	pid_t	forked_heredoc;
+	int		status;
 
-	buf_lst = FT_NULL;
-	while (VRAI)
+	file_name = get_tmp_file();
+	set_signal_forked(0);
+	forked_heredoc = fork();
+	if (!forked_heredoc)
+		forked_double_in(double_in, config, &file_name);
+	waitpid(forked_heredoc, &status, 0);
+	set_signal_base();
+	if (WEXITSTATUS(status) == 3)
 	{
-		ft_printf_fd(1, "> ");
-		buf = ft_get_next_line(1);
-		if (!buf)
-			exit(1);
-		if (buf[ft_strlen(double_in->content)] == '\n' && \
-		!ft_strncmp(double_in->content, buf, ft_strlen(double_in->content)))
-			break ;
-		if (buf_lst == FT_NULL)
-			buf_lst = ft_lstnew(buf);
-		else
-			ft_lstadd_back(&buf_lst, ft_lstnew(buf));
+		config->interrupt = 1;
+		ft_printf("\n");
 	}
-	free(buf);
-	prepare_in_double_file_join(buf_lst);
+	double_in->file = open(file_name, O_RDONLY);
+	dup2(double_in->file, STDIN_FILENO);
+	close(double_in->file);
+	unlink(file_name);
+	free(file_name);
 }

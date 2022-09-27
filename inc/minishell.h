@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 22:13:47 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:10:52 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,6 +70,7 @@
 #  define DEBUG				1
 # endif
 
+# define TMP_RG "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 # define VRAI				42
 
 # define LOG_FD				420
@@ -403,8 +404,9 @@ void			prepare_out_file(t_redirection *out, t_main *config);
 void			prepare_redirection(t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_heredoc.c
-void			prepare_in_double_file(t_redirection *double_in);
-void			prepare_in_double_file_join(t_list *buf_lst);
+char			*get_tmp_file(void);
+void			forked_double_in(t_redirection *double_in, t_main *conf, char **file_n);
+void			prepare_in_double_file(t_redirection *double_in, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_ng.c
 void			prepare_in_file_ng(t_main *config);
@@ -417,6 +419,7 @@ void			exec_engine(t_main *config);
 int				get_builtin(t_cmd *cmd);
 int				is_good_builin(char *from, char *to);
 t_bool			get_fork_first(int type);
+t_bool			is_minishell(char *cmd);
 void			get_builtins(t_main *config);
 
 // shell/exec_engine/utils/path.c
@@ -487,11 +490,12 @@ int				get_status_prompt_color(t_main *config);
 void			handle_sig_int(void);
 void			handle_sig_int_here_doc(void);
 void			signal_handler(int signal_code);
+void			signal_handler_forked(int signal_code);
 void			signal_handler_here_doc(int signal_code);
 
 // shell/signal_handling/signal.c
-int				set_signal_base(void);
-int				set_signal_here_doc(void);
+void			set_signal_base(void);
+void			set_signal_forked(int mode);
 
 // utils/ft_better_split.c
 t_list			*ft_better_split(char *s);
@@ -516,11 +520,17 @@ int				ft_patoi(char *nstr, int *has_overflow);
 int				ft_is_good_long_long(t_int64 n, int neg);
 t_int64			ft_patoll(char *nstr, int *has_overflow);
 
+// utils/ft_randint.c
+t_int64			ft_randint(int start, int end);
+
 // utils/ft_splitb.c
 char			**ft_splitb(char *s, char delim, char *encl);
 char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
 int				ft_splitb_get_size(char *str, char delim, char *encl);
 int				ft_splitb_get_word(char **str, char delim, char *encl);
+
+// utils/ft_tmpfile.c
+char			*ft_tmpfile(void);
 
 /* ########################################################################## */
 

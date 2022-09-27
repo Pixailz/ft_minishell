@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 21:29:29 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:13:34 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,10 +17,10 @@ int	get_status_prompt_color(t_main *config)
 	int	error_color;
 
 	error_color = 0;
-	if (!config->last_return_value)
-		error_color = 1;
-	else if (config->interrupt)
+	if (config->last_return_value == 130)
 		error_color = 2;
+	else if (!config->last_return_value)
+		error_color = 1;
 	return (error_color);
 }
 

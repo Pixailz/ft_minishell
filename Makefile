@@ -108,7 +108,9 @@ SRC_C			:= src/builtins/cd.c \
 				   src/utils/ft_isfile.c \
 				   src/utils/ft_patoi.c \
 				   src/utils/ft_patoll.c \
-				   src/utils/ft_splitb.c
+				   src/utils/ft_randint.c \
+				   src/utils/ft_splitb.c \
+				   src/utils/ft_tmpfile.c
 
 # OBJ
 

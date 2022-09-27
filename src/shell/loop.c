@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 21:32:04 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:45:48 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ int	is_command_empty(t_main *config)
 
 void	exit_ctrl_d(t_main *config)
 {
+	ft_printf("\n");
 	if (exit_check_shlvl(config))
 	{
-		ft_printf("\n");
 		free_config_entry(config);
 		exit(config->last_return_value);
 	}
@@ -51,6 +51,7 @@ int	main_loop(t_main *config)
 	{
 		config->line_buffer = readline(config->prompt);
 		handle_interrupt(config);
+		g_interrupt = 0;
 		ft_printf("%s", C_RESET);
 		if (config->line_buffer != FT_NULL && config->line_buffer[0] != ' ')
 			add_history(config->line_buffer);

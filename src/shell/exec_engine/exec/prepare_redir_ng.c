@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prepare_redirection_ng.c                           :+:      :+:    :+:   */
+/*   prepare_redir_ng.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 01:57:25 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 21:35:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,7 +35,7 @@ void	prepare_in_file_ng(t_main *config)
 	while (tmp)
 	{
 		if (tmp->is_double)
-			prepare_in_double_file(tmp);
+			prepare_in_double_file(tmp, config);
 		else
 			prepare_in_file(tmp, config);
 		tmp = tmp->next;
