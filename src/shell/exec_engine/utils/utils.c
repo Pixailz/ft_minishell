@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 00:49:24 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 06:03:52 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:31:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,10 +15,10 @@
 void	wait_for_all(t_context *context)
 {
 	int	counter;
-	int	islast;
+	int	isfirst;
 
-	islast = context->fork_last == False;
-	counter = context->cmd_nb - islast;
+	isfirst = context->fork_first == False;
+	counter = context->cmd_nb - isfirst;
 	while (counter > 0)
 	{
 		waitpid(context->cmd[counter - 1]->cmd_pid, \

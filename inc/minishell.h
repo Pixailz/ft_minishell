@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 20:02:03 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 22:13:47 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,34 +19,46 @@
 
 # include "libft.h"
 
-/*
-O_RDONLY
-*/
 # include <fcntl.h>
-/*
-SIGINT
-*/
+/* O_RDONLY
+ */
+
 # include <signal.h>
-/*
-waitpid
-*/
+/* SIGINT
+ */
+
 # include <sys/wait.h>
-/*
-readline
-*/
+/* waitpid()
+ */
+
+# include <sys/stat.h>
+/* stat()
+ */
+
 # include <readline/readline.h>
-/*
-add_history
-*/
+/* readline()
+ */
+
 # include <readline/history.h>
-/*
-chdir
-*/
+/* add_history()
+ */
+
 # include <unistd.h>
-/*
-errno
-*/
+/* chdir()
+ */
+
 # include <errno.h>
+/* errno
+ */
+
+# include <sys/ioctl.h>
+/* ioctl()
+ * TCXONC
+ */
+
+# include <termios.h>
+/* TCOON
+ */
 
 /* ########################################################################## */
 
@@ -55,46 +67,53 @@ errno
 /* ###### */
 
 # ifndef DEBUG
-#  define DEBUG			1
+#  define DEBUG				1
 # endif
 
-# define VRAI 42
+# define VRAI				42
 
-# define LOG_FD			420
+# define LOG_FD				420
 
-# define C_RED			"\001\033[31m\002"
-# define C_GREEN		"\001\033[32;m\002"
-# define C_LIGHT_GREEN	"\001\033[38;5;112m\002"
-# define C_YELLOW		"\001\033[33m\002"
-# define C_ORANGE		"\001\033[38;5;208m\002"
-# define C_BLUE			"\001\033[34m\002"
-# define C_PURPLE		"\001\033[35m\002"
-# define C_MAGENTA		"\001\033[36m\002"
-# define C_WHITE		"\001\033[37m\002"
-# define C_BLACK		"\001\033[30m\002"
+# define C_RED				"\001\033[31m\002"
+# define C_GREEN			"\001\033[32m\002"
+# define C_LIGHT_GREEN		"\001\033[38;5;112m\002"
+# define C_YELLOW			"\001\033[33m\002"
+# define C_ORANGE			"\001\033[38;5;208m\002"
+# define C_BLUE				"\001\033[34m\002"
+# define C_PURPLE			"\001\033[35m\002"
+# define C_MAGENTA			"\001\033[36m\002"
+# define C_WHITE			"\001\033[37m\002"
+# define C_BLACK			"\001\033[30m\002"
 
-# define B_RED			"\001\033[01;31m\002"
-# define B_GREEN		"\001\033[01;32m\002"
-# define B_LIGHT_GREEN	"\001\033[01;38;5;112m\002"
-# define B_YELLOW		"\001\033[01;33m\002"
-# define B_ORANGE		"\001\033[01;38;5;208m\002"
-# define B_BLUE			"\001\033[01;34m\002"
-# define B_PURPLE		"\001\033[01;35m\002"
-# define B_MAGENTA		"\001\033[01;36m\002"
-# define B_WHITE		"\001\033[01;37m\002"
-# define B_BLACK		"\001\033[01;30m\002"
+# define B_RED				"\001\033[01;31m\002"
+# define B_GREEN			"\001\033[01;32m\002"
+# define B_LIGHT_GREEN		"\001\033[01;38;5;112m\002"
+# define B_YELLOW			"\001\033[01;33m\002"
+# define B_ORANGE			"\001\033[01;38;5;208m\002"
+# define B_BLUE				"\001\033[01;34m\002"
+# define B_PURPLE			"\001\033[01;35m\002"
+# define B_MAGENTA			"\001\033[01;36m\002"
+# define B_WHITE			"\001\033[01;37m\002"
+# define B_BLACK			"\001\033[01;30m\002"
 
-# define C_RESET		"\001\033[0m\002"
+# define C_RESET			"\001\033[0m\002"
 
-# define C_PROMPT_ROOT	B_RED
-# define C_PROMPT_BASE	B_ORANGE
-# define C_PROMPT_PATH	B_BLUE
-# define C_PROMPT_CMD	C_LIGHT_GREEN
+# define GREEN_PLUS			"\001\033[0m[\033[38;5;82m+\033[0m]\002"
+# define RED_MINUS			"\001\033[0m[\033[38;5;196m-\033[0m]\002"
+# define ORANGE_STAR		"\001\033[0m[\033[38;5;214m*\033[0m]\002"
+# define BLUE_STAR			"\001\033[0m[\033[38;5;75m*\033[0m]\002"
 
-# define GREEN_PLUS		"\001\033[0m[\033[38;5;82m+\033[0m]\002"
-# define RED_MINUS		"\001\033[0m[\033[38;5;196m-\033[0m]\002"
-# define ORANGE_STAR	"\001\033[0m[\033[38;5;214m*\033[0m]\002"
-# define BLUE_STAR		"\001\033[0m[\033[38;5;75m*\033[0m]\002"
+// prompt_config :)
+# define OLD_STYLE			0
+
+# define C_PROMPT_ROOT		B_RED
+# define C_PROMPT_BASE		B_ORANGE
+# define C_PROMPT_PATH		B_BLUE
+# define C_PROMPT_CMD		C_RESET
+
+# define C_PROMPT_STATUS_1	B_LIGHT_GREEN
+# define C_PROMPT_STATUS_2	B_ORANGE
+# define C_PROMPT_STATUS_0	B_RED
 
 /* ########################################################################## */
 
@@ -112,6 +131,7 @@ typedef enum e_bool
 typedef struct s_main
 {
 	int					last_return_value;
+	int					interrupt;
 	char				*prompt_base;
 	char				*user;
 	char				*home;
@@ -129,10 +149,15 @@ typedef struct s_main
 enum e_builtin_type
 {
 	NONE,
+	NOT_BUILTIN,
 	CD,
 	PWD,
-	ECHO,
-	EXPORT
+	ECHOO,
+	EXPORT,
+	ENV,
+	UNSET,
+	EXIT,
+	MINISHELL
 };
 
 typedef struct s_cmd
@@ -162,7 +187,7 @@ typedef struct s_context
 	int		pipe_id;
 	int		default_in;
 	int		default_out;
-	t_bool	fork_last;
+	t_bool	fork_first;
 	int		**pipes;
 	t_cmd	**cmd;
 	char	**path;
@@ -204,7 +229,7 @@ typedef struct s_lst_env{
 /* ##### */
 
 // builtins/cd.c
-int				builtin_cd(t_cmd *cmd);
+int				builtin_cd(t_cmd *cmd, t_main *config);
 int				cd_get_error_code(t_cmd *cmd);
 void			builtin_cd_update_pwd(t_main *config);
 
@@ -213,17 +238,64 @@ int				builtin_echo(t_cmd *cmd);
 int				builtin_echo_have_params(t_cmd *cmd);
 
 // builtins/env.c
-void			print_env(t_lst_env *envlst);
+int				builtin_env(t_lst_env *envlst);
+
+// builtins/exit.c
+int				builtin_exit(t_cmd *cmd, t_main *config);
+int				exit_check_exit_code(char *exit_code);
+int				exit_check_shlvl(t_main *config);
+int				exit_get_exit_code(char *exit_code);
+void			builtin_exit_post_exec(t_cmd *cmd, t_main *config);
 
 // builtins/export.c
+int				builtin_export(t_cmd *cmd, t_main *config);
+int				print_export(t_lst_env *envlst);
+int				print_export_failed(char *var);
 void			export_var_to_env(t_lst_env **envlst, char *var);
-void			print_export(t_lst_env *envlst);
 
 // builtins/pwd.c
 int				builtin_pwd(t_cmd *cmd);
 
 // builtins/unset.c
+int				builtin_unset(t_cmd *cmd, t_main *config);
 void			unset(char *var, t_lst_env **env);
+void			unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first);
+
+// builtins/utils/args.c
+t_bool			have_args(t_cmd *cmd);
+t_bool			have_multiple_args(t_cmd *cmd);
+
+// builtins/utils/do_something_with_cmd.c
+void			*do_something_with_cmd(t_cmd *cmd);
+
+// builtins/utils/env.c
+char			*get_env(char *key, t_lst_env *env);
+void			set_env(char *key, char *value, t_lst_env **env);
+
+// builtins/utils/env_export_utils_1.c
+t_lst_env		*env_to_lst(char **env);
+void			index_env_lst(t_lst_env *env);
+void			unlink_key_value(char *var_env, char **key, char **value);
+
+// builtins/utils/env_export_utils_2.c
+int				ft_strcmp_env(char *s1, char *s2);
+t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
+t_lst_env		*ft_lstnew_env(void *env);
+
+// builtins/utils/env_export_utils_3.c
+void	export_join(t_lst_env **envlst, char *var);
+
+// builtins/utils/get_cwd.c
+char			*get_cwd(void);
+
+// builtins/utils/is_good_var_env.c
+int				is_good_var_env(char *str);
+int				is_good_var_env_char(char c);
+int				is_good_var_env_first(char c);
+
+// builtins/utils/params.c
+t_bool			have_params(char *options, t_cmd *cmd);
+t_bool			is_params(const char *argv, const char *options);
 
 // dataset/free/cmds.c
 void			free_cmd(t_cmd *cmd);
@@ -257,18 +329,19 @@ int				init_context(t_main *config);
 int				init_context_entry(t_main *config);
 size_t			get_number_of_command(t_main *config);
 
+// dataset/init/get_prompt.c
+int				get_prompt_init(t_main *config);
+void			get_prompt_init_cwd(t_main *config);
+
 // dataset/init/redirection.c
 t_redirection	*redir_new(char *content, int is_double);
 void			init_redirection(t_main *config);
 void			init_redirection_lst(t_redirection **lst, char *content, int is_double);
 void			redir_addback(t_redirection **lst, t_redirection *new);
 
-// dataset/init/signal.c
-int				init_signal(void);
-
 // debug/builtin.c
 void			debug_builtin(t_cmd *cmd);
-void			debug_params(t_cmd *cmd);
+void			debug_builtin_echo(t_cmd *cmd);
 void			debug_print_builtin(int builtin);
 
 // debug/init_redirection.c
@@ -280,9 +353,8 @@ void			debug_print_redir_2(t_redirection *lst, int mode, int counter);
 void			debug_parse(t_main *config);
 
 // debug/print.c
-void			debug_print(int type, void *ptr);
+void			debug_print_entry(int type, void *ptr);
 void			debug_print_post_exec(t_main *config);
-void			debug_print_question_mark(t_main *config);
 
 // debug/print_bool.c
 
@@ -301,7 +373,10 @@ int				debug_signal(int signal_code);
 char			**do_something_with_argv(char **argv);
 
 // shell/exec_engine/exec/exec_builtin.c
-int				exec_builtin(t_cmd *cmd);
+int				exec_builtin(t_cmd *cmd, t_main *config);
+
+// shell/exec_engine/exec/exec_minishell.c
+int				exec_minishell(t_main *config);
 
 // shell/exec_engine/exec/exec_prepare.c
 void			exec_prepare_between(t_context *context);
@@ -311,11 +386,11 @@ void			exec_prepare_last(t_context *context);
 void			exec_prepare_pipe(t_context *context);
 
 // shell/exec_engine/exec/execute.c
-int				exec_command(t_main *config, int is_last);
+int				exec_command(t_main *config);
 int				exec_entry(t_main *config);
 int				execve_ng(t_cmd *cmd);
 int				is_last(t_context *context);
-void			exec_command_child(t_main *config, int islast);
+void			exec_command_child(t_main *config);
 
 // shell/exec_engine/exec/prepare_cmds.c
 size_t			init_cmds_count_args(t_list *tmp);
@@ -324,23 +399,49 @@ void			init_get_cmd_paths(t_main *config);
 void			prepare_cmds_1(t_main *config);
 void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str);
 
-// shell/exec_engine/exec/prepare_redirection.c
-void			prepare_in_double_file(t_redirection *double_in);
+// shell/exec_engine/exec/prepare_redir.c
 void			prepare_in_file(t_redirection *in_file, t_main *config);
 void			prepare_out_double_file(t_redirection *double_out, t_main *config);
 void			prepare_out_file(t_redirection *out, t_main *config);
 void			prepare_redirection(t_main *config);
 
-// shell/exec_engine/exec/prepare_redirection_ng.c
+// shell/exec_engine/exec/prepare_redir_heredoc.c
+void			prepare_in_double_file(t_redirection *double_in);
+void			prepare_in_double_file_join(t_list *buf_lst);
+
+// shell/exec_engine/exec/prepare_redir_ng.c
 void			prepare_in_file_ng(t_main *config);
 void			prepare_out_file_ng(t_main *config);
 
 // shell/exec_engine/exec_engine.c
 void			exec_engine(t_main *config);
 
+// shell/exec_engine/utils/builtins.c
+int				get_builtin(t_cmd *cmd);
+int				is_good_builin(char *from, char *to);
+t_bool			get_fork_first(int type);
+void			get_builtins(t_main *config);
+
+// shell/exec_engine/utils/path.c
+char			**get_path(char **env);
+char			*get_cmd_path(char *name, char **path);
+
+// shell/exec_engine/utils/print_error.c
+int				print_error_file(t_cmd *cmd);
+int				print_error_infile(t_redirection *tmp);
+int				print_error_outfile(t_redirection *tmp);
+void			print_error(t_context *context);
+void			print_error_2(t_cmd *cmd);
+
+// shell/exec_engine/utils/utils.c
+void			close_all_pipes(t_context *context);
+void			wait_for_all(t_context *context);
+
 // shell/loop.c
 int				is_command_empty(t_main *config);
 int				main_loop(t_main *config);
+void			exit_ctrl_d(t_main *config);
+void			handle_interrupt(t_main *config);
 
 // shell/parsing_cmd/get_block.c
 t_block			*ft_lstadd_back_block(t_block **lst, t_block *new);
@@ -359,59 +460,41 @@ void			identify_redirection(t_block *input);
 void			parse_cmd(t_main *config);
 
 // shell/parsing_cmd/replace_dollar.c
-char			*find_key(char **input, t_lst_env *env);
+char			*find_key(t_main *config, char **input, t_lst_env *env);
+char			*find_key_2(int i, char **input, char **key, t_lst_env *env);
 char			*replace_key(t_main *config, char *input, t_lst_env *env);
-char			*replace_question_mark(t_main *config);
+char			*replace_question_mark(t_main *config, char **input);
 void			parse_replace_dollar(t_main *config, t_lst_env *env);
 
-// shell/signal_handler.c
+// shell/parsing_cmd/utils/convert_list.c
+t_block			*convert_list(t_list *input);
+
+// shell/prompt/get_base_prompt.c
+char			*assemble_base_prompt(char *user, char **hostname);
+char			*get_base_prompt(t_main *config);
+char			*get_hostname(void);
+
+// shell/prompt/get_prompt.c
+char			*get_prompt_2(t_main *config, char *tmp_1);
+char			*get_prompt_no_tilde(t_main *config);
+char			*get_prompt_tilde(t_main *config);
+void			get_prompt(t_main *config);
+
+// shell/prompt/get_status_prompt.c
+char			*get_status_prompt(t_main *config);
+char			*get_status_prompt_array(t_main *config);
+char			*get_status_prompt_assemble(int status_code, char **array);
+int				get_status_prompt_color(t_main *config);
+
+// shell/signal_handling/handler.c
 void			handle_sig_int(void);
-void			handle_sig_quit(void);
+void			handle_sig_int_here_doc(void);
 void			signal_handler(int signal_code);
+void			signal_handler_here_doc(int signal_code);
 
-// utils/builtins.c
-int				get_builtin(t_cmd *cmd);
-t_bool			get_fork_last(int type);
-void			get_builtins(t_main *config);
-
-// utils/builtins/args.c
-t_bool			have_args(t_cmd *cmd);
-
-// utils/builtins/do_something_with_cmd.c
-void			*do_something_with_cmd(t_cmd *cmd);
-
-// utils/builtins/env_export_utils_1.c
-t_lst_env		*env_to_lst(char **env);
-void			index_env_lst(t_lst_env **envlst);
-void			index_env_lst2(t_lst_env *lst, t_lst_env **tmp, t_lst_env **tmp2, int *i);
-void			unlink_key_value(char *var_env, char **key, char **value);
-
-// utils/builtins/env_export_utils_2.c
-int				ft_strcmp_env(char *s1, char *s2);
-t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
-t_lst_env		*ft_lstnew_env(void *env);
-
-// utils/builtins/get_cwd.c
-char			*get_cwd(void);
-
-// utils/builtins/params.c
-t_bool			have_params(char *options, t_cmd *cmd);
-t_bool			is_params(const char *argv, const char *options);
-
-// utils/env.c
-char			*get_env(char *key, t_lst_env *env);
-void			set_env(char *key, char *value, t_lst_env **env);
-
-// utils/exec/print_error.c
-int				print_error_file(t_cmd *cmd);
-int				print_error_infile(t_redirection *tmp);
-int				print_error_outfile(t_redirection *tmp);
-void			print_error(t_context *context);
-void			print_error_2(t_cmd *cmd);
-
-// utils/exec/utils.c
-void			close_all_pipes(t_context *context);
-void			wait_for_all(t_context *context);
+// shell/signal_handling/signal.c
+int				set_signal_base(void);
+int				set_signal_here_doc(void);
 
 // utils/ft_better_split.c
 t_list			*ft_better_split(char *s);
@@ -422,33 +505,25 @@ void			manage_symbols(char **s, char c, t_list **input);
 // utils/ft_better_strjoin.c
 char			*ft_better_strjoin(char *s1, char *s2);
 
+// utils/ft_isdir.c
+int				ft_isdir(char *dir_name, int mode);
+
+// utils/ft_isfile.c
+int				ft_isfile(char *file_path, int mode);
+
+// utils/ft_patoi.c
+int				ft_is_good_int(t_int64 n, int neg);
+int				ft_patoi(char *nstr, int *has_overflow);
+
+// utils/ft_patoll.c
+int				ft_is_good_long_long(t_int64 n, int neg);
+t_int64			ft_patoll(char *nstr, int *has_overflow);
+
 // utils/ft_splitb.c
 char			**ft_splitb(char *s, char delim, char *encl);
 char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
 int				ft_splitb_get_size(char *str, char delim, char *encl);
 int				ft_splitb_get_word(char **str, char delim, char *encl);
-
-// utils/parsing/convert_list.c
-t_block			*convert_list(t_list *input);
-
-// utils/path.c
-char			**get_path(char **env);
-char			*get_cmd_path(char *name, char **path);
-
-// utils/prompt/get_base_prompt.c
-char			*assemble_base_prompt(char *user, char **hostname);
-char			*get_base_prompt(t_main *config);
-char			*get_hostname(void);
-
-// utils/prompt/get_prompt.c
-char			*get_prompt_2(t_main *config, char *tmp_1);
-char			*get_prompt_no_tilde(t_main *config);
-char			*get_prompt_tilde(t_main *config);
-void			get_prompt(t_main *config);
-void			get_prompt_init(t_main *config);
-
-// utils/prompt/get_status_prompt.c
-char			*get_status_prompt(t_main *config);
 
 /* ########################################################################## */
 

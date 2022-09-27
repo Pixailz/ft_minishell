@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:19:00 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 01:45:53 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/24 19:41:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -67,11 +67,13 @@ void	identify_redirection(t_block *input)
 			input = input->next;
 		else if (!ft_strchr(" <>|", input->block[0]))
 			input = input->next;
-		else if	(input->block[0] == ' ')
+		else if (input->block[0] == ' ')
 		{
 			input->block_id = SPACEE;
 			input = input->next;
 		}
+		else
+			input = input->next;
 	}
 	return ;
 }

@@ -3,6 +3,23 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 # TEST / TODO
 
+1. TODO / not working
+	- `echo pass <> file | echo pass`
+		- parsing, create `file` but don't pipe output to it
+1. fix double in by forking before taking input
+	- restore signal
+	- fork
+	- re init signal
+1. built-ins
+	- [x] echo et l’option -n
+	- [x] cd uniquement avec un chemin relatif ou absolu
+		- CDPATH
+	- [x] pwd sans aucune option
+	- [x] export sans aucune option
+	- [x] unset sans aucune option
+	- [x] env sans aucune option ni argument
+	- [x] exit sans aucune option
+1. debug print
 1. working like the original bash
 	- `ca't' -e file`
 	- `ca't -e' "file.txt"`
@@ -33,40 +50,55 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `echo pass1 > file pass2`
 	- `echo pass >>file1 | echo pass >> file2`
 
-1. TODO / not working
-	- `echo pass <> file | echo pass`
-		- parsing, ignore all after `<>`, create `file` but don't pipe output to it
-	- `< file << END cat -e > file1 >> file2`<br>
-	  `TEST`<br>
-	  `END`
-		- in this order only
-	- not working multiple double in
-1. exit with errno
-	- implement `$?`
-1. built-ins
-	- [ ] echo et l’option -n
-	- [ ] cd uniquement avec un chemin relatif ou absolu
-	- [ ] pwd sans aucune option
-	- [x] export sans aucune option
-	- [x] unset sans aucune option
-	- [x] env sans aucune option ni argument
-	- [ ] exit sans aucune option
-
-## valgrind
+## DEBUG
 > without vsupp work fine
+
 `valgrind --leak-check=full <exec_path>`
 
 > with vsupp suppress ALL leak linked to readline ...
+
 `make re DEBUG=1 && valgrind  --leak-check=full --show-leak-kinds=all --suppressions=vsupp --trace-children=yes --track-fds=yes ./minishell 420>exec.log ; cat exec.log`
+
+> MEGALINE
+
+```
+./scripts/ft_helper/ft_helper && make re DEBUG=1 && \
+valgrind  --leak-check=full \
+          --show-leak-kinds=all \
+          --suppressions=$(pwd)/vsupp \
+          --trace-children=yes \
+          --track-fds=yes ./minishell 420>exec.log ; cat exec.log
+```
+
+> strace with ioctl
+
+`strace -e trace=ioctl bash`
 
 ## exec with log
 `./minishell 420>exec.log; cat exec.log`
 
-## PIPE
-[PIPE](https://youtu.be/ceNaZzEoUhk?t=1576)
+## termios
+https://stackoverflow.com/a/27559151
 
-## AST
-1. https://github.com/pmouhali/minishell_ast
-	- https://ruslanspivak.com/lsbasi-part7/
-	- https://unix.stackexchange.com/questions/88850/precedence-of-the-shell-logical-operators
-1. https://github.com/AudeizReading/minishell/wiki/01-PARSING
+### USAGE
+
+> log
+```h
+# define DEBUG				<0|1>
+# define LOG_FD				<FD_LOG_OUTPUT>
+```
+
+> prompt
+```h
+# define OLD_STYLE			<0|1>
+
+# define C_PROMPT_ROOT		<COLOR_CODE>
+# define C_PROMPT_BASE		<COLOR_CODE>
+# define C_PROMPT_PATH		<COLOR_CODE>
+# define C_PROMPT_CMD		<COLOR_CODE>
+
+# define C_PROMPT_STATUS_1	<COLOR_CODE>
+# define C_PROMPT_STATUS_2	<COLOR_CODE>
+# define C_PROMPT_STATUS_0	<COLOR_CODE>
+```
+

@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/21 04:14:37 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:43:41 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	print_export(t_lst_env *envlst)
+int	print_export(t_lst_env *envlst)
 {
 	t_lst_env	*tmp;
 	int			i;
@@ -30,26 +30,26 @@ void	print_export(t_lst_env *envlst)
 			printf("declare -x %s\n", (char *)tmp->key);
 		i++;
 	}
+	return (0);
 }
 
 void	export_var_to_env(t_lst_env **envlst, char *var)
 {
 	t_lst_env	*tmp;
-	int			i;
 
-	i = 1;
 	tmp = *envlst;
 	while (tmp != FT_NULL)
 	{
 		tmp = *envlst;
-		while (tmp && tmp->index != i)
-			tmp = tmp->next;
-		if (tmp && ft_strcmp_env(var, tmp->key) == 0)
+		while (tmp)
 		{
-			unlink_key_value(var, (char **)&tmp->key, (char **)&tmp->value);
-			return ;
+			if (tmp && ft_strcmp_env(var, tmp->key) == 0)
+			{
+				unlink_key_value(var, (char **)&tmp->key, (char **)&tmp->value);
+				return ;
+			}
+			tmp = tmp->next;
 		}
-		i++;
 	}
 	ft_lstadd_back_env(envlst, ft_lstnew_env(var));
 	tmp = *envlst;
@@ -58,5 +58,41 @@ void	export_var_to_env(t_lst_env **envlst, char *var)
 		tmp->index = 0;
 		tmp = tmp->next;
 	}
-	index_env_lst(envlst);
+	index_env_lst(*envlst);
+}
+
+int	print_export_failed(char *var)
+{
+	ft_printf_fd(STDERR_FILENO, \
+		"minishell: export: `%s': not a valid identifier\n", var);
+	return (1);
+}
+
+int	builtin_export(t_cmd *cmd, t_main *config)
+{
+	int	counter;
+	int	is_good;
+	int	i;
+
+	if (!have_args(cmd))
+		return (print_export(config->env));
+	counter = 1;
+	while (cmd->command[counter])
+	{
+		i = 0;
+		is_good = is_good_var_env(cmd->command[counter]);
+		if (!is_good)
+			break ;
+		while (cmd->command[counter][i] && cmd->command[counter][i] != '+' \
+										&& cmd->command[counter][i] != '=')
+			i++;
+		if (cmd->command[counter][i] == '+')
+			export_join(&config->env, cmd->command[counter]);
+		else
+			export_var_to_env(&config->env, cmd->command[counter]);
+		counter++;
+	}
+	if (!is_good)
+		return (print_export_failed(cmd->command[counter]));
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:16:02 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 00:02:21 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 15:34:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -76,7 +76,8 @@ void	trim_quotes(t_block *input)
 
 	while (input)
 	{
-		if (ft_strlen(input->block) > 1 && (input->block[0] == '"' || input->block[0] == '\''))
+		if (ft_strlen(input->block) > 1 && \
+			(input->block[0] == '"' || input->block[0] == '\''))
 		{
 			tmp = input->block;
 			input->block++;

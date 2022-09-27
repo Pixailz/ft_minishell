@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:19:40 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 19:19:58 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/26 12:30:59 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -34,9 +34,9 @@ char	*get_hostname(void)
 		hostnames = ft_split(buff, '.');
 		tmp = ft_strdup(hostnames[0]);
 		free_char_pointer_pointer(hostnames);
+		return (tmp);
 	}
-	tmp = ft_strdup(buff);
-	return (tmp);
+	return (ft_strdup(buff));
 }
 
 char	*assemble_base_prompt(char *user, char **hostname)
@@ -66,7 +66,7 @@ char	*get_base_prompt(t_main *config)
 	char	*hostname;
 	char	*prompt;
 
-	config->user = getenv("USER");
+	config->user = getenv("LOGNAME");
 	hostname = get_hostname();
 	prompt = assemble_base_prompt(config->user, &hostname);
 	return (prompt);

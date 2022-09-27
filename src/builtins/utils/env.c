@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 22:54:09 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 04:37:47 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 06:05:53 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,8 @@ void	set_env(char *key, char *value, t_lst_env **env)
 	}
 	if (env_ptr)
 	{
-		free(env_ptr->value);
+		if (env_ptr->value != FT_NULL)
+			free(env_ptr->value);
 		env_ptr->value = (void *)ft_strdup(value);
 	}
 }

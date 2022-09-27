@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:00:01 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/17 01:03:20 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 04:44:15 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,7 @@ int	ft_strcmp_env(char *s1, char *s2)
 		s2++;
 		s1++;
 	}
-	if ((*s1 == '=' && !(s2)) || (*s2 == '=' && !(*s1)))
+	if ((*s1 == '=' && !(*s2)) || (*s2 == '=' && !(*s1)))
 		return (0);
 	else
 		return ((unsigned char)*s1 - (unsigned char)*s2);
@@ -33,6 +33,8 @@ t_lst_env	*ft_lstnew_env(void *env)
 	if (!ptr)
 		return (FT_NULL);
 	ptr->index = 0;
+	ptr->key = FT_NULL;
+	ptr->value = FT_NULL;
 	unlink_key_value(env, (char **)&ptr->key, (char **)&ptr->value);
 	ptr->next = FT_NULL;
 	return (ptr);

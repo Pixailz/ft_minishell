@@ -1,20 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_isdir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/20 19:47:26 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/22 04:10:16 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 04:10:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	init_signal(void)
+int	main(int argc, char **argv)
 {
-	signal(SIGINT, signal_handler);
-	signal(SIGQUIT, signal_handler);
+	int	error_code;
+
+	if (argc != 2)
+		return (ft_error("only one arg", 1));
+	error_code = ft_isdir(argv[1]);
+	if (!error_code)
+		ft_printf("%s is a dir\n");
+	else if (error_code == 2)
+		ft_printf("%s do not exists\n");
+	else if (error_code == 1)
+		ft_printf("%s is not a dir\n");
 	return (0);
 }

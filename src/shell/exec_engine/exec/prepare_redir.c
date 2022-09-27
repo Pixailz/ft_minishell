@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   prepare_redirection.c                              :+:      :+:    :+:   */
+/*   prepare_redir.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 06:33:43 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/25 08:00:34 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,32 +24,6 @@ void	prepare_in_file(t_redirection *in_file, t_main *config)
 		exit(1);
 	}
 	close(in_file->file);
-}
-
-void	prepare_in_double_file(t_redirection *double_in)
-{
-	char			*buf;
-
-	double_in->file = open(".heredoc_tmp", O_CREAT | O_WRONLY | O_TRUNC, \
-						0000644);
-	while (VRAI)
-	{
-		ft_printf_fd(1, "> ");
-		buf = ft_get_next_line(1);
-		if (!buf)
-			exit(1);
-		if (buf[ft_strlen(double_in->content)] == '\n' && \
-		!ft_strncmp(double_in->content, buf, ft_strlen(double_in->content)))
-			break ;
-		write(double_in->file, buf, ft_strlen(buf) - 1);
-		write(double_in->file, "\n", 1);
-		free(buf);
-	}
-	free(buf);
-	close(double_in->file);
-	double_in->file = open(".heredoc_tmp", O_RDONLY);
-	dup2(double_in->file, STDIN_FILENO);
-	close(double_in->file);
 }
 
 void	prepare_out_file(t_redirection *out, t_main *config)

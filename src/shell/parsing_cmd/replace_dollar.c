@@ -6,13 +6,23 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 01:06:29 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 06:19:32 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/22 01:10:21 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-char	*find_key(char **input, t_lst_env *env)
+char	*find_key_2(int i, char **input, char **key, t_lst_env *env)
+{
+	while (--i >= 0)
+		(*input)++;
+	free(*key);
+	if (env)
+		return (ft_strdup(env->value));
+	return (ft_strdup("\0"));
+}
+
+char	*find_key(t_main *config, char **input, t_lst_env *env)
 {
 	char	*key;
 	int		i;
@@ -21,6 +31,8 @@ char	*find_key(char **input, t_lst_env *env)
 	if (**input != '$')
 		return (ft_strdup("\0"));
 	(*input)++;
+	if (**input == '?')
+		return (replace_question_mark(config, input));
 	while ((*input)[i] && (ft_isalnum((*input)[i]) || (*input)[i] == '_'))
 		i++;
 	if (i == 0)
@@ -32,17 +44,12 @@ char	*find_key(char **input, t_lst_env *env)
 			break ;
 		env = env->next;
 	}
-	while (--i >= 0)
-		(*input)++;
-	free(key);
-	if (env)
-		return (ft_strdup(env->value));
-	return (ft_strdup("\0"));
+	return (find_key_2(i, input, &key, env));
 }
 
-char	*replace_question_mark(t_main *config)
+char	*replace_question_mark(t_main *config, char **input)
 {
-	debug_print_question_mark(config);
+	(*input)++;
 	return (ft_itoa(config->last_return_value));
 }
 
@@ -65,13 +72,7 @@ char	*replace_key(t_main *config, char *input, t_lst_env *env)
 			i--;
 			input++;
 		}
-		if (input[0] == '$' && input[1] == '?')
-		{
-			str = ft_better_strjoin(str, ft_itoa(config->last_return_value));
-			input += 2;
-		}
-		else
-			str = ft_better_strjoin(str, find_key(&input, env));
+		str = ft_better_strjoin(str, find_key(config, &input, env));
 	}
 	return (str);
 }
