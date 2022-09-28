@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:17:59 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:05 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 01:13:26 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/20 22:18:07 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exec_entry(t_main *config)
+int	debug_signal(int signal_code)
 {
-	free_cmds(config->context);
-	if (config->context->path)
-		free_char_pointer_pointer(config->context->path);
-	free_pipes(config->context);
-	free_t_block(config->line_block);
-	close(config->context->default_in);
-	close(config->context->default_out);
-	free(config->context);
-	config->context = FT_NULL;
+	ft_printf_fd(LOG_FD, "%s signal_handler:\n", BLUE_STAR);
+	ft_printf_fd(LOG_FD, "  %s signal_catched [", GREEN_PLUS);
+	if (signal_code == -1)
+		ft_printf_fd(LOG_FD, "EOF");
+	else if (signal_code == SIGINT)
+		ft_printf_fd(LOG_FD, "SIGINT");
+	else if (signal_code == SIGQUIT)
+		ft_printf_fd(LOG_FD, "SIGQUIT");
+	ft_printf_fd(LOG_FD, "(%d)]\n", signal_code);
+	return (signal_code);
 }

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:29:04 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 03:03:29 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/28 02:28:01 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,6 +36,8 @@ void	free_t_redirection(t_redirection *lst)
 		next = lst->next;
 		free(lst->content);
 		lst->content = FT_NULL;
+		if (lst->file_name)
+			free(lst->file_name);
 		free(lst);
 		lst = FT_NULL;
 		lst = next;

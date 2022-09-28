@@ -1,26 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   get_cwd.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:17:59 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:05 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 21:45:30 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 07:20:24 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exec_entry(t_main *config)
+char	*get_cwd(void)
 {
-	free_cmds(config->context);
-	if (config->context->path)
-		free_char_pointer_pointer(config->context->path);
-	free_pipes(config->context);
-	free_t_block(config->line_block);
-	close(config->context->default_in);
-	close(config->context->default_out);
-	free(config->context);
-	config->context = FT_NULL;
+	char	*cwd;
+
+	cwd = ft_calloc(1, 0x1000);
+	getcwd(cwd, 0x1000);
+	return (cwd);
 }

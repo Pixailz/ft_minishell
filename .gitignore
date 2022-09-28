@@ -6,5 +6,9 @@ minishell
 obj/
 a.out
 
+# test folder
+/test/*
+!/test/**/*.c
+
 # log from stderr
-/*.ansi
+/*.log

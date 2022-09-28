@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   ft_isdir.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:17:59 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:05 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/22 04:10:16 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 04:10:35 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exec_entry(t_main *config)
+int	main(int argc, char **argv)
 {
-	free_cmds(config->context);
-	if (config->context->path)
-		free_char_pointer_pointer(config->context->path);
-	free_pipes(config->context);
-	free_t_block(config->line_block);
-	close(config->context->default_in);
-	close(config->context->default_out);
-	free(config->context);
-	config->context = FT_NULL;
+	int	error_code;
+
+	if (argc != 2)
+		return (ft_error("only one arg", 1));
+	error_code = ft_isdir(argv[1]);
+	if (!error_code)
+		ft_printf("%s is a dir\n");
+	else if (error_code == 2)
+		ft_printf("%s do not exists\n");
+	else if (error_code == 1)
+		ft_printf("%s is not a dir\n");
+	return (0);
 }

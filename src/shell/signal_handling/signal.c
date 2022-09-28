@@ -1,26 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   signal.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:17:59 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:05 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/27 23:39:24 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exec_entry(t_main *config)
+void	set_signal_forked(int mode)
 {
-	free_cmds(config->context);
-	if (config->context->path)
-		free_char_pointer_pointer(config->context->path);
-	free_pipes(config->context);
-	free_t_block(config->line_block);
-	close(config->context->default_in);
-	close(config->context->default_out);
-	free(config->context);
-	config->context = FT_NULL;
+	if (!mode)
+		signal(SIGINT, &signal_handler_here_doc);
+	else
+		signal(SIGINT, &signal_handler_forked);
+}
+
+void	set_signal_base(void)
+{
+	signal(SIGINT, &signal_handler);
+	signal(SIGQUIT, SIG_IGN);
 }

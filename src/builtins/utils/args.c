@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   args.c                                             :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:17:59 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:05 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/20 20:03:48 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 06:43:57 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exec_entry(t_main *config)
+t_bool	have_args(t_cmd *cmd)
 {
-	free_cmds(config->context);
-	if (config->context->path)
-		free_char_pointer_pointer(config->context->path);
-	free_pipes(config->context);
-	free_t_block(config->line_block);
-	close(config->context->default_in);
-	close(config->context->default_out);
-	free(config->context);
-	config->context = FT_NULL;
+	int	error_code;
+
+	error_code = 0;
+	if (cmd->command[0] != FT_NULL)
+		if (cmd->command[1] != FT_NULL)
+			error_code = 1;
+	return (error_code);
+}
+
+t_bool	have_multiple_args(t_cmd *cmd)
+{
+	return (cmd->command[2] != FT_NULL);
 }

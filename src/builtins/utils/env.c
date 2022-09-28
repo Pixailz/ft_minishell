@@ -5,20 +5,41 @@
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/17 00:53:56 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 06:55:02 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/19 22:54:09 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/22 06:05:53 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	builtin_env(t_lst_env *envlst)
+char	*get_env(char *key, t_lst_env *env)
 {
-	while (envlst != FT_NULL)
+	while (env)
 	{
-		if (envlst && envlst->value)
-			printf("%s%s\n", (char *)envlst->key, (char *)envlst->value);
-		envlst = envlst->next;
+		if (!ft_strcmp_env(key, env->key))
+			break ;
+		env = env->next;
 	}
-	return (0);
+	if (env)
+		return (env->value);
+	return (FT_NULL);
+}
+
+void	set_env(char *key, char *value, t_lst_env **env)
+{
+	t_lst_env	*env_ptr;
+
+	env_ptr = *env;
+	while (env_ptr)
+	{
+		if (!ft_strcmp_env(key, env_ptr->key))
+			break ;
+		env_ptr = env_ptr->next;
+	}
+	if (env_ptr)
+	{
+		if (env_ptr->value != FT_NULL)
+			free(env_ptr->value);
+		env_ptr->value = (void *)ft_strdup(value);
+	}
 }

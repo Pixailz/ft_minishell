@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   exec.c                                             :+:      :+:    :+:   */
+/*   exec_minishell.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:17:59 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:05 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/09/24 22:50:17 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/25 00:15:44 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-void	free_exec_entry(t_main *config)
+int	exec_minishell(t_main *config)
 {
-	free_cmds(config->context);
-	if (config->context->path)
-		free_char_pointer_pointer(config->context->path);
-	free_pipes(config->context);
-	free_t_block(config->line_block);
-	close(config->context->default_in);
-	close(config->context->default_out);
-	free(config->context);
-	config->context = FT_NULL;
+	char	*tmp_1;
+	char	*tmp_2;
+	int		tmp_int;
+
+	tmp_1 = get_env("SHLVL", config->env);
+	tmp_int = ft_atoi(tmp_1) + 1;
+	tmp_2 = ft_itoa(tmp_int);
+	tmp_1 = ft_strjoin("SHLVL=", tmp_2);
+	free(tmp_2);
+	export_var_to_env(&config->env, tmp_1);
+	free(tmp_1);
+	return (0);
 }

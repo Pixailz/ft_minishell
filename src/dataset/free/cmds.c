@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/19 00:18:32 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/19 05:35:04 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 10:31:21 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,8 +15,11 @@
 void	free_cmd(t_cmd *cmd)
 {
 	free_t_list(cmd->tmp_command);
-	free(cmd->path);
-	cmd->path = FT_NULL;
+	if (cmd->path != FT_NULL)
+	{
+		free(cmd->path);
+		cmd->path = FT_NULL;
+	}
 	free_char_pointer_pointer(cmd->command);
 	if (cmd->in_redir)
 		free_t_redirection(cmd->in_redir);
