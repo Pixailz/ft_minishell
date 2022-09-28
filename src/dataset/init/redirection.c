@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 03:42:30 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/22 01:24:35 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/28 02:26:43 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,7 @@ t_redirection	*redir_new(char *content, int is_double)
 		return (FT_NULL);
 	ptr->content = ft_strdup(content);
 	ptr->file = -1;
+	ptr->file_name = FT_NULL;
 	ptr->is_double = is_double;
 	ptr->next = FT_NULL;
 	return (ptr);

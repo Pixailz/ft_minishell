@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/26 13:16:30 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/27 21:11:11 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:12:02 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,7 +22,7 @@ int	main(void)
 	max = 100;
 	while (counter < max)
 	{
-		name = ft_tmpfile();
+		name = ft_tmpfile(0);
 		ft_printf("[%s]\n", name);
 		free(name);
 		counter++;

@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/27 21:10:52 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/28 03:28:28 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,7 +70,7 @@
 #  define DEBUG				1
 # endif
 
-# define TMP_RG "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
+# define TMP_ST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 # define VRAI				42
 
 # define LOG_FD				420
@@ -178,6 +178,7 @@ typedef struct s_redirection
 	char					*content;
 	int						is_double;
 	int						file;
+	char					*file_name;
 	struct s_redirection	*next;
 }				t_redirection;
 
@@ -405,10 +406,11 @@ void			prepare_redirection(t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_heredoc.c
 char			*get_tmp_file(void);
-void			forked_double_in(t_redirection *double_in, t_main *conf, char **file_n);
+void			forked_double_in(t_redirection *double_in, t_main *conf);
 void			prepare_in_double_file(t_redirection *double_in, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_ng.c
+void			post_prepare_in_file(t_main *config, t_redirection *last);
 void			prepare_in_file_ng(t_main *config);
 void			prepare_out_file_ng(t_main *config);
 
@@ -530,7 +532,7 @@ int				ft_splitb_get_size(char *str, char delim, char *encl);
 int				ft_splitb_get_word(char **str, char delim, char *encl);
 
 // utils/ft_tmpfile.c
-char			*ft_tmpfile(void);
+char			*ft_tmpfile(int in_tmp);
 
 /* ########################################################################## */
 
