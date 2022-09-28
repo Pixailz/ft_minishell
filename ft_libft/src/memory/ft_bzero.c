@@ -1,27 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_bzero.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 16:13:19 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/02/17 13:52:28 by stales            #+#    #+#             */
+/*   Updated: 2022/09/28 18:06:48 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
+#include "libft_memory.h"
 
-void	set_signal_forked(int mode)
+/**
+ * @brief			Erases the data in the n bytes of the memory starting at the
+ *					location pointed to by s, by writing zeros (bytes containing
+ *					'\0') to that area.
+ *
+ * @param s			Area to reset
+ * @param n			Number of byte to reset
+ *
+ * @return (void)	None.
+ */
+void	ft_bzero(void *s, t_size n)
 {
-	if (!mode)
-		signal(SIGINT, &signal_handler_here_doc);
-	else
-		signal(SIGINT, &signal_handler_forked);
-}
+	unsigned char	*tmp;
 
-void	set_signal_base(void)
-{
-	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	tmp = (unsigned char *)s;
+	while (n--)
+		*tmp++ = 0;
 }

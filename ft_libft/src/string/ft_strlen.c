@@ -1,27 +1,28 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_strlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 16:13:19 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/02/17 17:56:04 by pix               #+#    #+#             */
+/*   Updated: 2022/09/28 18:02:37 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	set_signal_forked(int mode)
+/**
+ * @brief			Calculate the length of a string
+ *
+ * @param str		String to mesure
+ *
+ * @return (int)	Length of the strings
+ */
+int	ft_strlen(char *str)
 {
-	if (!mode)
-		signal(SIGINT, &signal_handler_here_doc);
-	else
-		signal(SIGINT, &signal_handler_forked);
-}
+	char	*tmp;
 
-void	set_signal_base(void)
-{
-	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	tmp = str;
+	while (*str)
+		str++;
+	return (str - tmp);
 }

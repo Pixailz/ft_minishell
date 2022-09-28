@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_isalpha.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 16:13:19 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/02/17 18:31:21 by pix               #+#    #+#             */
+/*   Updated: 2022/09/28 17:56:49 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	set_signal_forked(int mode)
+/**
+ * @brief			Checks if c is an alphabetic character.
+ *
+ * @param c			Character value to check
+ *
+ * @return (int)	Nonzero if character is alphabetic and zero if not
+ */
+int	ft_isalpha(const char c)
 {
-	if (!mode)
-		signal(SIGINT, &signal_handler_here_doc);
-	else
-		signal(SIGINT, &signal_handler_forked);
-}
-
-void	set_signal_base(void)
-{
-	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	return ((c >= 'a' && c <= 'z') || (c >= 'A' && c <= 'Z' ));
 }

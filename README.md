@@ -68,7 +68,7 @@ valgrind  --leak-check=full \
           --show-leak-kinds=all \
           --suppressions=$(pwd)/vsupp \
           --trace-children=yes \
-          --track-fds=yes ./minishell 420>exec.log ; cat exec.log
+          --track-fds=yes ./minishell 420>exec.log ; echo "error_code [$?]"; cat exec.log
 ```
 
 > strace with ioctl

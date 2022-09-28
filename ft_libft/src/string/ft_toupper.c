@@ -1,27 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_toupper.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 16:13:19 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/02/17 18:59:57 by pix               #+#    #+#             */
+/*   Updated: 2022/09/28 18:03:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	set_signal_forked(int mode)
+/**
+ * @brief			Converts the letter c to upper case, if possible.
+ *
+ * @param c			Character to convert
+ *
+ * @return (int)	The value returned is that of the converted letter, or c if
+ *					the conversion was not possible.
+ */
+int	ft_toupper(int c)
 {
-	if (!mode)
-		signal(SIGINT, &signal_handler_here_doc);
-	else
-		signal(SIGINT, &signal_handler_forked);
-}
-
-void	set_signal_base(void)
-{
-	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	if (c >= 'a' && c <= 'z')
+		return (c ^ 0x20);
+	return (c);
 }

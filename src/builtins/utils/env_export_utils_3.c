@@ -1,3 +1,15 @@
+/* ************************************************************************** */
+/*                                                                            */
+/*                                                        :::      ::::::::   */
+/*   env_export_utils_3.c                               :+:      :+:    :+:   */
+/*                                                    +:+ +:+         +:+     */
+/*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
+/*                                                +#+#+#+#+#+   +#+           */
+/*   Created: 2022/09/28 17:54:42 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/09/28 17:55:13 by brda-sil         ###   ########.fr       */
+/*                                                                            */
+/* ************************************************************************** */
+
 #include "minishell.h"
 
 static int	ft_strcmp_env_join(char *s1, char *s2)
@@ -22,15 +34,15 @@ static void	unlink_key_value_join(char *var_env, char **key, char **value)
 		free(*key);
 	while (var_env[i] != '+')
 		i++;
-    *key = ft_better_strjoin(ft_substr(var_env, 0, i), ft_strdup("="));
-    i += 2;
+	*key = ft_better_strjoin(ft_substr(var_env, 0, i), ft_strdup("="));
+	i += 2;
 	while (--i > 0)
 		var_env++;
 	var_env++;
-    if (!(*value))
-	    *value = ft_strdup(var_env);
-    else
-        *value = ft_better_strjoin(*value, ft_strdup(var_env));
+	if (!(*value))
+		*value = ft_strdup(var_env);
+	else
+		*value = ft_better_strjoin(*value, ft_strdup(var_env));
 }
 
 static t_lst_env	*ft_lstnew_env_join(void *env)
@@ -60,13 +72,14 @@ void	export_join(t_lst_env **envlst, char *var)
 		{
 			if (tmp && ft_strcmp_env_join(var, tmp->key) == 0)
 			{
-				unlink_key_value_join(var, (char **)&tmp->key, (char **)&tmp->value);
+				unlink_key_value_join(var, (char **)&tmp->key,
+					(char **)&tmp->value);
 				return ;
 			}
 			tmp = tmp->next;
 		}
 	}
-    ft_lstadd_back_env(envlst, ft_lstnew_env_join(var));
+	ft_lstadd_back_env(envlst, ft_lstnew_env_join(var));
 	tmp = *envlst;
 	while (tmp != FT_NULL)
 	{

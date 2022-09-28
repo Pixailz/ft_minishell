@@ -1,27 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   signal.c                                           :+:      :+:    :+:   */
+/*   ft_isdigit.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/09/19 00:20:16 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 16:13:19 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/02/17 18:31:21 by pix               #+#    #+#             */
+/*   Updated: 2022/09/28 17:57:05 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "minishell.h"
-
-void	set_signal_forked(int mode)
+/**
+ * @brief			checks if c is a digit (0 through 9).
+ *
+ * @param c			character value to check
+ *
+ * @return (int)	nonzero if character is a digit and zero if not
+ */
+int	ft_isdigit(const char c)
 {
-	if (!mode)
-		signal(SIGINT, &signal_handler_here_doc);
-	else
-		signal(SIGINT, &signal_handler_forked);
-}
-
-void	set_signal_base(void)
-{
-	signal(SIGINT, &signal_handler);
-	signal(SIGQUIT, SIG_IGN);
+	return (c >= '0' && c <= '9');
 }
