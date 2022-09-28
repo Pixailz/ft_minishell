@@ -51,6 +51,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `echo pass >>file1 | echo pass >> file2`
 
 ## DEBUG
+
 > without vsupp work fine
 
 `valgrind --leak-check=full <exec_path>`
@@ -75,7 +76,8 @@ valgrind  --leak-check=full \
 `strace -e trace=ioctl bash`
 
 ## exec with log
-`./minishell 420>exec.log; cat exec.log`
+
+`./minishell 420>exec.log; echo "exit_code [$?]"; cat exec.log`
 
 ## termios
 https://stackoverflow.com/a/27559151

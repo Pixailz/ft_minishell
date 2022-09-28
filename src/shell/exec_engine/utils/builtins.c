@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:27:04 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 02:23:37 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 20:40:01 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,23 @@ int	is_good_builin(char *from, char *to)
 	else if (ft_strncmp(from, to, len_to))
 		is_good = 0;
 	return (is_good);
+}
+
+t_bool	is_minishell(char *cmd)
+{
+	char	**cmd_splitted;
+	int		last_char;
+	int		return_code;
+
+	return_code = False;
+	if (!ft_isfile(cmd, S_IXUSR))
+		return (False);
+	cmd_splitted = ft_split(cmd, '/');
+	last_char = ft_get_words(cmd, '/') - 1;
+	if (!ft_strncmp(cmd_splitted[last_char], "minishell", 9))
+		return_code = True;
+	free_char_pointer_pointer(cmd_splitted);
+	return (return_code);
 }
 
 int	get_builtin(t_cmd *cmd)
@@ -44,7 +61,7 @@ int	get_builtin(t_cmd *cmd)
 		return (UNSET);
 	else if (is_good_builin(cmd->command[0], "exit"))
 		return (EXIT);
-	else if (ft_isfile(cmd->command[0], S_IXUSR) == 1)
+	else if (is_minishell(cmd->command[0]))
 		return (MINISHELL);
 	return (NOT_BUILTIN);
 }

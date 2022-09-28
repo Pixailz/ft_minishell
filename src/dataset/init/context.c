@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 07:32:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/21 05:21:08 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/27 23:08:30 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -86,6 +86,7 @@ int	init_context_entry(t_main *config)
 {
 	int	return_code;
 
+	config->interrupt = 0;
 	return_code = init_context(config);
 	if (return_code)
 		return (return_code);
