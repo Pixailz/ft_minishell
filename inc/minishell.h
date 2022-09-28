@@ -284,9 +284,8 @@ int				ft_strcmp_env(char *s1, char *s2);
 t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
 t_lst_env		*ft_lstnew_env(void *env);
 
-
 // builtins/utils/env_export_utils_3.c
-void	export_join(t_lst_env **envlst, char *var);
+void			export_join(t_lst_env **envlst, char *var);
 
 // builtins/utils/get_cwd.c
 char			*get_cwd(void);
