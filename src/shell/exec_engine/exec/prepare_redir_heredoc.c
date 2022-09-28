@@ -43,7 +43,7 @@ void	forked_double_in(t_redirection *double_in, t_main *conf)
 	}
 	if (!buff && !g_interrupt)
 		ft_printf_fd(STDERR_FILENO, \
-			"\nwarning : here-document delimited by EOF(wanted '%s')\n", \
+			"warning : here-document delimited by EOF(wanted '%s')\n", \
 				double_in->content);
 	else if (buff)
 		free(buff);
