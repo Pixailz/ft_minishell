@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/25 19:29:23 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/27 21:44:47 by pmailly          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,6 +56,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/builtins/utils/env.c \
 				   src/builtins/utils/env_export_utils_1.c \
 				   src/builtins/utils/env_export_utils_2.c \
+				   src/builtins/utils/env_export_utils_3.c \
 				   src/builtins/utils/get_cwd.c \
 				   src/builtins/utils/is_good_var_env.c \
 				   src/builtins/utils/params.c \
