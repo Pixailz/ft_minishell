@@ -421,6 +421,7 @@ void			prepare_in_double_file(t_redirection *double_in, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_ng.c
 void			post_prepare_in_file(t_main *config, t_redirection *last);
+void			prepare_in_double_in_ng(t_main *config);
 void			prepare_in_file_ng(t_main *config);
 void			prepare_out_file_ng(t_main *config);
 

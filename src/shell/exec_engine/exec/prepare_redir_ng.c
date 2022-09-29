@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 03:24:13 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:00:31 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void	post_prepare_in_file(t_main *config, t_redirection *last)
 	}
 }
 
-void	prepare_in_file_ng(t_main *config)
+void	prepare_in_double_in_ng(t_main *config)
 {
 	t_redirection	*tmp;
 	t_redirection	*prev;
@@ -53,10 +53,21 @@ void	prepare_in_file_ng(t_main *config)
 	{
 		if (tmp->is_double)
 			prepare_in_double_file(tmp, config);
-		else
-			prepare_in_file(tmp, config);
 		prev = tmp;
 		tmp = tmp->next;
 	}
 	post_prepare_in_file(config, prev);
+}
+
+void	prepare_in_file_ng(t_main *config)
+{
+	t_redirection	*tmp;
+
+	tmp = config->context->cmd[config->context->cmd_id]->in_redir;
+	while (tmp)
+	{
+		if (!tmp->is_double)
+			prepare_in_file(tmp, config);
+		tmp = tmp->next;
+	}
 }

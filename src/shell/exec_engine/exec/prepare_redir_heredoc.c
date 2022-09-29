@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/29 18:28:12 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:47:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -30,7 +30,6 @@ void	forked_double_in(t_redirection *double_in, t_main *conf)
 	char	*buff;
 	int		file;
 
-	g_interrupt = 0;
 	file = open(double_in->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	buff = readline("> ");
 	while (buff && ft_strcmp(buff, double_in->content))
