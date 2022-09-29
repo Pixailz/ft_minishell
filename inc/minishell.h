@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/29 18:29:06 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 20:12:53 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -188,15 +188,16 @@ typedef struct s_redirection
 
 typedef struct s_context
 {
-	int		cmd_nb;
-	int		cmd_id;
-	int		pipe_id;
-	int		default_in;
-	int		default_out;
-	t_bool	fork_first;
-	int		**pipes;
-	t_cmd	**cmd;
-	char	**path;
+	int				cmd_nb;
+	int				cmd_id;
+	int				pipe_id;
+	int				default_in;
+	int				default_out;
+	t_bool			fork_first;
+	t_redirection	*last_in;
+	int				**pipes;
+	t_cmd			**cmd;
+	char			**path;
 
 }			t_context;
 
@@ -420,7 +421,7 @@ void			forked_double_in(t_redirection *double_in, t_main *conf);
 void			prepare_in_double_file(t_redirection *double_in, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_ng.c
-void			post_prepare_in_file(t_main *config, t_redirection *last);
+void			post_prepare_in_file(t_main *config);
 void			prepare_in_double_in_ng(t_main *config);
 void			prepare_in_file_ng(t_main *config);
 void			prepare_out_file_ng(t_main *config);
