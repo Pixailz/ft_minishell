@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:06:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/25 07:18:55 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:02:50 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -74,16 +74,26 @@ void	init_cmds(t_main *config)
 	get_builtins(config);
 }
 
-void	prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str)
+void	prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str, t_main *config)
 {
-	if (prev_str)
+	if ((*tmp) == FT_NULL)
+		get_error_redir(*tmp, config);
+	else
 	{
-		if (!cmd->tmp_command)
-			cmd->tmp_command = ft_lstnew((*tmp)->block);
+		if (redir_is_good_name((*tmp)->block))
+		{
+			if (prev_str)
+			{
+				if (!cmd->tmp_command)
+					cmd->tmp_command = ft_lstnew((*tmp)->block);
+				else
+					ft_lstadd_back(&cmd->tmp_command, ft_lstnew((*tmp)->block));
+			}
+		}
 		else
-			ft_lstadd_back(&cmd->tmp_command, ft_lstnew((*tmp)->block));
+			get_error_redir(*tmp, config);
+		*tmp = (*tmp)->next;
 	}
-	*tmp = (*tmp)->next;
 }
 
 void	prepare_cmds_1(t_main *config)
@@ -107,6 +117,6 @@ void	prepare_cmds_1(t_main *config)
 			tmp = tmp->next;
 		else
 			is_prev_str = 1;
-		prepare_cmds_2(config->context->cmd[cmd_id], &tmp, is_prev_str);
+		prepare_cmds_2(config->context->cmd[cmd_id], &tmp, is_prev_str, config);
 	}
 }

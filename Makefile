@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/28 18:09:13 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/09/29 19:08:42 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ TARGET			:= minishell
 RM				:= rm -rf
 CC				:= gcc
 MAKE			:= make -C
-VERSION			:= 4.1.0
+VERSION			:= 4.1.1
 $(eval export MAIN=1)
 
 ifneq ($(PADDING),60)
@@ -83,6 +83,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/shell/exec_engine/exec/exec_prepare.c \
 				   src/shell/exec_engine/exec/execute.c \
 				   src/shell/exec_engine/exec/prepare_cmds.c \
+				   src/shell/exec_engine/exec/prepare_cmds_error.c \
 				   src/shell/exec_engine/exec/prepare_redir.c \
 				   src/shell/exec_engine/exec/prepare_redir_heredoc.c \
 				   src/shell/exec_engine/exec/prepare_redir_ng.c \

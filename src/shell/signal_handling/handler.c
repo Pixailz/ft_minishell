@@ -6,13 +6,11 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 17:40:29 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:28:11 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-int	g_interrupt;
 
 void	handle_sig_int(void)
 {

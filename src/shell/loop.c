@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 17:39:26 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 19:08:22 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,7 @@ int	is_command_empty(t_main *config)
 
 void	exit_ctrl_d(t_main *config)
 {
-	ft_printf("\nexit\n");
+	ft_printf("exit\n");
 	if (exit_check_shlvl(config))
 	{
 		free_config_entry(config);

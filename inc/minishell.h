@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 18:07:59 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:29:06 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -117,6 +117,8 @@
 # define C_PROMPT_STATUS_1	B_LIGHT_GREEN
 # define C_PROMPT_STATUS_2	B_ORANGE
 # define C_PROMPT_STATUS_0	B_RED
+
+extern int	g_interrupt;
 
 /* ########################################################################## */
 
@@ -340,8 +342,7 @@ void			get_prompt_init_cwd(t_main *config);
 // dataset/init/redirection.c
 t_redirection	*redir_new(char *content, int is_double);
 void			init_redirection(t_main *config);
-void			init_redirection_lst(t_redirection **lst, char *content, \
-					int is_double);
+void			init_redirection_lst(t_redirection **lst, char *content, int is_double);
 void			redir_addback(t_redirection **lst, t_redirection *new);
 
 // debug/builtin.c
@@ -400,20 +401,23 @@ size_t			init_cmds_count_args(t_list *tmp);
 void			init_cmds(t_main *config);
 void			init_get_cmd_paths(t_main *config);
 void			prepare_cmds_1(t_main *config);
-void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str);
+void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str, t_main *config);
+
+// shell/exec_engine/exec/prepare_cmds_error.c
+int				redir_is_good_name(char *file_name);
+void			get_error_interrupt(t_main *config);
+void			get_error_redir(t_block *tmp, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir.c
 void			prepare_in_file(t_redirection *in_file, t_main *config);
-void			prepare_out_double_file(t_redirection *double_out, \
-					t_main *config);
+void			prepare_out_double_file(t_redirection *double_out, t_main *config);
 void			prepare_out_file(t_redirection *out, t_main *config);
 void			prepare_redirection(t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_heredoc.c
 char			*get_tmp_file(void);
 void			forked_double_in(t_redirection *double_in, t_main *conf);
-void			prepare_in_double_file(t_redirection *double_in, \
-					t_main *config);
+void			prepare_in_double_file(t_redirection *double_in, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_ng.c
 void			post_prepare_in_file(t_main *config, t_redirection *last);
@@ -546,8 +550,7 @@ t_int64			ft_randint(int start, int end);
 
 // utils/ft_splitb.c
 char			**ft_splitb(char *s, char delim, char *encl);
-char			**ft_splitb_get_words(char *s, char delim, char *encl, \
-					int tab_size);
+char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
 int				ft_splitb_get_size(char *str, char delim, char *encl);
 int				ft_splitb_get_word(char **str, char delim, char *encl);
 
