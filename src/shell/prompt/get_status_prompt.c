@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 00:14:52 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/27 23:13:34 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 01:58:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,31 +24,38 @@ int	get_status_prompt_color(t_main *config)
 	return (error_color);
 }
 
+void	get_status_prompt_fill_array(int ret_val, char **tmp_2, char *tmp_1)
+{
+	if (ret_val >= 0 && ret_val <= 9)
+	{
+		(*tmp_2)[0] = ' ';
+		(*tmp_2)[1] = tmp_1[0];
+		(*tmp_2)[2] = ' ';
+	}
+	else if (ret_val >= 10 && ret_val <= 99)
+	{
+		(*tmp_2)[0] = ' ';
+		(*tmp_2)[1] = tmp_1[0];
+		(*tmp_2)[2] = tmp_1[1];
+	}
+	else
+	{
+		(*tmp_2)[0] = tmp_1[0];
+		(*tmp_2)[1] = tmp_1[1];
+		(*tmp_2)[2] = tmp_1[2];
+	}
+}
+
 char	*get_status_prompt_array(t_main *config)
 {
 	char	*tmp_1;
 	char	*tmp_2;
 
 	tmp_2 = (char *)ft_calloc(sizeof(char), 4);
+	if (!tmp_2)
+		return (FT_NULL);
 	tmp_1 = ft_itoa(config->last_return_value);
-	if (config->last_return_value >= 0 && config->last_return_value <= 9)
-	{
-		tmp_2[0] = ' ';
-		tmp_2[1] = tmp_1[0];
-		tmp_2[2] = ' ';
-	}
-	else if (config->last_return_value >= 10 && config->last_return_value <= 99)
-	{
-		tmp_2[0] = ' ';
-		tmp_2[1] = tmp_1[0];
-		tmp_2[2] = tmp_1[1];
-	}
-	else
-	{
-		tmp_2[0] = tmp_1[0];
-		tmp_2[1] = tmp_1[1];
-		tmp_2[2] = tmp_1[2];
-	}
+	get_status_prompt_fill_array(config->last_return_value, &tmp_2, tmp_1);
 	free(tmp_1);
 	return (tmp_2);
 }
