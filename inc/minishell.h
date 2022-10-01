@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/01 18:32:45 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 01:13:11 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,7 +61,7 @@
 #  define DEBUG				1
 # endif
 
-# define VRAI				42
+# define THE_RESPONE_OF_LIFE				42
 
 # define LOG_FD				420
 
@@ -116,6 +116,7 @@ typedef struct s_main
 {
 	int					last_return_value;
 	int					interrupt;
+	int					base_shlvl;
 	char				*prompt_base;
 	char				*user;
 	char				*home;
@@ -175,6 +176,7 @@ typedef struct s_context
 	t_bool	fork_first;
 	int		**pipes;
 	t_cmd	**cmd;
+	char	**env;
 	char	**path;
 
 }			t_context;
@@ -357,9 +359,6 @@ char			**do_something_with_argv(char **argv);
 // shell/exec_engine/exec/exec_builtin.c
 int				exec_builtin(t_cmd *cmd, t_main *config);
 
-// shell/exec_engine/exec/exec_minishell.c
-int				exec_minishell(t_main *config);
-
 // shell/exec_engine/exec/exec_prepare.c
 void			exec_prepare_between(t_context *context);
 void			exec_prepare_entry(t_main *config);
@@ -370,7 +369,7 @@ void			exec_prepare_pipe(t_context *context);
 // shell/exec_engine/exec/execute.c
 int				exec_command(t_main *config);
 int				exec_entry(t_main *config);
-int				execve_ng(t_cmd *cmd);
+int				execve_ng(t_cmd *cmd, t_context *context);
 int				is_last(t_context *context);
 void			exec_command_child(t_main *config);
 
@@ -482,6 +481,11 @@ void			signal_handler_here_doc(int signal_code);
 void			set_signal_base(void);
 void			set_signal_forked(int mode);
 
+// utils/env_to_char.c
+char			**env_to_char(t_lst_env *env);
+char			*env_get_line(char *key, char *value);
+t_size			env_get_size(t_lst_env *env);
+
 // utils/ft_better_split.c
 t_list			*ft_better_split(char *s);
 void			manage_quotes(char **s, char c, t_list **input);
@@ -490,6 +494,11 @@ void			manage_symbols(char **s, char c, t_list **input);
 
 // utils/ft_better_strjoin.c
 char			*ft_better_strjoin(char *s1, char *s2);
+
+// utils/sh_lvl.c
+int				get_shlvl(t_main *config);
+void			decrease_shlvl(t_main *config);
+void			increase_shlvl(t_main *config);
 
 /* ########################################################################## */
 

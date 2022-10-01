@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:35:55 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 12:36:09 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 00:11:03 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,19 +14,9 @@
 
 int	exit_check_shlvl(t_main *config)
 {
-	char	*shlvl_str;
-	char	*shlvl_new;
-	int		shlvl;
-
-	shlvl_str = get_env("SHLVL", config->env);
-	shlvl = ft_atoi(shlvl_str);
-	if (shlvl != 1)
+	if (get_shlvl(config) > config->base_shlvl)
 	{
-		shlvl_str = ft_itoa(shlvl - 1);
-		shlvl_new = ft_strjoin("SHLVL=", shlvl_str);
-		free(shlvl_str);
-		export_var_to_env(&config->env, shlvl_new);
-		free(shlvl_new);
+		decrease_shlvl(config);
 		return (False);
 	}
 	return (True);

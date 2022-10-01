@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 07:32:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/27 23:08:30 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 00:46:51 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,6 +90,7 @@ int	init_context_entry(t_main *config)
 	return_code = init_context(config);
 	if (return_code)
 		return (return_code);
+	config->context->env = env_to_char(config->env);
 	return_code = init_cmd(config);
 	if (return_code)
 		return (return_code);

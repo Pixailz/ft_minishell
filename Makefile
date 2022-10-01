@@ -79,7 +79,6 @@ SRC_C			:= src/builtins/cd.c \
 				   src/debug/signal.c \
 				   src/minishell.c \
 				   src/shell/exec_engine/exec/exec_builtin.c \
-				   src/shell/exec_engine/exec/exec_minishell.c \
 				   src/shell/exec_engine/exec/exec_prepare.c \
 				   src/shell/exec_engine/exec/execute.c \
 				   src/shell/exec_engine/exec/prepare_cmds.c \
@@ -102,8 +101,10 @@ SRC_C			:= src/builtins/cd.c \
 				   src/shell/prompt/get_status_prompt.c \
 				   src/shell/signal_handling/handler.c \
 				   src/shell/signal_handling/signal.c \
+				   src/utils/env_to_char.c \
 				   src/utils/ft_better_split.c \
-				   src/utils/ft_better_strjoin.c
+				   src/utils/ft_better_strjoin.c \
+				   src/utils/sh_lvl.c
 
 # OBJ
 

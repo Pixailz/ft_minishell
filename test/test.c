@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/25 04:48:33 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 01:55:42 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 01:13:11 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,7 +98,7 @@ void	launch_prompt(void)
 	char		*line_buffer;
 	char		*prompt;
 
-	while (VRAI)
+	while (THE_RESPONE_OF_LIFE)
 	{
 		prompt = get_prompt_4();
 		g_interrupt_2 = 0;
