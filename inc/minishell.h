@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 03:28:28 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/01 18:32:45 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -51,15 +51,6 @@
 /* errno
  */
 
-# include <sys/ioctl.h>
-/* ioctl()
- * TCXONC
- */
-
-# include <termios.h>
-/* TCOON
- */
-
 /* ########################################################################## */
 
 /* ########################################################################## */
@@ -70,7 +61,6 @@
 #  define DEBUG				1
 # endif
 
-# define TMP_ST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
 # define VRAI				42
 
 # define LOG_FD				420
@@ -121,13 +111,6 @@
 /* ########################################################################## */
 /* STRUCT / ENUM / TYPEDEF */
 /* ####################### */
-
-// BOOOL
-typedef enum e_bool
-{
-	False,
-	True
-}			t_bool;
 
 typedef struct s_main
 {
@@ -507,32 +490,6 @@ void			manage_symbols(char **s, char c, t_list **input);
 
 // utils/ft_better_strjoin.c
 char			*ft_better_strjoin(char *s1, char *s2);
-
-// utils/ft_isdir.c
-int				ft_isdir(char *dir_name, int mode);
-
-// utils/ft_isfile.c
-int				ft_isfile(char *file_path, int mode);
-
-// utils/ft_patoi.c
-int				ft_is_good_int(t_int64 n, int neg);
-int				ft_patoi(char *nstr, int *has_overflow);
-
-// utils/ft_patoll.c
-int				ft_is_good_long_long(t_int64 n, int neg);
-t_int64			ft_patoll(char *nstr, int *has_overflow);
-
-// utils/ft_randint.c
-t_int64			ft_randint(int start, int end);
-
-// utils/ft_splitb.c
-char			**ft_splitb(char *s, char delim, char *encl);
-char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
-int				ft_splitb_get_size(char *str, char delim, char *encl);
-int				ft_splitb_get_word(char **str, char delim, char *encl);
-
-// utils/ft_tmpfile.c
-char			*ft_tmpfile(int in_tmp);
 
 /* ########################################################################## */
 

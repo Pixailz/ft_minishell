@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/25 19:29:23 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/01 18:31:00 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -32,16 +32,16 @@ endif
 
 # DIR
 SRC_DIR			:= src
-LIB_DIR			:= lib
+LIB_DIR			:= .
 OBJ_DIR			:= obj
 OBJ_SUBDIR		:= $(sort $(shell find $(SRC_DIR) -type d | \
 											sed 's|$(SRC_DIR)|$(OBJ_DIR)|g'))
 INC_TMP			:= inc \
-				   $(LIB_DIR)/ft_libft/inc
+				   $(LIB_DIR)/libft/inc
 INC_DIR			:= $(addprefix -I,$(INC_TMP))
 
 # LIB
-LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
+LIBFT			:= $(LIB_DIR)/libft/libft.a
 
 # SRC
 SRC_C			:= src/builtins/cd.c \
@@ -103,14 +103,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/shell/signal_handling/handler.c \
 				   src/shell/signal_handling/signal.c \
 				   src/utils/ft_better_split.c \
-				   src/utils/ft_better_strjoin.c \
-				   src/utils/ft_isdir.c \
-				   src/utils/ft_isfile.c \
-				   src/utils/ft_patoi.c \
-				   src/utils/ft_patoll.c \
-				   src/utils/ft_randint.c \
-				   src/utils/ft_splitb.c \
-				   src/utils/ft_tmpfile.c
+				   src/utils/ft_better_strjoin.c
 
 # OBJ
 
@@ -205,7 +198,7 @@ $(TARGET):				$(LIBFT) $(OBJ_C)
 	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
 
 $(LIBFT):
-	@$(MAKE) lib/ft_libft all
+	@$(MAKE) libft all
 
 all:			setup $(TARGET)
 	@printf "$$usage"
@@ -223,21 +216,21 @@ call_logo:
 	@printf "$(ascii_color)$$ascii_art"
 
 clean_all:				clean
-	@$(MAKE) lib/ft_libft clean
+	@$(MAKE) libft clean
 
 clean:
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(OBJ_DIR)$(reset)\n"
 	@$(RM) $(OBJ_DIR)
 
 fclean_all:				fclean
-	@$(MAKE) lib/ft_libft fclean
+	@$(MAKE) libft fclean
 
 fclean:					clean
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(TARGET)$(reset)\n"
 	@$(RM) $(TARGET)
 
 re_lib:
-	@$(MAKE) lib/ft_libft re all
+	@$(MAKE) libft re all
 
 test:					setup $(OBJ_C) $(LIBFT)
 	@$(CC) $(TEST) -o ./test/$@ $(filter-out obj/minishell.o,$(OBJ_C)) $(LIBS) $(CFLAGS)
