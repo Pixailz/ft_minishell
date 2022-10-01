@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/29 19:08:42 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/01 18:28:05 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -37,11 +37,11 @@ OBJ_DIR			:= obj
 OBJ_SUBDIR		:= $(sort $(shell find $(SRC_DIR) -type d | \
 											sed 's|$(SRC_DIR)|$(OBJ_DIR)|g'))
 INC_TMP			:= inc \
-				   $(LIB_DIR)/ft_libft/inc
+				   $(LIB_DIR)/libft/inc
 INC_DIR			:= $(addprefix -I,$(INC_TMP))
 
 # LIB
-LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
+LIBFT			:= $(LIB_DIR)/libft/libft.a
 
 # SRC
 SRC_C			:= src/builtins/cd.c \
@@ -209,7 +209,7 @@ $(TARGET):				setup $(LIBFT) $(OBJ_C)
 	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
 
 $(LIBFT):
-	@$(MAKE) $(LIB_DIR)/ft_libft all
+	@$(MAKE) $(LIB_DIR)/libft all
 
 all:			setup $(TARGET)
 	@printf "$$usage"
@@ -227,21 +227,21 @@ call_logo:
 	@printf "$(ascii_color)$$ascii_art"
 
 clean_all:				clean
-	@$(MAKE) $(LIB_DIR)/ft_libft clean
+	@$(MAKE) $(LIB_DIR)/libft clean
 
 clean:
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(OBJ_DIR)$(reset)\n"
 	@$(RM) $(OBJ_DIR)
 
 fclean_all:				fclean
-	@$(MAKE) $(LIB_DIR)/ft_libft fclean
+	@$(MAKE) $(LIB_DIR)/libft fclean
 
 fclean:					clean
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(TARGET)$(reset)\n"
 	@$(RM) $(TARGET)
 
 re_lib:
-	@$(MAKE) $(LIB_DIR)/ft_libft re all
+	@$(MAKE) $(LIB_DIR)/libft re all
 
 test:					setup $(OBJ_C) $(LIBFT)
 	@$(CC) $(TEST) -o ./test/$@ $(filter-out obj/minishell.o,$(OBJ_C)) $(LIBS) $(CFLAGS)
