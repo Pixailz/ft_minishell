@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:56:14 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/01 18:34:03 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:45:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -38,7 +38,7 @@ int	cd_get_error_code(t_cmd *cmd)
 			"minishell: cd: %s: No such file or directory\n", cmd->command[1]);
 		return (1);
 	}
-	else if (!ft_isdir(cmd->command[1], S_IXUSR))
+	else if (!ft_iscdable(cmd->command[1]))
 	{
 		ft_printf_fd(STDERR_FILENO, \
 			"minishell: cd: %s: Permission denied\n", cmd->command[1]);
@@ -66,7 +66,8 @@ int	builtin_cd(t_cmd *cmd, t_main *config)
 	}
 	else
 		to_change = get_env("HOME", config->env);
-	if (chdir(to_change) == -1)
-		error_code = cd_get_error_code(cmd);
+	if (ft_strlen(to_change) != 0)
+		if (chdir(to_change) == -1)
+			error_code = cd_get_error_code(cmd);
 	return (error_code);
 }

@@ -6,11 +6,9 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 18:47:57 by pix               #+#    #+#             */
-/*   Updated: 2022/07/01 11:49:24 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/28 17:57:20 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
-
-#include "libft_check.h"
 
 /**
  * @brief			Checks if c is any printable character including space.

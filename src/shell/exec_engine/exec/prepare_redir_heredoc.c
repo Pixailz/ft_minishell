@@ -6,13 +6,11 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 03:29:14 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:45:54 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
-
-extern int	g_interrupt;
 
 char	*get_tmp_file(void)
 {
@@ -32,7 +30,6 @@ void	forked_double_in(t_redirection *double_in, t_main *conf)
 	char	*buff;
 	int		file;
 
-	g_interrupt = 0;
 	file = open(double_in->file_name, O_CREAT | O_WRONLY | O_TRUNC, 0000644);
 	buff = readline("> ");
 	while (buff && ft_strcmp(buff, double_in->content))
@@ -43,8 +40,8 @@ void	forked_double_in(t_redirection *double_in, t_main *conf)
 	}
 	if (!buff && !g_interrupt)
 		ft_printf_fd(STDERR_FILENO, \
-			"warning : here-document delimited by EOF(wanted '%s')\n", \
-				double_in->content);
+		"minishell: warning : here-document delimited by EOF(wanted '%s')\n", \
+			double_in->content);
 	else if (buff)
 		free(buff);
 	close(file);

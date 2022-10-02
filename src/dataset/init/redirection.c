@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 03:42:30 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 02:26:43 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/29 18:43:55 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -56,7 +56,7 @@ void	init_redirection(t_main *config)
 	tmp = config->line_block;
 	context = config->context;
 	counter = 0;
-	while (tmp)
+	while (tmp && config->interrupt != 5)
 	{
 		if (tmp->block_id == PIPE)
 			counter++;

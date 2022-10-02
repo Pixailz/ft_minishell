@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/02 01:13:11 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 16:44:12 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,6 +33,8 @@
 
 # include <sys/stat.h>
 /* stat()
+ * ISDIR()
+ * ISREG()
  */
 
 # include <readline/readline.h>
@@ -105,6 +107,8 @@
 # define C_PROMPT_STATUS_1	B_LIGHT_GREEN
 # define C_PROMPT_STATUS_2	B_ORANGE
 # define C_PROMPT_STATUS_0	B_RED
+
+extern int	g_interrupt;
 
 /* ########################################################################## */
 
@@ -269,6 +273,9 @@ int				ft_strcmp_env(char *s1, char *s2);
 t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
 t_lst_env		*ft_lstnew_env(void *env);
 
+// builtins/utils/env_export_utils_3.c
+void			export_join(t_lst_env **envlst, char *var);
+
 // builtins/utils/get_cwd.c
 char			*get_cwd(void);
 
@@ -340,8 +347,6 @@ void			debug_parse(t_main *config);
 void			debug_print_entry(int type, void *ptr);
 void			debug_print_post_exec(t_main *config);
 
-// debug/print_bool.c
-
 // debug/print_cmd.c
 void			debug_print_cmd(t_cmd *cmd);
 void			debug_print_cmd_2(t_cmd *cmd);
@@ -378,7 +383,12 @@ size_t			init_cmds_count_args(t_list *tmp);
 void			init_cmds(t_main *config);
 void			init_get_cmd_paths(t_main *config);
 void			prepare_cmds_1(t_main *config);
-void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str);
+void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str, t_main *config);
+
+// shell/exec_engine/exec/prepare_cmds_error.c
+int				redir_is_good_name(char *file_name);
+void			get_error_interrupt(t_main *config);
+void			get_error_redir(t_block *tmp, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir.c
 void			prepare_in_file(t_redirection *in_file, t_main *config);
@@ -392,7 +402,8 @@ void			forked_double_in(t_redirection *double_in, t_main *conf);
 void			prepare_in_double_file(t_redirection *double_in, t_main *config);
 
 // shell/exec_engine/exec/prepare_redir_ng.c
-void			post_prepare_in_file(t_main *config, t_redirection *last);
+void			post_prepare_in_file(t_main *config);
+void			prepare_in_double_in_ng(t_main *config);
 void			prepare_in_file_ng(t_main *config);
 void			prepare_out_file_ng(t_main *config);
 

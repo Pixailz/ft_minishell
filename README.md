@@ -98,3 +98,21 @@ https://stackoverflow.com/a/27559151
 # define C_PROMPT_STATUS_0	<COLOR_CODE>
 ```
 
+### vsupp
+
+```md
+{
+	readline
+	Memcheck:Leak
+	...
+	fun:readline
+	...
+}
+{
+	readline
+	Memcheck:Leak
+	...
+	fun:add_history
+	...
+}
+```
