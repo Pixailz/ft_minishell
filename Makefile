@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/10/02 16:42:18 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/02 01:38:43 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -56,7 +56,6 @@ SRC_C			:= src/builtins/cd.c \
 				   src/builtins/utils/env.c \
 				   src/builtins/utils/env_export_utils_1.c \
 				   src/builtins/utils/env_export_utils_2.c \
-				   src/builtins/utils/env_export_utils_3.c \
 				   src/builtins/utils/get_cwd.c \
 				   src/builtins/utils/is_good_var_env.c \
 				   src/builtins/utils/params.c \
@@ -74,6 +73,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/debug/init_redirection.c \
 				   src/debug/parse.c \
 				   src/debug/print.c \
+				   src/debug/print_bool.c \
 				   src/debug/print_cmd.c \
 				   src/debug/prompt.c \
 				   src/debug/signal.c \
@@ -195,12 +195,12 @@ endef
 # **************************************************************************** #
 # Rules
 
-$(TARGET):				setup $(LIBFT) $(OBJ_C)
+$(TARGET):				$(LIBFT) $(OBJ_C)
 	@printf "$(green_plus) $(font_color)Creation of $(bold)$@$(reset)\n"
 	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
 
 $(LIBFT):
-	@$(MAKE) $(LIB_DIR)/libft all
+	@$(MAKE) libft all
 
 all:			setup $(TARGET)
 	@printf "$$usage"
@@ -218,21 +218,21 @@ call_logo:
 	@printf "$(ascii_color)$$ascii_art"
 
 clean_all:				clean
-	@$(MAKE) $(LIB_DIR)/libft clean
+	@$(MAKE) libft clean
 
 clean:
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(OBJ_DIR)$(reset)\n"
 	@$(RM) $(OBJ_DIR)
 
 fclean_all:				fclean
-	@$(MAKE) $(LIB_DIR)/libft fclean
+	@$(MAKE) libft fclean
 
 fclean:					clean
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(TARGET)$(reset)\n"
 	@$(RM) $(TARGET)
 
 re_lib:
-	@$(MAKE) $(LIB_DIR)/libft re all
+	@$(MAKE) libft re all
 
 test:					setup $(OBJ_C) $(LIBFT)
 	@$(CC) $(TEST) -o ./test/$@ $(filter-out obj/minishell.o,$(OBJ_C)) $(LIBS) $(CFLAGS)

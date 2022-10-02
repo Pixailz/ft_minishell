@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   path.c                                             :+:      :+:    :+:   */
+/*   get_path.c                                         :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/01 01:38:57 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 17:33:14 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/09/20 01:55:58 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,8 @@ char	*get_cmd_path(char *name, char **path)
 	char	*tmp_cmd_path;
 	char	*tmp;
 
+	if (access(name, F_OK) == 0)
+		return (ft_strdup(name));
 	while (*path)
 	{
 		tmp = ft_strjoin(*path, "/");
@@ -29,8 +31,6 @@ char	*get_cmd_path(char *name, char **path)
 		tmp_cmd_path = FT_NULL;
 		path++;
 	}
-	if (access(name, F_OK) == 0)
-		return (ft_strdup(name));
 	return (FT_NULL);
 }
 

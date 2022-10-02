@@ -6,9 +6,11 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 18:43:03 by pix               #+#    #+#             */
-/*   Updated: 2022/09/28 17:56:59 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/07/05 02:29:14 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+#include "libft_check.h"
 
 /**
  * @brief			Checks if c fit in the ascii table.

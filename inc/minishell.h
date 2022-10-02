@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/02 16:44:12 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:15:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 
 # include <sys/stat.h>
 /* stat()
- * ISDIR()
- * ISREG()
  */
 
 # include <readline/readline.h>
@@ -60,55 +58,53 @@
 /* ###### */
 
 # ifndef DEBUG
-#  define DEBUG				1
+#  define DEBUG					1
 # endif
 
 # define THE_RESPONE_OF_LIFE				42
 
-# define LOG_FD				420
+# define LOG_FD					420
 
-# define C_RED				"\001\033[31m\002"
-# define C_GREEN			"\001\033[32m\002"
-# define C_LIGHT_GREEN		"\001\033[38;5;112m\002"
-# define C_YELLOW			"\001\033[33m\002"
-# define C_ORANGE			"\001\033[38;5;208m\002"
-# define C_BLUE				"\001\033[34m\002"
-# define C_PURPLE			"\001\033[35m\002"
-# define C_MAGENTA			"\001\033[36m\002"
-# define C_WHITE			"\001\033[37m\002"
-# define C_BLACK			"\001\033[30m\002"
+# define C_RED					"\001\033[31m\002"
+# define C_GREEN				"\001\033[32m\002"
+# define C_LIGHT_GREEN			"\001\033[38;5;112m\002"
+# define C_YELLOW				"\001\033[33m\002"
+# define C_ORANGE				"\001\033[38;5;208m\002"
+# define C_BLUE					"\001\033[34m\002"
+# define C_PURPLE				"\001\033[35m\002"
+# define C_MAGENTA				"\001\033[36m\002"
+# define C_WHITE				"\001\033[37m\002"
+# define C_BLACK				"\001\033[30m\002"
 
-# define B_RED				"\001\033[01;31m\002"
-# define B_GREEN			"\001\033[01;32m\002"
-# define B_LIGHT_GREEN		"\001\033[01;38;5;112m\002"
-# define B_YELLOW			"\001\033[01;33m\002"
-# define B_ORANGE			"\001\033[01;38;5;208m\002"
-# define B_BLUE				"\001\033[01;34m\002"
-# define B_PURPLE			"\001\033[01;35m\002"
-# define B_MAGENTA			"\001\033[01;36m\002"
-# define B_WHITE			"\001\033[01;37m\002"
-# define B_BLACK			"\001\033[01;30m\002"
+# define B_RED					"\001\033[01;31m\002"
+# define B_GREEN				"\001\033[01;32m\002"
+# define B_LIGHT_GREEN			"\001\033[01;38;5;112m\002"
+# define B_YELLOW				"\001\033[01;33m\002"
+# define B_ORANGE				"\001\033[01;38;5;208m\002"
+# define B_BLUE					"\001\033[01;34m\002"
+# define B_PURPLE				"\001\033[01;35m\002"
+# define B_MAGENTA				"\001\033[01;36m\002"
+# define B_WHITE				"\001\033[01;37m\002"
+# define B_BLACK				"\001\033[01;30m\002"
 
-# define C_RESET			"\001\033[0m\002"
+# define C_RESET				"\001\033[0m\002"
 
-# define GREEN_PLUS			"\001\033[0m[\033[38;5;82m+\033[0m]\002"
-# define RED_MINUS			"\001\033[0m[\033[38;5;196m-\033[0m]\002"
-# define ORANGE_STAR		"\001\033[0m[\033[38;5;214m*\033[0m]\002"
-# define BLUE_STAR			"\001\033[0m[\033[38;5;75m*\033[0m]\002"
+# define GREEN_PLUS				"\001\033[0m[\033[38;5;82m+\033[0m]\002"
+# define RED_MINUS				"\001\033[0m[\033[38;5;196m-\033[0m]\002"
+# define ORANGE_STAR			"\001\033[0m[\033[38;5;214m*\033[0m]\002"
+# define BLUE_STAR				"\001\033[0m[\033[38;5;75m*\033[0m]\002"
 
 // prompt_config :)
-# define OLD_STYLE			0
+# define OLD_STYLE				0
 
-# define C_PROMPT_ROOT		B_RED
-# define C_PROMPT_BASE		B_ORANGE
-# define C_PROMPT_PATH		B_BLUE
-# define C_PROMPT_CMD		C_RESET
+# define C_PROMPT_ROOT			B_RED
+# define C_PROMPT_BASE			B_ORANGE
+# define C_PROMPT_PATH			B_BLUE
+# define C_PROMPT_CMD			C_RESET
 
-# define C_PROMPT_STATUS_1	B_LIGHT_GREEN
-# define C_PROMPT_STATUS_2	B_ORANGE
-# define C_PROMPT_STATUS_0	B_RED
-
-extern int	g_interrupt;
+# define C_PROMPT_STATUS_1		B_LIGHT_GREEN
+# define C_PROMPT_STATUS_2		B_ORANGE
+# define C_PROMPT_STATUS_0		B_RED
 
 /* ########################################################################## */
 
@@ -172,17 +168,17 @@ typedef struct s_redirection
 
 typedef struct s_context
 {
-	int		cmd_nb;
-	int		cmd_id;
-	int		pipe_id;
-	int		default_in;
-	int		default_out;
-	t_bool	fork_first;
-	int		**pipes;
-	t_cmd	**cmd;
-	char	**env;
-	char	**path;
-
+	int				cmd_nb;
+	int				cmd_id;
+	int				pipe_id;
+	int				default_in;
+	int				default_out;
+	t_bool			fork_first;
+	t_redirection	*last_in;
+	int				**pipes;
+	t_cmd			**cmd;
+	char			**env;
+	char			**path;
 }			t_context;
 
 // PARSE CMD PART
@@ -273,9 +269,6 @@ int				ft_strcmp_env(char *s1, char *s2);
 t_lst_env		*ft_lstadd_back_env(t_lst_env **lst, t_lst_env *new);
 t_lst_env		*ft_lstnew_env(void *env);
 
-// builtins/utils/env_export_utils_3.c
-void			export_join(t_lst_env **envlst, char *var);
-
 // builtins/utils/get_cwd.c
 char			*get_cwd(void);
 
@@ -346,6 +339,8 @@ void			debug_parse(t_main *config);
 // debug/print.c
 void			debug_print_entry(int type, void *ptr);
 void			debug_print_post_exec(t_main *config);
+
+// debug/print_bool.c
 
 // debug/print_cmd.c
 void			debug_print_cmd(t_cmd *cmd);
@@ -480,6 +475,7 @@ char			*get_status_prompt(t_main *config);
 char			*get_status_prompt_array(t_main *config);
 char			*get_status_prompt_assemble(int status_code, char **array);
 int				get_status_prompt_color(t_main *config);
+void			get_status_prompt_fill_array(int ret_val, char **tmp_2, char *tmp_1);
 
 // shell/signal_handling/handler.c
 void			handle_sig_int(void);

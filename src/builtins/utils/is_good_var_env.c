@@ -49,7 +49,7 @@ int	is_good_var_env(char *str)
 	{
 		if (str[counter] == '=' || str[counter] == '+')
 			break ;
-		else if (!is_good_var_env_char(str[counter]))
+		if (!is_good_var_env_char(str[counter]))
 			return (0);
 		counter++;
 	}

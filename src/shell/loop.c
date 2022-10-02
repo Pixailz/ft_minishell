@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/02 16:45:42 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 01:19:08 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_interrupt;
+int	g_interrupt = 0;
 
 int	is_command_empty(t_main *config)
 {

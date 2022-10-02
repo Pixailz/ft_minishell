@@ -72,24 +72,16 @@ int	builtin_export(t_cmd *cmd, t_main *config)
 {
 	int	counter;
 	int	is_good;
-	int	i;
 
 	if (!have_args(cmd))
 		return (print_export(config->env));
 	counter = 1;
 	while (cmd->command[counter])
 	{
-		i = 0;
 		is_good = is_good_var_env(cmd->command[counter]);
 		if (!is_good)
 			break ;
-		while (cmd->command[counter][i] && cmd->command[counter][i] != '+' \
-										&& cmd->command[counter][i] != '=')
-			i++;
-		if (cmd->command[counter][i] == '+')
-			export_join(&config->env, cmd->command[counter]);
-		else
-			export_var_to_env(&config->env, cmd->command[counter]);
+		export_var_to_env(&config->env, cmd->command[counter]);
 		counter++;
 	}
 	if (!is_good)
