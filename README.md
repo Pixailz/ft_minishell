@@ -49,7 +49,6 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 	- `echo pass >>file1 | echo pass >> file2`
 
 ## DEBUG
-=======
 
 > without vsupp work fine
 
