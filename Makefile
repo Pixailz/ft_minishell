@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/10/02 01:38:43 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/02 17:31:58 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ endif
 ifeq ($(DEBUG),)
 CFLAGS			+= -Werror
 else
-CFLAGS			+= -g3 -fdiagnostics-color=always
+CFLAGS			+= -g3
 endif
 
 # DIR
@@ -56,6 +56,7 @@ SRC_C			:= src/builtins/cd.c \
 				   src/builtins/utils/env.c \
 				   src/builtins/utils/env_export_utils_1.c \
 				   src/builtins/utils/env_export_utils_2.c \
+				   src/builtins/utils/env_export_utils_3.c \
 				   src/builtins/utils/get_cwd.c \
 				   src/builtins/utils/is_good_var_env.c \
 				   src/builtins/utils/params.c \

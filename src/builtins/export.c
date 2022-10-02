@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/30 03:22:16 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/25 04:43:41 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:37:15 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -72,16 +72,24 @@ int	builtin_export(t_cmd *cmd, t_main *config)
 {
 	int	counter;
 	int	is_good;
+	int	i;
 
 	if (!have_args(cmd))
 		return (print_export(config->env));
 	counter = 1;
 	while (cmd->command[counter])
 	{
+		i = 0;
 		is_good = is_good_var_env(cmd->command[counter]);
 		if (!is_good)
 			break ;
-		export_var_to_env(&config->env, cmd->command[counter]);
+		while (cmd->command[counter][i] && cmd->command[counter][i] != '+' \
+										&& cmd->command[counter][i] != '=')
+			i++;
+		if (cmd->command[counter][i] == '+')
+			export_join(&config->env, cmd->command[counter]);
+		else
+			export_var_to_env(&config->env, cmd->command[counter]);
 		counter++;
 	}
 	if (!is_good)
