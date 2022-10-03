@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 08:02:07 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/02 17:05:34 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:30:00 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -37,6 +37,12 @@ int	exec_command(t_main *config)
 	exec_prepare_entry(config);
 	close_all_pipes(config->context);
 	get_error_interrupt(config);
+	if (cmd->builtin == NONE)
+	{
+		close_all_std();
+		free_config_entry(config);
+		exit(0);
+	}
 	if (cmd->builtin == NOT_BUILTIN)
 		error_code = execve_ng(cmd, config->context);
 	else if (cmd->builtin != NONE)

@@ -361,6 +361,7 @@ char			**do_something_with_argv(char **argv);
 
 // shell/exec_engine/exec/exec_builtin.c
 int				exec_builtin(t_cmd *cmd, t_main *config);
+void			close_all_std(void);
 
 // shell/exec_engine/exec/exec_prepare.c
 void			exec_prepare_between(t_context *context);

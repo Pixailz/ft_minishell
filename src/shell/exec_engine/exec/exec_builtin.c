@@ -6,11 +6,20 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:51:17 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/02 00:03:32 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:35:22 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
+
+void	close_all_std(void)
+{
+	int	counter;
+
+	counter = 0;
+	while (counter < 3)
+		close(counter++);
+}
 
 int	exec_builtin(t_cmd *cmd, t_main *config)
 {
@@ -34,7 +43,8 @@ int	exec_builtin(t_cmd *cmd, t_main *config)
 	if (cmd->builtin == MINISHELL)
 	{
 		increase_shlvl(config);
-		error_code = 0;
+		return (0);
 	}
+	close_all_std();
 	return (error_code);
 }

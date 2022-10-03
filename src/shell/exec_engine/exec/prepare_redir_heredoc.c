@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/11 01:20:03 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/28 03:29:14 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:20:39 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,6 +48,7 @@ void	forked_double_in(t_redirection *double_in, t_main *conf)
 	else if (buff)
 		free(buff);
 	close(file);
+	close_all_std();
 	free_config_entry(conf);
 	exit(g_interrupt);
 }
