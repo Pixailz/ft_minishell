@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:51:17 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/03 20:35:22 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/03 21:50:24 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -45,6 +45,7 @@ int	exec_builtin(t_cmd *cmd, t_main *config)
 		increase_shlvl(config);
 		return (0);
 	}
-	close_all_std();
+	if (config->context->fork_first)
+		close_all_std();
 	return (error_code);
 }
