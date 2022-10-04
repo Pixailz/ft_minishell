@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/21 05:03:33 by pmailly           #+#    #+#             */
-/*   Updated: 2022/09/22 15:55:20 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/04 20:53:34 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,29 @@
 
 void	unset2(t_lst_env *tmp, t_lst_env **env, t_lst_env *first)
 {
-	tmp->next = (*env)->next;
-	free((*env)->key);
-	if ((*env)->value)
-		free((*env)->value);
-	free((*env));
-	*env = first;
-	while (*env)
+	if (!tmp)
 	{
-		(*env)->index = 0;
-		(*env) = (*env)->next;
+		*env = (*env)->next;
+		free(first->key);
+		if (first->value)
+			free(first->value);
+		free(first);
 	}
-	*env = first;
+	else
+	{
+		tmp->next = (*env)->next;
+		free((*env)->key);
+		if ((*env)->value)
+			free((*env)->value);
+		free((*env));
+		*env = first;
+		while (*env)
+		{
+			(*env)->index = 0;
+			(*env) = (*env)->next;
+		}
+		*env = first;
+	}
 }
 
 void	unset(char *var, t_lst_env **env)
@@ -43,14 +54,9 @@ void	unset(char *var, t_lst_env **env)
 		*env = (*env)->next;
 	}
 	if (!*env)
-		return ;
-	else if (!tmp)
 	{
-		*env = (*env)->next;
-		free(first->key);
-		if (first->value)
-			free(first->value);
-		free(first);
+		*env = first;
+		return ;
 	}
 	else
 		unset2(tmp, env, first);
