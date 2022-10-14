@@ -38,7 +38,7 @@ int	cd_get_error_code(t_cmd *cmd)
 			"minishell: cd: %s: No such file or directory\n", cmd->command[1]);
 		return (1);
 	}
-	else if (!ft_isdir(cmd->command[1], S_IXUSR))
+	else if (!ft_iscdable(cmd->command[1]))
 	{
 		ft_printf_fd(STDERR_FILENO, \
 			"minishell: cd: %s: Permission denied\n", cmd->command[1]);
