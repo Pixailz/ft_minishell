@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/27 23:40:58 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:36:09 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,10 @@ void	handle_sig_int_here_doc(void)
 void	signal_handler_forked(int signal_code)
 {
 	if (signal_code == SIGINT)
+	{
 		ft_printf("");
+		g_interrupt = 1;
+	}
 }
 
 void	signal_handler(int signal_code)
