@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/10/02 17:31:58 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/14 14:14:24 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -196,15 +196,15 @@ endef
 # **************************************************************************** #
 # Rules
 
+all:			setup $(TARGET)
+	@printf "$$usage"
+
 $(TARGET):				$(LIBFT) $(OBJ_C)
 	@printf "$(green_plus) $(font_color)Creation of $(bold)$@$(reset)\n"
 	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
 
 $(LIBFT):
 	@$(MAKE) libft all
-
-all:			setup $(TARGET)
-	@printf "$$usage"
 
 $(OBJ_SUBDIR):
 	$(foreach dir,$@,$(call make_dir,$(dir)))
