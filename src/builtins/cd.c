@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/20 08:56:14 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/01 18:34:03 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:31:40 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	builtin_cd_update_pwd(t_main *config)
 	char	*tmp_1;
 
 	tmp_1 = get_cwd();
+	set_env("OLDPWD", get_env("PWD", config->env), &config->env);
 	set_env("PWD", tmp_1, &config->env);
 	free(tmp_1);
 }
