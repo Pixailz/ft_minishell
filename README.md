@@ -109,3 +109,5 @@ https://stackoverflow.com/a/27559151
 	- fix message
 	- ft_isexec
 1. `echo pass '>' file`
+1. cd <3
+1. why without path execve check for current directory
