@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/02 01:19:08 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:35:54 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,8 +41,10 @@ void	handle_interrupt(t_main *config)
 	{
 		config->interrupt = 1;
 		config->last_return_value = 130;
-		g_interrupt = 0;
 	}
+	else if (g_interrupt == 2)
+		config->last_return_value = 131;
+	g_interrupt = 0;
 }
 
 int	main_loop(t_main *config)

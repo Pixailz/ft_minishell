@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:48:41 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/14 14:36:09 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:34:16 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,11 @@ void	signal_handler_forked(int signal_code)
 	{
 		ft_printf("");
 		g_interrupt = 1;
+	}
+	else if (signal_code == SIGQUIT)
+	{
+		ft_printf("Quit (core dumped)\n");
+		g_interrupt = 2;
 	}
 }
 

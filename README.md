@@ -97,3 +97,15 @@ https://stackoverflow.com/a/27559151
 # define C_PROMPT_STATUS_0	<COLOR_CODE>
 ```
 
+## TODO
+
+1. `exit 1 1`
+1. ctrl-\
+1. ^C
+	- forked_here_doc
+	- normal command (cat | grep)
+1. CDPATH
+1. executable
+	- fix message
+	- ft_isexec
+1. `echo pass '>' file`
