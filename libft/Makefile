@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/10/01 23:57:53 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/14 14:19:10 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -186,7 +186,8 @@ SRC_CHK				:= check/ft_isalnum.c \
 					   check/ft_isgoodll.c \
 					   check/ft_isgoodu.c \
 					   check/ft_isprint.c \
-					   check/ft_isspace.c
+					   check/ft_isspace.c \
+					   check/ft_sisdigit.c
 
 ifeq ($(CHECK),1)
 SRC_C_TMP			+= $(SRC_CHK)

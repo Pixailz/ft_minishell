@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:16:35 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/01 18:36:13 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:18:56 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,6 +83,9 @@ int		ft_isprint(const char c);
 
 // ft_isspace.c
 int		ft_isspace(const char c);
+
+// ft_sisdigit.c
+t_bool	ft_sisdigit(const char *str);
 
 /* ########################################################################## */
 
