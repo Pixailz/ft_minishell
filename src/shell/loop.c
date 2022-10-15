@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/08/25 03:52:50 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/29 19:08:22 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 19:35:54 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	g_interrupt;
+int	g_interrupt = 0;
 
 int	is_command_empty(t_main *config)
 {
@@ -41,13 +41,15 @@ void	handle_interrupt(t_main *config)
 	{
 		config->interrupt = 1;
 		config->last_return_value = 130;
-		g_interrupt = 0;
 	}
+	else if (g_interrupt == 2)
+		config->last_return_value = 131;
+	g_interrupt = 0;
 }
 
 int	main_loop(t_main *config)
 {
-	while (VRAI)
+	while (THE_RESPONE_OF_LIFE)
 	{
 		config->line_buffer = readline(config->prompt);
 		handle_interrupt(config);

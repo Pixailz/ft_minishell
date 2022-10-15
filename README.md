@@ -6,10 +6,8 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 1. TODO / not working
 	- `echo pass <> file | echo pass`
 		- parsing, create `file` but don't pipe output to it
-1. fix double in by forking before taking input
-	- restore signal
-	- fork
-	- re init signal
+1. add alias
+1. add minishellrc
 1. built-ins
 	- [x] echo et l’option -n
 	- [x] cd uniquement avec un chemin relatif ou absolu
@@ -64,11 +62,7 @@ https://cdn.intra.42.fr/pdf/pdf/58866/fr.subject.pdf
 
 ```
 ./scripts/ft_helper/ft_helper && make re DEBUG=1 && \
-valgrind  --leak-check=full \
-          --show-leak-kinds=all \
-          --suppressions=$(pwd)/vsupp \
-          --trace-children=yes \
-          --track-fds=yes ./minishell 420>exec.log ; echo "error_code [$?]"; cat exec.log
+valgrind  --leak-check=full --show-leak-kinds=all --suppressions=$(pwd)/vsupp --trace-children=yes --track-fds=yes ./minishell 420>exec.log ; cat exec.log
 ```
 
 > strace with ioctl
@@ -76,7 +70,6 @@ valgrind  --leak-check=full \
 `strace -e trace=ioctl bash`
 
 ## exec with log
-
 `./minishell 420>exec.log; echo "exit_code [$?]"; cat exec.log`
 
 ## termios
@@ -104,3 +97,17 @@ https://stackoverflow.com/a/27559151
 # define C_PROMPT_STATUS_0	<COLOR_CODE>
 ```
 
+## TODO
+
+1. `exit 1 1`
+1. ctrl-\
+1. ^C
+	- forked_here_doc
+	- normal command (cat | grep)
+1. CDPATH
+1. executable
+	- fix message
+	- ft_isexec
+1. `echo pass '>' file`
+1. cd <3
+1. why without path execve check for current directory

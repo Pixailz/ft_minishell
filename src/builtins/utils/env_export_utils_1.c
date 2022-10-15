@@ -37,16 +37,17 @@ void	unlink_key_value(char *var_env, char **key, char **value)
 	int	i;
 
 	i = 0;
-	while (var_env[i] && var_env[i] != '=')
-		i++;
-	if (!var_env[i] && *key)
-		return ;
 	if (*key)
 		free(*key);
-	if (var_env[i] && *value)
+	if (*value)
 		free(*value);
+	while (var_env[i] && var_env[i] != '=')
+		i++;
 	if (!var_env[i])
+	{
 		*key = ft_substr(var_env, 0, i);
+		*value = FT_NULL;
+	}
 	else
 	{
 		i++;

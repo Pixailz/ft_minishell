@@ -6,7 +6,7 @@
 #    By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2022/04/23 01:36:34 by brda-sil          #+#    #+#              #
-#    Updated: 2022/09/29 19:08:42 by brda-sil         ###   ########.fr        #
+#    Updated: 2022/10/14 14:14:24 by brda-sil         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -17,7 +17,7 @@ TARGET			:= minishell
 RM				:= rm -rf
 CC				:= gcc
 MAKE			:= make -C
-VERSION			:= 4.1.1
+VERSION			:= 4.1.2
 $(eval export MAIN=1)
 
 ifneq ($(PADDING),60)
@@ -27,7 +27,7 @@ endif
 ifeq ($(DEBUG),)
 CFLAGS			+= -Werror
 else
-CFLAGS			+= -g3 -fdiagnostics-color=always
+CFLAGS			+= -g3
 endif
 
 # DIR
@@ -37,11 +37,11 @@ OBJ_DIR			:= obj
 OBJ_SUBDIR		:= $(sort $(shell find $(SRC_DIR) -type d | \
 											sed 's|$(SRC_DIR)|$(OBJ_DIR)|g'))
 INC_TMP			:= inc \
-				   $(LIB_DIR)/ft_libft/inc
+				   $(LIB_DIR)/libft/inc
 INC_DIR			:= $(addprefix -I,$(INC_TMP))
 
 # LIB
-LIBFT			:= $(LIB_DIR)/ft_libft/libft.a
+LIBFT			:= $(LIB_DIR)/libft/libft.a
 
 # SRC
 SRC_C			:= src/builtins/cd.c \
@@ -74,12 +74,12 @@ SRC_C			:= src/builtins/cd.c \
 				   src/debug/init_redirection.c \
 				   src/debug/parse.c \
 				   src/debug/print.c \
+				   src/debug/print_bool.c \
 				   src/debug/print_cmd.c \
 				   src/debug/prompt.c \
 				   src/debug/signal.c \
 				   src/minishell.c \
 				   src/shell/exec_engine/exec/exec_builtin.c \
-				   src/shell/exec_engine/exec/exec_minishell.c \
 				   src/shell/exec_engine/exec/exec_prepare.c \
 				   src/shell/exec_engine/exec/execute.c \
 				   src/shell/exec_engine/exec/prepare_cmds.c \
@@ -103,18 +103,10 @@ SRC_C			:= src/builtins/cd.c \
 				   src/shell/prompt/get_status_prompt.c \
 				   src/shell/signal_handling/handler.c \
 				   src/shell/signal_handling/signal.c \
+				   src/utils/env_to_char.c \
 				   src/utils/ft_better_split.c \
 				   src/utils/ft_better_strjoin.c \
-				   src/utils/ft_getgid.c \
-				   src/utils/ft_getuid.c \
-				   src/utils/ft_iscdable.c \
-				   src/utils/ft_isdir.c \
-				   src/utils/ft_isfile.c \
-				   src/utils/ft_patoi.c \
-				   src/utils/ft_patoll.c \
-				   src/utils/ft_randint.c \
-				   src/utils/ft_splitb.c \
-				   src/utils/ft_tmpfile.c
+				   src/utils/sh_lvl.c
 
 # OBJ
 
@@ -204,15 +196,15 @@ endef
 # **************************************************************************** #
 # Rules
 
-$(TARGET):				setup $(LIBFT) $(OBJ_C)
+all:			setup $(TARGET)
+	@printf "$$usage"
+
+$(TARGET):				$(LIBFT) $(OBJ_C)
 	@printf "$(green_plus) $(font_color)Creation of $(bold)$@$(reset)\n"
 	@$(CC) -o $@ $(OBJ_C) $(LIBS) $(CFLAGS)
 
 $(LIBFT):
-	@$(MAKE) $(LIB_DIR)/ft_libft all
-
-all:			setup $(TARGET)
-	@printf "$$usage"
+	@$(MAKE) libft all
 
 $(OBJ_SUBDIR):
 	$(foreach dir,$@,$(call make_dir,$(dir)))
@@ -227,21 +219,21 @@ call_logo:
 	@printf "$(ascii_color)$$ascii_art"
 
 clean_all:				clean
-	@$(MAKE) $(LIB_DIR)/ft_libft clean
+	@$(MAKE) libft clean
 
 clean:
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(OBJ_DIR)$(reset)\n"
 	@$(RM) $(OBJ_DIR)
 
 fclean_all:				fclean
-	@$(MAKE) $(LIB_DIR)/ft_libft fclean
+	@$(MAKE) libft fclean
 
 fclean:					clean
 	@printf "$(red_minus) $(font_color)Deleting $(bold)$(TARGET)$(reset)\n"
 	@$(RM) $(TARGET)
 
 re_lib:
-	@$(MAKE) $(LIB_DIR)/ft_libft re all
+	@$(MAKE) libft re all
 
 test:					setup $(OBJ_C) $(LIBFT)
 	@$(CC) $(TEST) -o ./test/$@ $(filter-out obj/minishell.o,$(OBJ_C)) $(LIBS) $(CFLAGS)

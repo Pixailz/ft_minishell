@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/17 20:06:18 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/29 19:06:06 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:28:16 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,7 @@ void	get_error_interrupt(t_main *config)
 	if (config->interrupt == 5)
 	{
 		free_config_entry(config);
-		exit (2);
+		exit (0);
 	}
 	else if (config->interrupt != 0)
 	{

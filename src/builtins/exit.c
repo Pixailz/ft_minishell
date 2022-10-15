@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/24 05:35:55 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/26 12:36:09 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 14:23:56 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,22 +14,25 @@
 
 int	exit_check_shlvl(t_main *config)
 {
-	char	*shlvl_str;
-	char	*shlvl_new;
-	int		shlvl;
-
-	shlvl_str = get_env("SHLVL", config->env);
-	shlvl = ft_atoi(shlvl_str);
-	if (shlvl != 1)
+	if (get_shlvl(config) > config->base_shlvl)
 	{
-		shlvl_str = ft_itoa(shlvl - 1);
-		shlvl_new = ft_strjoin("SHLVL=", shlvl_str);
-		free(shlvl_str);
-		export_var_to_env(&config->env, shlvl_new);
-		free(shlvl_new);
+		decrease_shlvl(config);
 		return (False);
 	}
 	return (True);
+}
+
+void	builtin_exit_multiple_args(t_cmd *cmd, t_main *config)
+{
+	if (!ft_sisdigit(cmd->command[1]))
+	{
+		ft_printf("minishell: exit: %s: numeric argument required\n", \
+			cmd->command[1]);
+		free_config_entry(config);
+		exit(2);
+	}
+	else
+		ft_printf("minishell: exit: too many arguments\n", cmd->command[1]);
 }
 
 void	builtin_exit_post_exec(t_cmd *cmd, t_main *config)
@@ -49,7 +52,7 @@ void	builtin_exit_post_exec(t_cmd *cmd, t_main *config)
 		}
 	}
 	if (cmd->return_value == 2)
-		ft_printf("minishell: exit: too many arguments\n", cmd->command[1]);
+		builtin_exit_multiple_args(cmd, config);
 	else
 	{
 		if (exit_check_shlvl(config))

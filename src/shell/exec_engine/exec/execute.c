@@ -6,13 +6,13 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/09/09 08:02:07 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/29 19:05:39 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/03 20:30:00 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "minishell.h"
 
-int	execve_ng(t_cmd *cmd)
+int	execve_ng(t_cmd *cmd, t_context *context)
 {
 	int		error_code;
 
@@ -22,7 +22,7 @@ int	execve_ng(t_cmd *cmd)
 	else if (access(cmd->path, X_OK) != 0)
 		error_code = 126;
 	else
-		execve(cmd->path, cmd->command, FT_NULL);
+		execve(cmd->path, cmd->command, context->env);
 	return (error_code);
 }
 
@@ -37,8 +37,14 @@ int	exec_command(t_main *config)
 	exec_prepare_entry(config);
 	close_all_pipes(config->context);
 	get_error_interrupt(config);
+	if (cmd->builtin == NONE)
+	{
+		close_all_std();
+		free_config_entry(config);
+		exit(0);
+	}
 	if (cmd->builtin == NOT_BUILTIN)
-		error_code = execve_ng(cmd);
+		error_code = execve_ng(cmd, config->context);
 	else if (cmd->builtin != NONE)
 		error_code = exec_builtin(cmd, config);
 	if (config->context->fork_first)

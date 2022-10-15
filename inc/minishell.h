@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/05/11 23:56:44 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/29 20:12:53 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/02 17:15:36 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,6 @@
 
 # include <sys/stat.h>
 /* stat()
- * ISDIR()
- * ISREG()
  */
 
 # include <readline/readline.h>
@@ -53,15 +51,6 @@
 /* errno
  */
 
-# include <sys/ioctl.h>
-/* ioctl()
- * TCXONC
- */
-
-# include <termios.h>
-/* TCOON
- */
-
 /* ########################################################################## */
 
 /* ########################################################################## */
@@ -69,56 +58,53 @@
 /* ###### */
 
 # ifndef DEBUG
-#  define DEBUG				1
+#  define DEBUG					1
 # endif
 
-# define TMP_ST "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789"
-# define VRAI				42
+# define THE_RESPONE_OF_LIFE				42
 
-# define LOG_FD				420
+# define LOG_FD					420
 
-# define C_RED				"\001\033[31m\002"
-# define C_GREEN			"\001\033[32m\002"
-# define C_LIGHT_GREEN		"\001\033[38;5;112m\002"
-# define C_YELLOW			"\001\033[33m\002"
-# define C_ORANGE			"\001\033[38;5;208m\002"
-# define C_BLUE				"\001\033[34m\002"
-# define C_PURPLE			"\001\033[35m\002"
-# define C_MAGENTA			"\001\033[36m\002"
-# define C_WHITE			"\001\033[37m\002"
-# define C_BLACK			"\001\033[30m\002"
+# define C_RED					"\001\033[31m\002"
+# define C_GREEN				"\001\033[32m\002"
+# define C_LIGHT_GREEN			"\001\033[38;5;112m\002"
+# define C_YELLOW				"\001\033[33m\002"
+# define C_ORANGE				"\001\033[38;5;208m\002"
+# define C_BLUE					"\001\033[34m\002"
+# define C_PURPLE				"\001\033[35m\002"
+# define C_MAGENTA				"\001\033[36m\002"
+# define C_WHITE				"\001\033[37m\002"
+# define C_BLACK				"\001\033[30m\002"
 
-# define B_RED				"\001\033[01;31m\002"
-# define B_GREEN			"\001\033[01;32m\002"
-# define B_LIGHT_GREEN		"\001\033[01;38;5;112m\002"
-# define B_YELLOW			"\001\033[01;33m\002"
-# define B_ORANGE			"\001\033[01;38;5;208m\002"
-# define B_BLUE				"\001\033[01;34m\002"
-# define B_PURPLE			"\001\033[01;35m\002"
-# define B_MAGENTA			"\001\033[01;36m\002"
-# define B_WHITE			"\001\033[01;37m\002"
-# define B_BLACK			"\001\033[01;30m\002"
+# define B_RED					"\001\033[01;31m\002"
+# define B_GREEN				"\001\033[01;32m\002"
+# define B_LIGHT_GREEN			"\001\033[01;38;5;112m\002"
+# define B_YELLOW				"\001\033[01;33m\002"
+# define B_ORANGE				"\001\033[01;38;5;208m\002"
+# define B_BLUE					"\001\033[01;34m\002"
+# define B_PURPLE				"\001\033[01;35m\002"
+# define B_MAGENTA				"\001\033[01;36m\002"
+# define B_WHITE				"\001\033[01;37m\002"
+# define B_BLACK				"\001\033[01;30m\002"
 
-# define C_RESET			"\001\033[0m\002"
+# define C_RESET				"\001\033[0m\002"
 
-# define GREEN_PLUS			"\001\033[0m[\033[38;5;82m+\033[0m]\002"
-# define RED_MINUS			"\001\033[0m[\033[38;5;196m-\033[0m]\002"
-# define ORANGE_STAR		"\001\033[0m[\033[38;5;214m*\033[0m]\002"
-# define BLUE_STAR			"\001\033[0m[\033[38;5;75m*\033[0m]\002"
+# define GREEN_PLUS				"\001\033[0m[\033[38;5;82m+\033[0m]\002"
+# define RED_MINUS				"\001\033[0m[\033[38;5;196m-\033[0m]\002"
+# define ORANGE_STAR			"\001\033[0m[\033[38;5;214m*\033[0m]\002"
+# define BLUE_STAR				"\001\033[0m[\033[38;5;75m*\033[0m]\002"
 
 // prompt_config :)
-# define OLD_STYLE			0
+# define OLD_STYLE				0
 
-# define C_PROMPT_ROOT		B_RED
-# define C_PROMPT_BASE		B_ORANGE
-# define C_PROMPT_PATH		B_BLUE
-# define C_PROMPT_CMD		C_RESET
+# define C_PROMPT_ROOT			B_RED
+# define C_PROMPT_BASE			B_ORANGE
+# define C_PROMPT_PATH			B_BLUE
+# define C_PROMPT_CMD			C_RESET
 
-# define C_PROMPT_STATUS_1	B_LIGHT_GREEN
-# define C_PROMPT_STATUS_2	B_ORANGE
-# define C_PROMPT_STATUS_0	B_RED
-
-extern int	g_interrupt;
+# define C_PROMPT_STATUS_1		B_LIGHT_GREEN
+# define C_PROMPT_STATUS_2		B_ORANGE
+# define C_PROMPT_STATUS_0		B_RED
 
 /* ########################################################################## */
 
@@ -126,17 +112,11 @@ extern int	g_interrupt;
 /* STRUCT / ENUM / TYPEDEF */
 /* ####################### */
 
-// BOOOL
-typedef enum e_bool
-{
-	False,
-	True
-}			t_bool;
-
 typedef struct s_main
 {
 	int					last_return_value;
 	int					interrupt;
+	int					base_shlvl;
 	char				*prompt_base;
 	char				*user;
 	char				*home;
@@ -197,8 +177,8 @@ typedef struct s_context
 	t_redirection	*last_in;
 	int				**pipes;
 	t_cmd			**cmd;
+	char			**env;
 	char			**path;
-
 }			t_context;
 
 // PARSE CMD PART
@@ -252,6 +232,7 @@ int				builtin_exit(t_cmd *cmd, t_main *config);
 int				exit_check_exit_code(char *exit_code);
 int				exit_check_shlvl(t_main *config);
 int				exit_get_exit_code(char *exit_code);
+void			builtin_exit_multiple_args(t_cmd *cmd, t_main *config);
 void			builtin_exit_post_exec(t_cmd *cmd, t_main *config);
 
 // builtins/export.c
@@ -363,6 +344,8 @@ void			debug_parse(t_main *config);
 void			debug_print_entry(int type, void *ptr);
 void			debug_print_post_exec(t_main *config);
 
+// debug/print_bool.c
+
 // debug/print_cmd.c
 void			debug_print_cmd(t_cmd *cmd);
 void			debug_print_cmd_2(t_cmd *cmd);
@@ -379,9 +362,7 @@ char			**do_something_with_argv(char **argv);
 
 // shell/exec_engine/exec/exec_builtin.c
 int				exec_builtin(t_cmd *cmd, t_main *config);
-
-// shell/exec_engine/exec/exec_minishell.c
-int				exec_minishell(t_main *config);
+void			close_all_std(void);
 
 // shell/exec_engine/exec/exec_prepare.c
 void			exec_prepare_between(t_context *context);
@@ -393,7 +374,7 @@ void			exec_prepare_pipe(t_context *context);
 // shell/exec_engine/exec/execute.c
 int				exec_command(t_main *config);
 int				exec_entry(t_main *config);
-int				execve_ng(t_cmd *cmd);
+int				execve_ng(t_cmd *cmd, t_context *context);
 int				is_last(t_context *context);
 void			exec_command_child(t_main *config);
 
@@ -499,6 +480,7 @@ char			*get_status_prompt(t_main *config);
 char			*get_status_prompt_array(t_main *config);
 char			*get_status_prompt_assemble(int status_code, char **array);
 int				get_status_prompt_color(t_main *config);
+void			get_status_prompt_fill_array(int ret_val, char **tmp_2, char *tmp_1);
 
 // shell/signal_handling/handler.c
 void			handle_sig_int(void);
@@ -511,6 +493,11 @@ void			signal_handler_here_doc(int signal_code);
 void			set_signal_base(void);
 void			set_signal_forked(int mode);
 
+// utils/env_to_char.c
+char			**env_to_char(t_lst_env *env);
+char			*env_get_line(char *key, char *value);
+t_size			env_get_size(t_lst_env *env);
+
 // utils/ft_better_split.c
 t_list			*ft_better_split(char *s);
 void			manage_quotes(char **s, char c, t_list **input);
@@ -520,44 +507,10 @@ void			manage_symbols(char **s, char c, t_list **input);
 // utils/ft_better_strjoin.c
 char			*ft_better_strjoin(char *s1, char *s2);
 
-// utils/ft_getgid.c
-int				ft_getgid(void);
-int				ft_getgid_dir(char *file_name);
-int				ft_getgid_file(char *file_name);
-
-// utils/ft_getuid.c
-int				ft_getuid(void);
-int				ft_getuid_dir(char *file_name);
-int				ft_getuid_file(char *file_name);
-
-// utils/ft_iscdable.c
-t_bool			ft_iscdable(char *dir_name);
-
-// utils/ft_isdir.c
-int				ft_isdir(char *dir_name, int mode);
-
-// utils/ft_isfile.c
-int				ft_isfile(char *file_path, int mode);
-
-// utils/ft_patoi.c
-int				ft_is_good_int(t_int64 n, int neg);
-int				ft_patoi(char *nstr, int *has_overflow);
-
-// utils/ft_patoll.c
-int				ft_is_good_long_long(t_int64 n, int neg);
-t_int64			ft_patoll(char *nstr, int *has_overflow);
-
-// utils/ft_randint.c
-t_int64			ft_randint(int start, int end);
-
-// utils/ft_splitb.c
-char			**ft_splitb(char *s, char delim, char *encl);
-char			**ft_splitb_get_words(char *s, char delim, char *encl, int tab_size);
-int				ft_splitb_get_size(char *str, char delim, char *encl);
-int				ft_splitb_get_word(char **str, char delim, char *encl);
-
-// utils/ft_tmpfile.c
-char			*ft_tmpfile(int in_tmp);
+// utils/sh_lvl.c
+int				get_shlvl(t_main *config);
+void			decrease_shlvl(t_main *config);
+void			increase_shlvl(t_main *config);
 
 /* ########################################################################## */
 
