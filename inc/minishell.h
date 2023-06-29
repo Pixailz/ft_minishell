@@ -231,7 +231,7 @@ int				builtin_env(t_lst_env *envlst);
 int				builtin_exit(t_cmd *cmd, t_main *config);
 int				exit_check_exit_code(char *exit_code);
 int				exit_get_exit_code(char *exit_code);
-void			builtin_exit_multiple_args(t_cmd *cmd, t_main *config);
+void			builtin_exit_multiple_args(t_cmd *cmd, t_main *config, int *exit_code);
 void			builtin_exit_post_exec(t_cmd *cmd, t_main *config);
 
 // builtins/export.c

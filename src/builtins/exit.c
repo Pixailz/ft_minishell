@@ -12,7 +12,7 @@
 
 #include "minishell.h"
 
-void	builtin_exit_multiple_args(t_cmd *cmd, t_main *config)
+void	builtin_exit_multiple_args(t_cmd *cmd, t_main *config, int *exit_code)
 {
 	if (!ft_is_str(cmd->command[1], ft_isdigit))
 	{
@@ -22,7 +22,10 @@ void	builtin_exit_multiple_args(t_cmd *cmd, t_main *config)
 		exit(2);
 	}
 	else
+	{
+		*exit_code = 1;
 		ft_printf("minishell: exit: too many arguments\n", cmd->command[1]);
+	}
 }
 
 void	builtin_exit_post_exec(t_cmd *cmd, t_main *config)
@@ -42,7 +45,7 @@ void	builtin_exit_post_exec(t_cmd *cmd, t_main *config)
 		}
 	}
 	if (cmd->return_value == 2)
-		builtin_exit_multiple_args(cmd, config);
+		builtin_exit_multiple_args(cmd, config, &exit_code);
 	else
 	{
 		if (exit_check_shlvl(config))
