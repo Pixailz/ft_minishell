@@ -230,7 +230,6 @@ int				builtin_env(t_lst_env *envlst);
 // builtins/exit.c
 int				builtin_exit(t_cmd *cmd, t_main *config);
 int				exit_check_exit_code(char *exit_code);
-int				exit_check_shlvl(t_main *config);
 int				exit_get_exit_code(char *exit_code);
 void			builtin_exit_multiple_args(t_cmd *cmd, t_main *config);
 void			builtin_exit_post_exec(t_cmd *cmd, t_main *config);
@@ -278,8 +277,8 @@ char			*get_cwd(void);
 
 // builtins/utils/is_good_var_env.c
 int				is_good_var_env(char *str);
-int				is_good_var_env_char(char c);
-int				is_good_var_env_first(char c);
+t_bool			is_good_var_env_char(char c);
+t_bool			is_good_var_env_first(char c);
 
 // builtins/utils/params.c
 t_bool			have_params(char *options, t_cmd *cmd);
@@ -386,7 +385,7 @@ void			prepare_cmds_1(t_main *config);
 void			prepare_cmds_2(t_cmd *cmd, t_block **tmp, int prev_str, t_main *config);
 
 // shell/exec_engine/exec/prepare_cmds_error.c
-int				redir_is_good_name(char *file_name);
+t_bool			redir_is_good_name(char *file_name);
 void			get_error_interrupt(t_main *config);
 void			get_error_redir(t_block *tmp, t_main *config);
 
@@ -509,6 +508,7 @@ char			*ft_better_strjoin(char *s1, char *s2);
 
 // utils/sh_lvl.c
 int				get_shlvl(t_main *config);
+t_bool			exit_check_shlvl(t_main *config);
 void			decrease_shlvl(t_main *config);
 void			increase_shlvl(t_main *config);
 

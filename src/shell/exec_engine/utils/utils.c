@@ -17,7 +17,7 @@ void	wait_for_all(t_context *context)
 	int	counter;
 	int	isfirst;
 
-	isfirst = context->fork_first == False;
+	isfirst = context->fork_first == FALSE;
 	counter = context->cmd_nb - isfirst;
 	while (counter > 0)
 	{

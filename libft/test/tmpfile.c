@@ -1,24 +1,24 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sisdigit.c                                      :+:      :+:    :+:   */
+/*   tmp.c                                              :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2022/02/17 18:31:21 by pix               #+#    #+#             */
-/*   Updated: 2022/10/14 14:18:37 by brda-sil         ###   ########.fr       */
+/*   Created: 2022/10/07 22:35:36 by brda-sil          #+#    #+#             */
+/*   Updated: 2022/10/07 22:36:14 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "libft_check.h"
+#include <libft_random.h>
+#include <stdio.h>
 
-t_bool	ft_sisdigit(const char *str)
+int	main(void)
 {
-	char	*ptr;
+	t_size	counter;
 
-	ptr = (char *)str;
-	while (*ptr)
-		if (!ft_isdigit(*ptr++))
-			return (False);
-	return (True);
+	counter = 0;
+	while (counter < 10)
+		printf("[%lu] \t%s\n", counter++, ft_tmpfile(0));
+	return (0);
 }

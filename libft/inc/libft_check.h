@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:16:35 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/14 14:18:56 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:30:32 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,30 +17,16 @@
 /* INCLUDE */
 /* ####### */
 
-# ifndef LIBFT_DEFINE_H
-#  include "libft_define.h"
-# endif
-
 # include <limits.h>
 # include <sys/stat.h>
 
 /* ########################################################################## */
 
 /* ########################################################################## */
-/* CONFIG */
-/* ###### */
+/* REQUIREMENTS */
+/* ############ */
 
-/* ########################################################################## */
-
-/* ########################################################################## */
-/* TYPEDEF */
-/* ####### */
-
-/* ########################################################################## */
-
-/* ########################################################################## */
-/* STRUCT */
-/* ###### */
+# include "libft_define.h"
 
 /* ########################################################################## */
 
@@ -48,44 +34,38 @@
 /* FILES */
 /* ##### */
 
+// ft_is_str.c
+t_bool	ft_is_str(const char *str, t_bool func(char));
+
 // ft_isalnum.c
-int		ft_isalnum(const char c);
+t_bool	ft_isalnum(const char c);
 
 // ft_isalpha.c
-int		ft_isalpha(const char c);
+t_bool	ft_isalpha(const char c);
 
 // ft_isascii.c
-int		ft_isascii(const char c);
+t_bool	ft_isascii(const char c);
 
 // ft_isblank.c
-int		ft_isblank(const char c);
+t_bool	ft_isblank(const char c);
 
 // ft_isdigit.c
-int		ft_isdigit(const char c);
-
-// ft_isdir.c
-int		ft_isdir(char *dir_name, int mode);
-
-// ft_isfile.c
-int		ft_isfile(char *file_path, int mode);
+t_bool	ft_isdigit(const char c);
 
 // ft_isgoodi.c
 t_bool	ft_isgoodi(int n, int neg);
 
 // ft_isgoodll.c
-t_bool	ft_isgoodll(t_int64 n, int neg);
+int		ft_isgoodll(t_int64 n, int neg);
 
 // ft_isgoodu.c
 t_bool	ft_isgoodu(t_uint32 n, int is_last);
 
 // ft_isprint.c
-int		ft_isprint(const char c);
+t_bool	ft_isprint(const char c);
 
 // ft_isspace.c
-int		ft_isspace(const char c);
-
-// ft_sisdigit.c
-t_bool	ft_sisdigit(const char *str);
+t_bool	ft_isspace(const char c);
 
 /* ########################################################################## */
 

@@ -51,3 +51,13 @@ int	get_shlvl(t_main *config)
 	shlvl = ft_atoi(shlvl_str);
 	return (shlvl);
 }
+
+t_bool	exit_check_shlvl(t_main *config)
+{
+	if (get_shlvl(config) > config->base_shlvl)
+	{
+		decrease_shlvl(config);
+		return (FALSE);
+	}
+	return (TRUE);
+}

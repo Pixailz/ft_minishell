@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:16:35 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/09/24 21:24:41 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/11/09 03:33:31 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,9 +22,23 @@
 # endif
 
 # include <unistd.h>
+/* write()
+ **/
+
 # include <stdarg.h>
-// ft_error.c
+/* va_arg()
+ * va_list()
+ * va_start()
+ * va_end()
+ **/
+
 # include <errno.h>
+/* errorno()
+ **/
+
+# include <stdio.h>
+/* perror()
+ **/
 
 /* ########################################################################## */
 
@@ -40,24 +54,10 @@
 /* REQUIREMENTS */
 /* ############ */
 
-# ifndef LIBFT_INTEGER
-// ft_itoa_base.c
-char	*ft_itoa_base(const t_int64 const_nb, const char *base);
-
-// ft_strlen.c
-t_size	ft_nbrlen_base(const void *void_nbr, const char *base);
-# endif
-
-# ifndef LIBFT_MEMORY
-// ft_calloc.c
-void	*ft_calloc(t_size nmemb, t_size size);
-
-// ft_error.c
-int		ft_error(char *msg, int return_code);
-
-// ft_memset.c
-void	*ft_memset(void *s, int c, t_size n);
-# endif
+# include "libft_define.h"
+# include "libft_integer.h"
+# include "libft_memory.h"
+# include "libft_string.h"
 
 /* ########################################################################## */
 
@@ -79,6 +79,9 @@ size_t	ft_putchar_fd(char c, int fd);
 
 // ft_putendl_fd.c
 size_t	ft_putendl_fd(char const *s, int fd);
+
+// ft_putnbr_base_fd.c
+size_t	ft_putnbr_base_fd(t_int64 n, const char *base, int fd);
 
 // ft_putnbr_fd.c
 size_t	ft_putnbr_fd(int n, int fd);

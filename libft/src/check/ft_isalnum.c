@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/17 18:39:55 by pix               #+#    #+#             */
-/*   Updated: 2022/07/01 11:58:54 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/10/14 05:07:58 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,9 +18,9 @@
  *
  * @param c			Character value to check
  *
- * @return (int)	Nonzero if character is alphanumeric and zero if not
+ * @return (t_bool)	TRUE if character is alphanumeric and FALSE if not
  */
-int	ft_isalnum(const char c)
+t_bool	ft_isalnum(const char c)
 {
 	return (ft_isalpha(c) || ft_isdigit(c));
 }

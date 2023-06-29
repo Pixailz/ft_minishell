@@ -32,13 +32,13 @@ t_bool	is_minishell(char *cmd)
 	int		last_char;
 	int		return_code;
 
-	return_code = False;
+	return_code = FALSE;
 	if (!ft_isfile(cmd, S_IXUSR))
-		return (False);
+		return (FALSE);
 	cmd_splitted = ft_split(cmd, '/');
 	last_char = ft_get_words(cmd, '/') - 1;
 	if (!ft_strncmp(cmd_splitted[last_char], "minishell", 9))
-		return_code = True;
+		return_code = TRUE;
 	free_char_pointer_pointer(cmd_splitted);
 	return (return_code);
 }
@@ -70,11 +70,11 @@ t_bool	get_fork_first(int type)
 {
 	int	error_code;
 
-	error_code = True;
+	error_code = TRUE;
 	if (type == CD || type == UNSET || type == EXPORT || type == EXIT)
-		error_code = False;
+		error_code = FALSE;
 	if (type == MINISHELL)
-		error_code = False;
+		error_code = FALSE;
 	return (error_code);
 }
 
@@ -84,13 +84,13 @@ void	get_builtins(t_main *config)
 	t_cmd	*cmd;
 
 	counter = 0;
-	config->context->fork_first = True;
+	config->context->fork_first = TRUE;
 	while (counter < config->context->cmd_nb)
 	{
 		cmd = config->context->cmd[counter];
 		cmd->builtin = get_builtin(cmd);
 		counter++;
 		if (config->context->cmd_nb == 1 && !get_fork_first(cmd->builtin))
-			config->context->fork_first = False;
+			config->context->fork_first = FALSE;
 	}
 }

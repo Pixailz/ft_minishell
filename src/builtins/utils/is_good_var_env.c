@@ -12,26 +12,26 @@
 
 #include "minishell.h"
 
-int	is_good_var_env_first(char c)
+t_bool	is_good_var_env_first(char c)
 {
 	if (c == '_')
-		return (True);
+		return (TRUE);
 	if (ft_isdigit(c))
-		return (False);
+		return (FALSE);
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (True);
-	return (False);
+		return (TRUE);
+	return (FALSE);
 }
 
-int	is_good_var_env_char(char c)
+t_bool	is_good_var_env_char(char c)
 {
 	if (c == '_')
-		return (True);
+		return (TRUE);
 	if (ft_isdigit(c))
-		return (True);
+		return (TRUE);
 	if ((c >= 'A' && c <= 'Z') || (c >= 'a' && c <= 'z'))
-		return (True);
-	return (False);
+		return (TRUE);
+	return (FALSE);
 }
 
 int	is_good_var_env(char *str)

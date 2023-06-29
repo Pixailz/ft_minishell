@@ -38,18 +38,18 @@ void	get_error_interrupt(t_main *config)
 	}
 }
 
-int	redir_is_good_name(char *file_name)
+t_bool	redir_is_good_name(char *file_name)
 {
 	t_bool	is_good;
 
-	is_good = True;
+	is_good = TRUE;
 	if (!ft_strcmp(file_name, "<<"))
-		is_good = False;
+		is_good = FALSE;
 	else if (!ft_strcmp(file_name, ">>"))
-		is_good = False;
+		is_good = FALSE;
 	else if (!ft_strcmp(file_name, ">"))
-		is_good = False;
+		is_good = FALSE;
 	else if (!ft_strcmp(file_name, "<"))
-		is_good = False;
+		is_good = FALSE;
 	return (is_good);
 }

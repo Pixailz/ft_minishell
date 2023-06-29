@@ -18,17 +18,17 @@ t_bool	is_params(const char *argv, const char *options)
 	int		c_argv;
 
 	c_argv = 0;
-	if (&argv[c_argv] == FT_NULL || argv[c_argv] != '-')
-		return (False);
+	if (!argv[c_argv] || argv[c_argv] != '-')
+		return (FALSE);
 	c_argv++;
 	ptr_options = (char *)options;
 	while (argv[c_argv])
 	{
 		if (!ft_strcchr(ptr_options, argv[c_argv]))
-			return (False);
+			return (FALSE);
 		c_argv++;
 	}
-	return (True);
+	return (TRUE);
 }
 
 t_bool	have_params(char *options, t_cmd *cmd)
@@ -39,8 +39,8 @@ t_bool	have_params(char *options, t_cmd *cmd)
 	while (cmd->command[counter])
 	{
 		if (is_params(cmd->command[counter], options))
-			return (True);
+			return (TRUE);
 		counter++;
 	}
-	return (False);
+	return (FALSE);
 }

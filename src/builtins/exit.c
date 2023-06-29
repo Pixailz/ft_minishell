@@ -12,19 +12,9 @@
 
 #include "minishell.h"
 
-int	exit_check_shlvl(t_main *config)
-{
-	if (get_shlvl(config) > config->base_shlvl)
-	{
-		decrease_shlvl(config);
-		return (False);
-	}
-	return (True);
-}
-
 void	builtin_exit_multiple_args(t_cmd *cmd, t_main *config)
 {
-	if (!ft_sisdigit(cmd->command[1]))
+	if (!ft_is_str(cmd->command[1], ft_isdigit))
 	{
 		ft_printf("minishell: exit: %s: numeric argument required\n", \
 			cmd->command[1]);
@@ -69,8 +59,6 @@ int	exit_get_exit_code(char *exit_code)
 	long long	code;
 
 	code = ft_patoll(exit_code, 0);
-	while (code < 0)
-		code += 256;
 	code = code % 256;
 	return (code);
 }

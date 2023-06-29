@@ -6,7 +6,7 @@
 /*   By: brda-sil <brda-sil@students.42angouleme    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2022/02/22 13:16:35 by brda-sil          #+#    #+#             */
-/*   Updated: 2022/10/01 18:36:21 by brda-sil         ###   ########.fr       */
+/*   Updated: 2022/12/28 12:46:53 by brda-sil         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,35 +29,10 @@
 /* REQUIREMENTS */
 /* ############ */
 
-# ifndef LIBFT_INTEGER
-// ft_strlen.c
-t_size		ft_nbrlen_base(const void *void_nbr, const char *base);
-
-// ft_nbrlen.c
-t_size		ft_nbrlen(const void *void_nbr);
-
-// ft_get_base.c
-int			ft_get_base(int c, const char *base);
-# endif
-
-# ifndef LIBFT_CHECK
-// ft_isgoodi.c
-t_bool		ft_isgoodi(int n, int neg);
-
-// ft_isgoodll.c
-t_bool		ft_isgoodll(t_int64 n, int neg);
-
-// ft_isgoodu.c
-t_bool		ft_isgoodu(t_uint32 n, int is_last);
-# endif
-
-# ifndef LIBFT_MEMORY
-// ft_calloc.c
-void		*ft_calloc(t_size nmemb, t_size size);
-
-// ft_memset.c
-void		*ft_memset(void *s, int c, t_size n);
-# endif
+# include "libft_define.h"
+# include "libft_integer.h"
+# include "libft_check.h"
+# include "libft_memory.h"
 
 /* ########################################################################## */
 
@@ -66,53 +41,54 @@ void		*ft_memset(void *s, int c, t_size n);
 /* ##### */
 
 // ft_atoi.c
-int			ft_atoi(char *nstr);
+int			ft_atoi(const char *nstr);
 
 // ft_atoi_base.c
-int			ft_atoi_base(char *nstr, const char *base);
+int			ft_atoi_base(const char *nstr, const char *base);
 
 // ft_atoll.c
-t_int64		ft_atoll(char *nstr);
+t_int64		ft_atoll(const char *nstr);
 
 // ft_atoll_base.c
 t_int64		ft_atoll_base(char *nstr, const char *base);
 
 // ft_atou.c
-t_uint64	ft_atou(char *nstr);
+t_uint64	ft_atou(const char *nstr);
 
 // ft_atou_base.c
-t_uint64	ft_atou_base(char *nstr, const char *base);
+t_uint64	ft_atou_base(const char *nstr, const char *base);
 
 // ft_get_words.c
 int			ft_get_words(char *str, char c);
 
 // ft_patoi.c
-t_int64		ft_patoi(char *nstr, int *has_overflow);
+int			ft_patoi(const char *nstr, int *has_flow);
 
 // ft_patoi_base.c
-t_int64		ft_patoi_base(char *nstr, const char *base, int *has_overflow);
+int			ft_patoi_base(const char *nstr, const char *base, int *has_flow);
 
 // ft_patoll.c
-t_int64		ft_patoll(char *nstr, int *has_overflow);
+t_int64		ft_patoll(const char *nstr, int *has_flow);
 
 // ft_patoll_base.c
-t_int64		ft_patoll_base(char *nstr, const char *base, int *has_overflow);
+t_int64		ft_patoll_base(const char *nstr, const char *base, int *has_flow);
 
 // ft_patou.c
-t_uint32	ft_patou(char *nstr, int *has_overflow);
+t_uint32	ft_patou(const char *nstr, int *has_overflow);
 
 // ft_patou_base.c
-t_uint32	ft_patou_base(char *nstr, const char *base, int *has_overflow);
+t_uint32	ft_patou_base(const char *nstr, const char *base, \
+				int *has_overflow);
 
 // ft_split.c
 char		**ft_split(char *s, char c);
 
 // ft_splitb.c
-int			ft_splitb_get_word(char **str, char delim, char *encl);
-int			ft_splitb_get_size(char *str, char delim, char *encl);
+char		**ft_splitb(char *s, char delim, char *encl);
 char		**ft_splitb_get_words(char *s, char delim, char *encl, \
 				int tab_size);
-char		**ft_splitb(char *s, char delim, char *encl);
+int			ft_splitb_get_size(char *str, char delim, char *encl);
+int			ft_splitb_get_word(char **str, char delim, char *encl);
 
 // ft_strcat.c
 char		*ft_strcat(char *dest, char *src);
@@ -154,7 +130,7 @@ t_uint32	ft_strlcat(char *dest, char *src, t_size size);
 t_uint32	ft_strlcpy(char *dest, char *src, t_size size);
 
 // ft_strlen.c
-int			ft_strlen(char *str);
+int			ft_strlen(const char *str);
 
 // ft_strmapi.c
 char		*ft_strmapi(char const *s1, char (*f)(unsigned int, char));
